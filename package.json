@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "start": "ng serve --host 0.0.0.0",
+    "build": "ng build --prod",
+    "test": "npm run lint && ng test --watch false",
+    "test-watch": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "coverage": "ng test --watch false --code-coverage"
   },
   "private": true,
   "dependencies": {
