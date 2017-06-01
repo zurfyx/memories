@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import {
   MdButtonModule,
   MdToolbarModule,
+  // MdDialog,
+  // OVERLAY_PROVIDERS,
 } from '@angular/material';
 
 import { NavbarComponent } from './navbar.component';
+import { SigninComponent } from '../auth/signin.component';
 
 @NgModule({
   imports: [
@@ -12,7 +15,14 @@ import { NavbarComponent } from './navbar.component';
     MdToolbarModule,
   ],
   exports: [NavbarComponent],
-  declarations: [NavbarComponent],
-  providers: [],
+  declarations: [
+    NavbarComponent,
+    SigninComponent,
+  ],
+  entryComponents: [
+    SigninComponent,
+  ],
+  providers: [
+  ],
 })
 export class NavbarModule { }

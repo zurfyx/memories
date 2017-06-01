@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
+
+import { SigninComponent } from '../auth/signin.component';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private dialog: MdDialog,
+  ) { }
 
   ngOnInit() { }
+
+  openSigninDialog() {
+    const dialogRef = this.dialog.open(SigninComponent);
+  }
 }

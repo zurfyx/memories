@@ -1,15 +1,4 @@
-@import "~@angular/material/theming";
-
 @import "./shared/index";
-
-@include mat-core();
-
-$candy-app-primary: mat-palette($mat-teal);
-$candy-app-accent:  mat-palette($mat-amber, A200, A100, A400);
-$candy-app-warn:    mat-palette($mat-red);
-$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
-
-@include angular-material-theme($candy-app-theme);
 
 #main {
   width: 100%;

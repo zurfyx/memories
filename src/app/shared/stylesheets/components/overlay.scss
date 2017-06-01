@@ -1,0 +1,15 @@
+.cdk-overlay-pane {
+  min-width: 75%;
+
+  h1 {
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 550px) {
+  .cdk-overlay-pane {
+    min-width: 420px;
+  }
+}
