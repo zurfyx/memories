@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 
-import { SigninComponent } from '../auth/signin.component';
+import { SigninComponent } from './signin.component';
 
 @Component({
   moduleId: module.id,

@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import {
   MdButtonModule,
   MdToolbarModule,
-  // MdDialog,
-  // OVERLAY_PROVIDERS,
 } from '@angular/material';
 
 import { NavbarComponent } from './navbar.component';
-import { SigninComponent } from '../auth/signin.component';
+import { SigninComponent } from './signin.component';
 
 @NgModule({
   imports: [

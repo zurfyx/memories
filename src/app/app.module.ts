@@ -8,7 +8,6 @@ import { AngularFireModule } from 'angularfire2';
 
 import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
-import { SigninComponent } from './shared/auth/signin.component';
 import { AppComponent } from './app.component';
 
 @NgModule({
