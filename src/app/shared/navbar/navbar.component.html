@@ -1,6 +1,12 @@
 <md-toolbar color="primary">
-  <a href="/" id="logo" class="neat">🌎 Memories</a>
+  <a href="/" id="logo" class="neat">Memories</a>
   <nav class="navbar__links filler">
-    <button (click)="openSigninDialog()" md-button>Sign in</button>
+    <ng-container *ngIf="(user|async); then signedinBlock; else signinBlock"></ng-container>
+    <ng-template #signedinBlock>
+      {{(user | async).displayName}}
+    </ng-template>
+    <ng-template #signinBlock>
+      <button (click)="openSigninDialog()" md-button>Sign in</button>
+    </ng-template>
   </nav>
 </md-toolbar>
