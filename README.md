@@ -4,7 +4,6 @@
 
 [![Build Status](https://travis-ci.org/LiquidGalaxyLAB/memories.svg?branch=master)](https://travis-ci.org/LiquidGalaxyLAB/memories)
 [![David](https://david-dm.org/LiquidGalaxyLAB/memories.svg)](https://david-dm.org/LiquidGalaxyLAB/memories)
-[![Coverage Status](https://coveralls.io/repos/github/LiquidGalaxyLAB/memories/badge.svg?branch=master)](https://coveralls.io/github/LiquidGalaxyLAB/memories?branch=master)
 [![Code Climate](https://codeclimate.com/github/LiquidGalaxyLAB/memories/badges/gpa.svg)](https://codeclimate.com/github/LiquidGalaxyLAB/memories)
 ![Physical Web](https://img.shields.io/badge/Physical%20Web-%E2%9C%94-blue.svg) 
 ![Liquid Galaxy](https://img.shields.io/badge/Liquid%20Galaxy-%E2%9C%94-blue.svg)
