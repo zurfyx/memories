@@ -1,0 +1,36 @@
+@mixin bg-cover-empty() {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+
+@mixin bg-cover-image($url) {
+  @include bg-cover();
+  background-image: url($url);
+}
+
+@mixin image-link-empty($width, $height) {
+  @include bg-cover-empty();
+  background-attachment: initial;
+  text-indent: 999em;
+  display: inline-block;
+  width: $width;
+  height: $height;
+  overflow: hidden;
+}
+
+@mixin image-link($url, $width, $height) {
+  background-image: url($url, $width, $height);
+}
+
+@mixin three-dots() {
+  display: block;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}

@@ -1,9 +1,15 @@
 @import '~@angular/material/theming';
 
+@import "../index";
+
 #logo {
   color: #fff;
 }
 
 .navbar__links {
   text-align: right;
+}
+
+.navbar-icon {
+  @include image-link-empty(32px, 32px);
 }

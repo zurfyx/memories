@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -16,13 +17,11 @@ export class NavbarComponent implements OnInit {
   user: Observable<firebase.User>;
 
   constructor(
+    private sanitizer: DomSanitizer,
     private dialog: MdDialog,
     private afAuth: AngularFireAuth,
   ) {
     this.user = afAuth.authState;
-    this.user.subscribe((u) => {
-      console.info(u);
-    });
   }
 
   ngOnInit() { }

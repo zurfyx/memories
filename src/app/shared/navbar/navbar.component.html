@@ -1,9 +1,13 @@
 <md-toolbar color="primary">
   <a href="/" id="logo" class="neat">Memories</a>
   <nav class="navbar__links filler">
-    <ng-container *ngIf="(user|async); then signedinBlock; else signinBlock"></ng-container>
+    <ng-container *ngIf="(user | async); then signedinBlock; else signinBlock"></ng-container>
     <ng-template #signedinBlock>
-      {{(user | async).displayName}}
+      <a 
+        [style.background-image]="sanitizer.bypassSecurityTrustStyle('url(' + (user | async)?.photoURL + ')')" 
+        class="navbar-icon rounded-full">
+        {{(user | async)?.displayName}}
+      </a>
     </ng-template>
     <ng-template #signinBlock>
       <button (click)="openSigninDialog()" md-button>Sign in</button>
