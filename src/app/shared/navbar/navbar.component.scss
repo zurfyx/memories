@@ -2,6 +2,16 @@
 
 @import "../index";
 
+:host {
+  margin-bottom: 64px;
+}
+
+md-toolbar {
+  box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  z-index: 41;
+  position: fixed;
+}
+
 #logo {
   color: #fff;
 }
