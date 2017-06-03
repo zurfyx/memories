@@ -1,7 +1,10 @@
 import {
   Component,
   ViewEncapsulation,
+  OnInit,
 } from '@angular/core';
+
+import { AuthService } from './shared';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +12,12 @@ import {
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+  ) { }
+
+  ngOnInit() {
+    this.authService.syncWithFirebase();
+  }
+}

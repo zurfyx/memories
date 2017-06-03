@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
+import { AuthService } from '../services';
 
 @Component({
   moduleId: module.id,
@@ -11,13 +12,12 @@ import * as firebase from 'firebase/app';
 export class SigninComponent implements OnInit {
   constructor(
     private dialogRef: MdDialogRef<SigninComponent>,
-    private afAuth: AngularFireAuth,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() { }
 
   googleSignin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    this.afAuth.auth.signInWithRedirect(provider);
+    this.authService.googleSignin();
   }
 }

@@ -6,7 +6,8 @@ Database schema:
 users: {
   <userUid>: {
     displayName: string,
-    email: string
+    email: string,
+    photoURL: string
   }
 },
 trips: {

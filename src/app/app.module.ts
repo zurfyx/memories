@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
 import { TripModule } from './trip/trip.module';
 import { AppComponent } from './app.component';
+import { AuthService } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -27,7 +28,9 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
