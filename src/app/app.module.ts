@@ -8,12 +8,11 @@ import { AngularFireModule } from 'angularfire2';
 
 import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
+import { TripModule } from './trip/trip.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -22,6 +21,11 @@ import { AppComponent } from './app.component';
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     SharedModule,
+    TripModule,
+    AppRoutingModule,
+  ],
+  declarations: [
+    AppComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

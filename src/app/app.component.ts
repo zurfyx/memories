@@ -9,6 +9,4 @@ import {
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
-  title = 'app works!';
-}
+export class AppComponent { }
