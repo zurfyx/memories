@@ -8,10 +8,18 @@
     <span class="item-value">Home</span>
   </md-list-item>
 
+  <md-list-item
+    [routerLink]="['journeys/new']"
+    [routerLinkActive]="['router-link-active']">
+    <i class="fa fa-plane" aria-hidden="true"></i>
+    <span class="item-value">New journey</span>
+  </md-list-item>
+
   <h3 md-subheader>Social</h3>
   <md-list-item
-    [routerLink]="['trips']"
-    [routerLinkActive]="['router-link-active']">
+    [routerLink]="['journeys']"
+    [routerLinkActive]="['router-link-active']"
+    [routerLinkActiveOptions]="{ exact: true }">
     <i class="fa fa-globe" aria-hidden="true"></i>
     <span class="item-value">Explore</span>
   </md-list-item>

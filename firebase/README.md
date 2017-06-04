@@ -10,7 +10,7 @@ users: {
     photoURL: string
   }
 },
-trips: {
+journeys: {
   <tripUid>: {
     user: <userUid>,
     dateStart: Date,

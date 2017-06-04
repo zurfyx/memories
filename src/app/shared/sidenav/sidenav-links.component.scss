@@ -28,8 +28,12 @@
   font-size: 0.9em;
 }
 
-md-list-item:hover {
-  cursor: pointer;
+md-list-item {
+  text-transform: capitalize;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 md-list-item.highlight {
