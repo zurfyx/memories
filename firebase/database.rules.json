@@ -1,6 +1,25 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    "users": {
+       "$uid": {
+       	 ".write": "newData.exists() && $uid === auth.uid",
+         ".validate": "newData.hasChildren(['displayName', 'email'])",
+         "displayName": {
+           ".read": true,
+           ".validate": "newData.val() === auth.token.name"
+         },
+         "email": {
+           ".read": "$uid === auth.uid",
+           ".validate": "newData.val() === auth.token.email"
+         },
+         "photoURL": {
+           ".read": true,
+           ".validate": "newData.val().matches(/^https:\\/\\/[a-z0-9]+\\.googleusercontent\\.com\\/.*\\.jpg$/)"
+         },
+         "$other": {
+           ".validate": false
+         }
+       }
+    }
   }
 }
