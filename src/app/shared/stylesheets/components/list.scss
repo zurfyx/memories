@@ -1,0 +1,9 @@
+@import "../colors";
+
+md-list-item {
+  outline: 0;
+
+  &:hover {
+    background-color: $hover;
+  }
+}

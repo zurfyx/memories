@@ -1,3 +1,9 @@
+@import "../colors";
+
+a {
+  color: $primary;
+}
+
 a.neat, .fake-link.neat {
   text-decoration: none;
 }

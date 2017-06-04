@@ -6,7 +6,7 @@ import { TripComponent } from './trip.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', component: TripComponent },
+      { path: 'trips', component: TripComponent },
     ])
   ]
 })

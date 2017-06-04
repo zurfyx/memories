@@ -1,16 +1,14 @@
+@import "../index";
+
 .mat-list {
   padding-top: 0;
 }
 
 .mat-list-item {
+  color: rgba(0,0,0,0.54);
+  font-weight: 500;
   padding-top: 5px;
   padding-bottom: 5px;
-}
-
-.mat-list .mat-list-item,
-.mat-nav-list .mat-list-item {
-  color: rgba(0,0,0,0.54) !important;
-  font-weight: 500;
 }
 
 .mat-list .mat-subheader {
@@ -30,7 +28,15 @@
   font-size: 0.9em;
 }
 
+md-list-item:hover {
+  cursor: pointer;
+}
+
 md-list-item.highlight {
   background-color: #FAFAFA;
   border-bottom: 1px solid #dddddd;
+}
+
+md-list-item.router-link-active {
+  color: $primary;
 }
