@@ -1,3 +1,31 @@
-<form>
-  <i>Coming soon...</i>
-</form>
+<div class="container box">
+  <form class="withLines" [formGroup]="journeyForm" (ngSubmit)="submitJourneyForm()">
+    <fieldset [disabled]="isSubmitting">
+      <fieldset>
+        <md-input-container>
+          <input type="text" formControlName="title" placeholder="Title" mdInput required />
+        </md-input-container>
+
+        <div class="input-row cover-result-container" *ngIf="coverResultBase64">
+          <img class="cover-result" [src]="coverResultBase64" />
+        </div>
+
+        <div class="input-row">
+          <input type="file" (change)="coverChange($event)" #coverInput />
+          <button type="button" class="label" (click)="executeCover()" md-button>
+            Add cover image
+          </button>
+        </div>
+      </fieldset>
+
+      <div class="input-row submit-row">
+        <button type="button" (click)="cancelJourneyForm()" md-button>
+          Cancel
+        </button>
+        <button type="submit" color="primary" [disabled]="!journeyForm.valid" md-raised-button>
+          Save
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+form.withLines {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+  md-input-container {
+    display: block;
+  }
+
+  md-input-container + md-input-container,
+  .input-row + md-input-container,
+  md-input-container + .input-row {
+    margin-top: 25px;
+  }
+
+  .submit-row {
+    margin-top: 42px;
+    text-align: right;
+  }
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+input[type="file"] {
+  display: none;
+}
