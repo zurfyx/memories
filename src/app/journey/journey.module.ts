@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdInputModule, MdButtonModule } from '@angular/material';
 
 import {
+  ImageService,
   JourneyService,
 } from '../shared';
 import { JourneyListComponent } from './list/journey-list.component';
@@ -25,6 +26,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     JourneyNewComponent,
   ],
   providers: [
+    ImageService,
     JourneyService,
   ],
 })
