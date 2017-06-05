@@ -55,6 +55,10 @@ export class JourneyNewComponent implements OnInit {
     const title: string = this.journeyForm.value['title'];
     const journey: Journey = new Journey({ title });
 
-    this.journeyService.createJourney(journey, this.coverResult);
+    this.journeyService.createJourneyWithCoverFile(journey, this.coverResult)
+      .subscribe(
+        _ => window.alert('Done!'),
+        error => window.alert(error),
+      );
   }
 }
