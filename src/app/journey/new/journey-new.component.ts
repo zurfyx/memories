@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import * as firebase from 'firebase';
 
 import {
   FormUtils,
@@ -25,6 +28,7 @@ export class JourneyNewComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private afAuth: AngularFireAuth,
     private journeyService: JourneyService,
   ) {
     this.journeyForm = this.formBuilder.group({
@@ -53,12 +57,24 @@ export class JourneyNewComponent implements OnInit {
     this.isSubmitting = true;
 
     const title: string = this.journeyForm.value['title'];
-    const journey: Journey = new Journey({ title });
 
-    this.journeyService.createJourneyWithCoverFile(journey, this.coverResult)
+    this.afAuth.authState
+      .first()
+      .flatMap((user) => {
+        const userUid = user.uid;
+        const journey: Journey = new Journey({
+          title,
+          owner: userUid,
+          updatedAt: firebase.database.ServerValue.TIMESTAMP,
+        });
+        return this.journeyService.createJourneyWithCoverFile(journey, this.coverResult);
+      })
       .subscribe(
         _ => window.alert('Done!'),
-        error => window.alert('An error has occurred.'),
+        error => {
+          window.alert('An error has occurred.');
+          this.isSubmitting = false;
+        },
       );
   }
 }

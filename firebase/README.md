@@ -12,10 +12,11 @@ users: {
 },
 journeys: {
   <tripUid>: {
-    user: <userUid>,
-    dateStart: Date,
-    dateEnd: Date,
-    createdAt: Date,
+    owner: <userUid>,
+    dateStart: number,
+    dateEnd: number,
+    createdAt: number,
+    updatedAt: number,
     banner: string,
     description: string,
     stories: <storyUid>[]
