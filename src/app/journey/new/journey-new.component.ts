@@ -58,7 +58,7 @@ export class JourneyNewComponent implements OnInit {
     this.journeyService.createJourneyWithCoverFile(journey, this.coverResult)
       .subscribe(
         _ => window.alert('Done!'),
-        error => window.alert(error),
+        error => window.alert('An error has occurred.'),
       );
   }
 }

@@ -36,3 +36,10 @@ physicalWeb: {
   }
 }
 ```
+
+Storage schema:
+
+```
+<userUid>: {
+  <fileUid>
+}
