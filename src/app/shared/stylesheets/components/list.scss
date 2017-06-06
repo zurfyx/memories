@@ -7,3 +7,21 @@ md-list-item {
     background-color: $hover;
   }
 }
+
+ul.unstyled {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.grid {
+  @extend .unstyled;
+  margin-left: -25px;
+  margin-top: -25px;
+
+  > li {
+    display: inline-block;
+    margin-left: 25px;
+    margin-top: 25px;
+  }
+}

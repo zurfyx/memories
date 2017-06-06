@@ -1,0 +1,9 @@
+@import "../mixins";
+
+.mat-card-title {
+  @include three-dots();
+}
+
+.mat-card-image {
+  max-height: 300px;
+}

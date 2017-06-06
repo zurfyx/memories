@@ -43,4 +43,13 @@ export class JourneyService {
         return this.createJourney(journey);
       });
   }
+
+  readJourneys(): Observable<Journey[]> {
+    const afListOptions = {
+      query: { orderByChild: 'updatedAt' }
+    };
+    return this.afDatabase.list('/journeys', afListOptions).map((snapshot: any[]) => (
+      snapshot.map(journeyValues => new Journey(journeyValues))
+    ));
+  }
 }

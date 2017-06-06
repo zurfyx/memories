@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MdInputModule, MdButtonModule } from '@angular/material';
+import {
+  MdInputModule,
+  MdButtonModule,
+  MdCardModule,
+} from '@angular/material';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {
@@ -19,6 +23,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     ReactiveFormsModule,
     MdInputModule,
     MdButtonModule,
+    MdCardModule,
     JourneyRoutingModule,
     AngularFireAuthModule,
   ],
