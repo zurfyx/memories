@@ -5,7 +5,7 @@
       <md-card-content>
         <md-card-title>{{journey.title}}</md-card-title>
         <p>
-          My name here
+          <app-journey-list-owner [owner]="journey.owner"></app-journey-list-owner>
         </p>
       </md-card-content>
     </md-card>

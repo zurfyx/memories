@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 import {
   Journey,
@@ -24,7 +25,7 @@ export class JourneyListComponent implements OnInit {
     });
   }
 
-  private sortJourneysByDateDesc(journeys: Journey[]) {
+  sortJourneysByDateDesc(journeys: Journey[]) {
     return journeys.sort((a, b) => b.updatedAt - a.updatedAt);
   }
 }
