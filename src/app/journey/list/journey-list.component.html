@@ -1,12 +1,12 @@
 <ul class="grid">
   <li *ngFor="let journey of journeys">
     <md-card class="journey-card">
-      <md-card-header>
+      <md-card-header class="solo-title">
         <md-card-title>{{journey.title}}</md-card-title>
       </md-card-header>
       <img md-card-image [src]="journey.coverURL || 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='" />
       <md-card-content>
-        <p>....</p>
+        ...
       </md-card-content>
     </md-card>
   </li>

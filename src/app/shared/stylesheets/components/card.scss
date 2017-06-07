@@ -1,9 +1,20 @@
 @import "../mixins";
 
-.mat-card-title {
-  @include three-dots();
+.mat-card {
+  overflow: hidden;
 }
 
 .mat-card-image {
   max-height: 300px;
+}
+
+md-card-header.solo-title {
+  .mat-card-header-text {
+    width: 100%;
+    margin: 0;
+  }
+
+  .mat-card-title {
+    @include three-dots();
+  }
 }

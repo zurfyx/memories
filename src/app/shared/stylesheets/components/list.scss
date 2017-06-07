@@ -8,14 +8,22 @@ md-list-item {
   }
 }
 
-ul.unstyled {
+ul.no-dotted {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style-type: none;
+}
+
+ul.inline {
+  @extend ul.no-dotted;
+  
+  > li {
+    display: inline;
+  }
 }
 
 ul.grid {
-  @extend .unstyled;
+  @extend .no-dotted;
   margin-left: -25px;
   margin-top: -25px;
 
