@@ -1,15 +1,17 @@
-<ul class="grid">
-  <li *ngFor="let journey of journeys">
-    <md-card class="journey-card clickable" (click)="navigateToJourney(journey.$key)">
-      <div md-card-image class="cover" [style.backgroundImage]="journey.coverURL && 'url(' + journey.coverURL + ')'"></div>
-      <md-card-content>
-        <md-card-title>
-          <a class="invisible" (click)="navigateToJourney(journey.$key)">{{journey.title}}</a>
-        </md-card-title>
-        <p>
-          <app-journey-list-owner [owner]="journey.owner"></app-journey-list-owner>
-        </p>
-      </md-card-content>
-    </md-card>
-  </li>
-</ul>
+<div class="page">
+  <ul class="grid">
+    <li *ngFor="let journey of journeys">
+      <md-card class="journey-card clickable" (click)="navigateToJourney(journey.$key)">
+        <div md-card-image class="cover" [style.backgroundImage]="journey.coverURL && 'url(' + journey.coverURL + ')'"></div>
+        <md-card-content>
+          <md-card-title>
+            <a class="invisible" (click)="navigateToJourney(journey.$key)">{{journey.title}}</a>
+          </md-card-title>
+          <p>
+            <app-journey-list-owner [owner]="journey.owner"></app-journey-list-owner>
+          </p>
+        </md-card-content>
+      </md-card>
+    </li>
+  </ul>
+</div>

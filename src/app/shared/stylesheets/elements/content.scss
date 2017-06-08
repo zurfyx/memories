@@ -1,0 +1,7 @@
+@import "../mixins";
+
+.content__banner {
+  @include bg-image();
+  height: 250px;
+  width: 100%;
+}

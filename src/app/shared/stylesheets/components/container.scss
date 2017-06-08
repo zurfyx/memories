@@ -1,4 +1,9 @@
-.container {
+.page {
+  padding: 5%;
+}
+
+.page > .container {
   width: 100%;
   max-width: 942px;
+  margin: 0 auto;
 }

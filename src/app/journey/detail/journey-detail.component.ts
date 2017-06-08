@@ -10,6 +10,7 @@ import {
   moduleId: module.id,
   selector: 'app-journey-detail',
   templateUrl: 'journey-detail.component.html',
+  styleUrls: ['journey-detail.component.scss'],
 })
 export class JourneyDetailComponent implements OnInit {
   journey: Journey;
