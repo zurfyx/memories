@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import {
@@ -16,6 +17,7 @@ export class JourneyListComponent implements OnInit {
   journeys: Journey[];
 
   constructor(
+    private router: Router,
     private journeyService: JourneyService,
   ) { }
 
@@ -27,5 +29,9 @@ export class JourneyListComponent implements OnInit {
 
   sortJourneysByDateDesc(journeys: Journey[]) {
     return journeys.sort((a, b) => b.updatedAt - a.updatedAt);
+  }
+
+  navigateToJourney(uid: string) {
+    this.router.navigate([`journeys/${uid}`]);
   }
 }

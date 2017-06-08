@@ -4,6 +4,10 @@
   overflow: hidden;
 }
 
+.mat-card.clickable {
+  cursor: pointer;
+}
+
 .mat-card-image {
   max-height: 300px;
 }

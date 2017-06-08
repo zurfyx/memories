@@ -11,3 +11,12 @@ a.neat, .fake-link.neat {
 .fake-link {
   cursor: pointer;
 }
+
+a.invisible {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: currentColor;
+  }
+}

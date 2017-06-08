@@ -52,4 +52,10 @@ export class JourneyService {
       snapshot.map(journeyValues => new Journey(journeyValues))
     ));
   }
+
+  readJourney(uid: string): Observable<Journey> {
+    return this.afDatabase.object(`/journeys/${uid}`).map((snapshot: any) => (
+      new Journey(snapshot)
+    ));
+  }
 }
