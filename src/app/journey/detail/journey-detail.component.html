@@ -10,6 +10,23 @@
         <a href="#" md-button>Add story</a>
       </div>
     </div>
+    <div class="box story-new">
+      <form class="withLines">
+        <fieldset [disabled]="isSubmitting">
+          <md-input-container>
+            <input type="text" name="title" placeholder="New story title" mdInput />
+          </md-input-container>
+          <div class="input-row submit-row">
+            <button type="button" md-button>
+              Cancel
+            </button>
+            <button type="submit" color="primary" [disabled]="false" md-raised-button>
+              Create
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
     <div class="box">
       <md-list-item class="story clickable">
         <div class="storyInfo">
