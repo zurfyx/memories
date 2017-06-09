@@ -2,10 +2,14 @@
 
 md-list-item {
   outline: 0;
+}
 
-  &:hover {
-    background-color: $hover;
-  }
+md-list-item.clickable:hover {
+  cursor: pointer;
+}
+
+md-list-item.clickable.withBgColor:hover {
+  background-color: $hover;
 }
 
 ul.no-dotted {

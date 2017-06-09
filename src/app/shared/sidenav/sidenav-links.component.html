@@ -1,6 +1,6 @@
 <md-list>
   <md-list-item
-    class="highlight"
+    class="clickable withBgColor highlight"
     [routerLink]="['/']"
     [routerLinkActive]="['router-link-active']"
     [routerLinkActiveOptions]="{ exact: true }">
@@ -9,6 +9,7 @@
   </md-list-item>
 
   <md-list-item
+    class="clickable withBgColor"
     [routerLink]="['journeys/new']"
     [routerLinkActive]="['router-link-active']">
     <i class="fa fa-plane" aria-hidden="true"></i>
@@ -17,6 +18,7 @@
 
   <h3 md-subheader>Social</h3>
   <md-list-item
+    class="clickable withBgColor"
     [routerLink]="['journeys']"
     [routerLinkActive]="['router-link-active']"
     [routerLinkActiveOptions]="{ exact: true }">
