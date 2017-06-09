@@ -3,7 +3,13 @@
 
 <div class="page journey-detail-page">
   <div class="container">
-    <h1>{{journey.title}}</h1>
+    <div class="container__head-buttons">
+      <h1>{{journey.title}}</h1>
+      <div class="buttons">
+        <a href="#" md-button>Edit journey</a>
+        <a href="#" md-button>Add story</a>
+      </div>
+    </div>
     <div class="box">
       <md-list-item class="story clickable">
         <div class="storyInfo">

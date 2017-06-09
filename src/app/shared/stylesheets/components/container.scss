@@ -7,3 +7,14 @@
   max-width: 942px;
   margin: 0 auto;
 }
+
+.container__head-buttons {
+  display: flex;
+  flex: row;
+
+  .buttons {
+    flex: 1;
+    text-align: right;
+    align-self: center;
+  }
+}
