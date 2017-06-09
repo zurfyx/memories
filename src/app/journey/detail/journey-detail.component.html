@@ -1,2 +1,28 @@
 <div class="content__banner" [style.backgroundImage]="'url(' + journey.coverURL + ')'"></div>
-Current journey: {{journey.$key}} {{journey.title}}
+<div class="avatar" [style.backgroundImage]="'url(' + owner?.photoURL + ')'"></div>
+
+<div class="page journey-detail-page">
+  <div class="container">
+    <h1>{{journey.title}}</h1>
+    <div class="box">
+      <md-list-item class="story">
+        <div class="storyInfo">
+          <h3 md-line>Story title</h3>
+          <p md-line>June 16, 2016</p>
+        </div>
+        <div class="storyCover">
+          <div style="background-image:url('https://cdn.wallpaper.com/main/the-sandhya-1.jpg')"></div>
+        </div>
+      </md-list-item>
+      <md-list-item class="story">
+        <div class="storyInfo">
+          <h3 md-line>Story title</h3>
+          <p md-line>June 16, 2016</p>
+        </div>
+        <div class="storyCover">
+          <div style="background-image:url('https://cdn.wallpaper.com/main/the-sandhya-1.jpg')"></div>
+        </div>
+      </md-list-item>
+    </div>
+  </div>
+</div>

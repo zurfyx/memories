@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   Journey,
   JourneyService,
+  User,
+  UserService,
 } from '../../shared';
 
 @Component({
@@ -14,15 +16,21 @@ import {
 })
 export class JourneyDetailComponent implements OnInit {
   journey: Journey;
+  owner: User;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private userService: UserService,
   ) {
     this.route.data.subscribe((params: { journey: Journey }) => {
       this.journey = params.journey;
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userService.readUser(this.journey.owner, ['photoURL']).subscribe((owner: User) => {
+      this.owner = owner;
+    });
+  }
 }

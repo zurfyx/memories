@@ -5,6 +5,7 @@ import {
   MdInputModule,
   MdButtonModule,
   MdCardModule,
+  MdListModule,
 } from '@angular/material';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
@@ -28,6 +29,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     MdInputModule,
     MdButtonModule,
     MdCardModule,
+    MdListModule,
     JourneyRoutingModule,
     AngularFireAuthModule,
   ],
