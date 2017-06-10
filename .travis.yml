@@ -23,9 +23,9 @@ install:
   - npm install -g coveralls
 
 script:
+  - npm run build
   - npm run coverage
 
 after_success:
   - cat ./coverage/lcov.info | coveralls
-  - npm run build
   - firebase deploy --token $FIREBASE_TOKEN
