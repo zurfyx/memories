@@ -18,6 +18,8 @@ export class JourneyDetailComponent implements OnInit {
   journey: Journey;
   owner: User;
 
+  isSubmitting = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
