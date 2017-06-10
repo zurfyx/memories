@@ -6,6 +6,9 @@ import { NavbarModule, NavbarComponent } from './navbar';
 import { SidenavModule, SidenavComponent } from './sidenav';
 import {
   AuthService,
+  ImageService,
+  JourneyService,
+  UserService,
 } from './services';
 
 @NgModule({
@@ -22,6 +25,9 @@ import {
     AngularFireAuth,
     AngularFireDatabase,
     AuthService,
+    ImageService,
+    JourneyService,
+    UserService,
   ],
 })
 export class SharedModule { }

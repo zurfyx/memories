@@ -6,6 +6,10 @@
   padding: 42px;
 }
 
+.box.unspaced {
+  padding: 0;
+}
+
 .box.highlight {
   background-color: $secondary;
 }

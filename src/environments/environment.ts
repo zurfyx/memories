@@ -12,5 +12,8 @@ export const environment = {
     projectId: 'geographical-memories-dev',
     storageBucket: 'geographical-memories-dev.appspot.com',
     messagingSenderId: '388931646367',
+  },
+  maps: {
+    apiKey: 'AIzaSyDPQLa3pdoBVIfPj8Hj5mO7wQhW-z8b5jU',
   }
 };
