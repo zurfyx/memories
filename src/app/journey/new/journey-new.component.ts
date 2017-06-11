@@ -72,6 +72,7 @@ export class JourneyNewComponent implements OnInit {
       .subscribe(
         _ => window.alert('Done!'),
         error => {
+          console.error(error);
           window.alert('An error has occurred.');
           this.isSubmitting = false;
         },

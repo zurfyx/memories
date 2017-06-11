@@ -12,7 +12,7 @@
           </div>
 
           <div class="input-row">
-            <input type="file" (change)="coverChange($event)" #coverInput />
+            <input type="file" accept="image/x-png,image/gif,image/jpeg" (change)="coverChange($event)" #coverInput />
             <button type="button" class="label" (click)="executeCover()" md-button>
               Add cover image
             </button>

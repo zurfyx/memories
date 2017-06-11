@@ -3,6 +3,9 @@ export abstract class Base {
 
   constructor(values) {
     Object.assign(this, values);
-    this.$key = values.$key;
+
+    if (values.$key) {
+      this.$key = values.$key;
+    }
   }
 }
