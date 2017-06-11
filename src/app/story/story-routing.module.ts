@@ -8,7 +8,7 @@ import { StoryDetailComponent } from './detail/story-detail.component';
   imports: [
     RouterModule.forChild([
       {
-        path: 'story/:uid',
+        path: 'stories/:uid',
         component: StoryDetailComponent,
         resolve: {
           story: StoryResolver,
