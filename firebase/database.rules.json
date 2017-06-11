@@ -1,8 +1,8 @@
 {
   "rules": {
     "users": {
-       "$uid": {
-       	 ".write": "newData.exists() && $uid === auth.uid",
+       "$uid": { 
+         ".write": "newData.exists() && $uid === auth.uid",
          ".validate": "newData.hasChildren(['displayName', 'email'])",
          "displayName": {
            ".read": true,
@@ -28,7 +28,9 @@
         ".validate": "newData.hasChildren(['owner', 'title', 'updatedAt'])",
         ".indexOn": ["updatedAt"],
         "owner": {
-          ".validate": "newData.val() === auth.uid && (!data.exists() || data.val() === auth.uid) && root.child('users/' + newData.val()).exists()"
+          ".validate": "newData.val() === auth.uid
+                        && (!data.exists() || data.val() === auth.uid)
+          						  && root.child('users/' + newData.val()).exists()"
         },
         "title": {
           ".validate": "newData.val().length > 0"
@@ -41,6 +43,56 @@
         },
         "$other": {
           ".validate": false
+        }
+      }
+    },
+    "stories": {
+      ".read": true,
+      "$uid": {
+        ".write": "auth !== null",
+        ".validate": "newData.hasChildren(['journey', 'owner', 'updatedAt', 'title'])",
+        "journey": {
+          ".validate": "newData.val().matches(/^[a-zA-Z0-9_-]+$/) && root.child('journeys/' + newData.val() + '/owner').val() === auth.uid"
+        },
+        "owner": {
+          ".validate": "newData.val() === auth.uid
+                        && (!data.exists() || data.val() === auth.uid)
+          						  && root.child('users/' + newData.val()).exists()"
+        },
+        "dateStart": {
+          ".validate": "newData.isNumber()"
+        },
+        "updatedAt": {
+          ".validate": "newData.val() === now"
+        },
+        "title": {
+          ".validate": "newData.val().length > 0"
+        },
+        "description": {
+          ".validate": "newData.isString()"
+        },
+        "map": {
+          ".validate": "newData.hasChildren(['lat', 'long'])",
+          "lat": {
+            ".validate": "newData.isNumber()"
+          },
+          "long": {
+            ".validate": "newData.isNumber()"
+          }
+        },
+        "coverURL": {
+          ".validate": "newData.val().matches(/^https:\\/\\/firebasestorage.googleapis.com\\//)"
+        },
+        "photos": {
+          "$photoUid": {
+            ".validate": "$photoUid >= 0 && $photoUid < 10 && newData.hasChildren(['url', 'title'])",
+            "url": {
+              ".validate": "newData.val().matches(/^https:\\/\\/firebasestorage.googleapis.com\\//)"
+            },
+            "title": {
+              ".validate": "newData.isString()"
+            }
+          }
         }
       }
     }

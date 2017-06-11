@@ -13,20 +13,32 @@ users: {
 journeys: {
   <tripUid>: {
     owner: <userUid>,
+    title: string,
     dateStart: number,
     dateEnd: number,
     createdAt: number,
     updatedAt: number,
     banner: string,
-    description: string,
-    stories: <storyUid>[]
+    description: string
   }
 },
 stories: {
   <storyUid>: {
-    dateStart: Date,
-    dateEnd: Date,
-    description: string
+    journey: <journeyUid>,
+    owner: <ownerUid>,
+    dateStart: number,
+    updatedAt: number,
+    title: string,
+    description: string,
+    map: {
+      lat: number,
+      long: number
+    },
+    coverURL: string,
+    photos: {
+      url: string,
+      title: string
+    }
   }
 },
 physicalWeb: {
