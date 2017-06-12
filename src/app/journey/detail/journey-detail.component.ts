@@ -8,6 +8,8 @@ import {
   Journey,
   User,
   UserService,
+  Story,
+  StoryService,
 } from '../../shared';
 
 @Component({
@@ -19,6 +21,7 @@ import {
 export class JourneyDetailComponent implements OnInit {
   journey: Journey;
   owner: User; // Journey's owner.
+  stories: Story[];
 
   isNewStoryVisible = false;
 
@@ -26,6 +29,7 @@ export class JourneyDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
+    private storyService: StoryService,
   ) {
     this.route.data.subscribe((params: { journey: Journey }) => {
       this.journey = params.journey;
@@ -35,6 +39,9 @@ export class JourneyDetailComponent implements OnInit {
   ngOnInit() {
     this.userService.readUser(this.journey.owner, ['photoURL']).subscribe((owner: User) => {
       this.owner = owner;
+    });
+    this.storyService.readStories(this.journey.$key).subscribe((stories: Story[]) => {
+      this.stories = stories;
     });
   }
 

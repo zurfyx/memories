@@ -19,26 +19,15 @@
       </app-story-new>
     </div>
     <div class="box">
-      <md-list-item class="story clickable">
+      <md-list-item class="story clickable" *ngFor="let story of stories">
         <div class="storyInfo">
           <h3 md-line>
-            <a class="invisible" href="#">Story title</a>
+            <a class="invisible" href="#">{{story.title}}</a>
           </h3>
-          <p md-line>June 16, 2016</p>
+          <p md-line>{{story.dateStart}}</p>
         </div>
-        <div class="storyCover">
-          <div style="background-image:url('https://cdn.wallpaper.com/main/the-sandhya-1.jpg')"></div>
-        </div>
-      </md-list-item>
-      <md-list-item class="story clickable">
-        <div class="storyInfo">
-          <h3 md-line>
-            <a class="invisible" href="#">Story title</a>
-          </h3>
-          <p md-line>June 16, 2016</p>
-        </div>
-        <div class="storyCover">
-          <div style="background-image:url('https://cdn.wallpaper.com/main/the-sandhya-1.jpg')"></div>
+        <div class="storyCover" *ngIf="story?.coverURL">
+          <div [style.backgroundImage]="'url(' + story.coverURL + ')'"></div>
         </div>
       </md-list-item>
     </div>

@@ -19,4 +19,16 @@ export class StoryService {
     const setPromise = stories.set(story);
     return Observable.fromPromise(setPromise);
   }
+
+  readStories(journeyUid: string): Observable<Story[]> {
+    const afListOptions = {
+      query: {
+        orderByChild: 'journey',
+        equalTo: journeyUid,
+      }
+    };
+    return this.afDatabase.list('/stories', afListOptions).map((snapshot: any[]) => (
+      snapshot.map(storyValues => new Story(storyValues))
+    ));
+  }
 }
