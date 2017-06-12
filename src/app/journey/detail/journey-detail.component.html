@@ -7,25 +7,16 @@
       <h1>{{journey.title}}</h1>
       <div class="buttons">
         <a href="#" md-button>Edit journey</a>
-        <a href="#" md-button>Add story</a>
+        <a href="#" md-button (click)="toggleNewStory($event)">Add story</a>
       </div>
     </div>
-    <div class="box story-new">
-      <form class="withLines" [formGroup]="storyForm" (ngSubmit)="submitStoryForm()">
-        <fieldset [disabled]="isSubmitting">
-          <md-input-container>
-            <input type="text" formControlName="title" placeholder="New story title" mdInput required />
-          </md-input-container>
-          <div class="input-row submit-row">
-            <button type="button" md-button>
-              Cancel
-            </button>
-            <button type="submit" color="primary" [disabled]="false" md-raised-button>
-              Create
-            </button>
-          </div>
-        </fieldset>
-      </form>
+    <div class="box story-new" [hidden]="!isNewStoryVisible">
+      <app-story-new 
+        [journey]="journey"
+        (success)="toggleNewStory()"
+        (fail)="toggleNewStory()"
+        (cancel)="toggleNewStory()">
+      </app-story-new>
     </div>
     <div class="box">
       <md-list-item class="story clickable">

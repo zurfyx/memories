@@ -6,11 +6,8 @@ import * as firebase from 'firebase';
 
 import {
   Journey,
-  JourneyService,
   User,
   UserService,
-  Story,
-  StoryService,
 } from '../../shared';
 
 @Component({
@@ -21,22 +18,15 @@ import {
 })
 export class JourneyDetailComponent implements OnInit {
   journey: Journey;
-  owner: User;
+  owner: User; // Journey's owner.
 
-  storyForm: FormGroup;
-  isSubmitting = false;
+  isNewStoryVisible = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private afAuth: AngularFireAuth,
     private userService: UserService,
-    private storyService: StoryService,
   ) {
-    this.storyForm = this.formBuilder.group({
-      title: [''],
-    });
     this.route.data.subscribe((params: { journey: Journey }) => {
       this.journey = params.journey;
     });
@@ -48,30 +38,10 @@ export class JourneyDetailComponent implements OnInit {
     });
   }
 
-  submitStoryForm() {
-    this.isSubmitting = true;
-
-    const title: string = this.storyForm.value['title'];
-
-    this.afAuth.authState
-      .first()
-      .flatMap((user: firebase.User) => {
-        const userUid = user.uid;
-        const story: Story = new Story({
-          title,
-          journey: this.journey.$key,
-          owner: userUid,
-          updatedAt: firebase.database.ServerValue.TIMESTAMP,
-        });
-        return this.storyService.createStory(story);
-      })
-      .subscribe(
-        _ => window.alert('Done!'),
-        error => {
-          console.error(error);
-          window.alert('An error has ocurred.');
-          this.isSubmitting = false;
-        }
-      );
+  toggleNewStory(event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
+    this.isNewStoryVisible = !this.isNewStoryVisible;
   }
 }

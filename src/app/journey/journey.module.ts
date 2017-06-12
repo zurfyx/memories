@@ -9,6 +9,7 @@ import {
 } from '@angular/material';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { StoryNewModule } from './story-new/story-new.module';
 import { JourneyListComponent } from './list/journey-list.component';
 import { JourneyListOwnerComponent } from './list/journey-list-owner.component';
 import { JourneyNewComponent } from './new/journey-new.component';
@@ -27,6 +28,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     MdListModule,
     JourneyRoutingModule,
     AngularFireAuthModule,
+    StoryNewModule,
   ],
   exports: [],
   declarations: [

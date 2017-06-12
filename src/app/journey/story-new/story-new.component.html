@@ -1,0 +1,15 @@
+<form class="withLines" [formGroup]="storyForm" (ngSubmit)="submitStoryForm()">
+  <fieldset [disabled]="isSubmitting">
+    <md-input-container>
+      <input type="text" formControlName="title" placeholder="New story title" mdInput required />
+    </md-input-container>
+    <div class="input-row submit-row">
+      <button type="button" (click)="cancelStoryForm()" md-button>
+        Cancel
+      </button>
+      <button type="submit" color="primary" [disabled]="!storyForm.valid" md-raised-button>
+        Create
+      </button>
+    </div>
+  </fieldset>
+</form>
