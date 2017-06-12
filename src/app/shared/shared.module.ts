@@ -6,6 +6,7 @@ import { NavbarModule, NavbarComponent } from './navbar';
 import { SidenavModule, SidenavComponent } from './sidenav';
 import {
   AuthService,
+  IdService,
   ImageService,
   JourneyService,
   UserService,
@@ -26,6 +27,7 @@ import {
     AngularFireAuth,
     AngularFireDatabase,
     AuthService,
+    IdService,
     ImageService,
     JourneyService,
     UserService,

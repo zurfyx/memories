@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import shortid from 'shortid';
 
 import { Journey } from '../models';
 import { ImageService } from './image.service';
+import { IdService } from './id.service';
 
 @Injectable()
 export class JourneyService {
@@ -13,13 +13,18 @@ export class JourneyService {
   constructor(
     private afDatabase: AngularFireDatabase,
     private imageService: ImageService,
+    private idService: IdService,
   ) { }
 
-  createJourney(journey: Journey): Observable<void> {
-    const journeyId = shortid.generate();
+  createJourney(journey: Journey): Observable<Journey> {
+    const journeyId = this.idService.short();
     const journeys = this.afDatabase.object(`journeys/${journeyId}`);
     const setPromise = journeys.set(journey);
-    return Observable.fromPromise(setPromise);
+    return Observable.fromPromise(setPromise)
+      .map(() => {
+        const newValues = Object.assign({ $key: journeyId }, journey);
+        return new Journey(newValues);
+      });
   }
 
   /**
@@ -28,15 +33,16 @@ export class JourneyService {
    * @param journey A complete journey object, excepting coverURL which can be left blank.
    * @param cover A cover file.
    */
-  createJourneyWithCoverFile(journey: Journey, cover?: File): Observable<void> {
+  createJourneyWithCoverFile(journey: Journey, cover?: File): Observable<Journey> {
     if (!cover) {
       return this.createJourney(journey);
     }
 
     return this.imageService.createImage(cover)
       .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => {
-        journey.coverURL = snapshot.downloadURL;
-        return this.createJourney(journey);
+        const newValues = Object.assign({ coverURL: snapshot.downloadURL }, journey);
+        const newJourney = new Journey(newValues);
+        return this.createJourney(newJourney);
       });
   }
 

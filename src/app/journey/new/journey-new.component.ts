@@ -70,7 +70,7 @@ export class JourneyNewComponent implements OnInit {
         return this.journeyService.createJourneyWithCoverFile(journey, this.coverResult);
       })
       .subscribe(
-        _ => window.alert('Done!'),
+        (journey: Journey) => this.router.navigate([`/journeys/${journey.$key}`]),
         error => {
           console.error(error);
           window.alert('An error has occurred.');
