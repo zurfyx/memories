@@ -60,7 +60,7 @@ export class JourneyNewComponent implements OnInit {
 
     this.afAuth.authState
       .first()
-      .flatMap((user) => {
+      .flatMap((user: firebase.User) => {
         const userUid = user.uid;
         const journey: Journey = new Journey({
           title,

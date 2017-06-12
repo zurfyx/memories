@@ -9,6 +9,7 @@ import {
   ImageService,
   JourneyService,
   UserService,
+  StoryService,
 } from './services';
 
 @NgModule({
@@ -28,6 +29,7 @@ import {
     ImageService,
     JourneyService,
     UserService,
+    StoryService,
   ],
 })
 export class SharedModule { }

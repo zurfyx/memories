@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import shortid from 'shortid';
@@ -12,18 +11,15 @@ import { ImageService } from './image.service';
 export class JourneyService {
 
   constructor(
-    private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase,
     private imageService: ImageService,
   ) { }
 
   createJourney(journey: Journey): Observable<void> {
-    return this.afAuth.authState.first().flatMap((user) => {
-      const journeyId = shortid.generate();
-      const journeys = this.afDatabase.object(`journeys/${journeyId}`);
-      const setPromise = journeys.set(journey);
-      return Observable.fromPromise(setPromise);
-    });
+    const journeyId = shortid.generate();
+    const journeys = this.afDatabase.object(`journeys/${journeyId}`);
+    const setPromise = journeys.set(journey);
+    return Observable.fromPromise(setPromise);
   }
 
   /**

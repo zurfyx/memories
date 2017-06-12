@@ -11,10 +11,10 @@
       </div>
     </div>
     <div class="box story-new">
-      <form class="withLines">
+      <form class="withLines" [formGroup]="storyForm" (ngSubmit)="submitStoryForm()">
         <fieldset [disabled]="isSubmitting">
           <md-input-container>
-            <input type="text" name="title" placeholder="New story title" mdInput />
+            <input type="text" formControlName="title" placeholder="New story title" mdInput required />
           </md-input-container>
           <div class="input-row submit-row">
             <button type="button" md-button>
