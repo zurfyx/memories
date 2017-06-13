@@ -1,34 +1,24 @@
-<div class="content__banner" [style.backgroundImage]="'url(' + story.coverURL + ')'">
-  <div class="action-buttons" *ngIf="isEditing">
-    <i class="fa fa-camera"></i>
-  </div>
-</div>
-
+<app-story-detail-banner [story]="story" [isEditing]="isEditing"></app-story-detail-banner>
 <div class="avatar" [style.backgroundImage]="'url(' + owner?.photoURL + ')'"></div>
 
 <div class="page story-detail-page">
   <div class="container">
     <div class="container__head-buttons">
-      <h1>{{story.title}}</h1>
+      <app-story-detail-title [story]="story" [isEditing]="isEditing"></app-story-detail-title>
       <div class="buttons">
-        <a href="#" md-button>Edit</a>
+        <a (click)="toggleEdit()" md-button>Edit</a>
       </div>
     </div>
 
-    <div class="photos">
-      <img [src]="photo.url" *ngFor="let photo of story.photos" />
-    </div>
+    <app-story-detail-photo [story]="story" [isEditing]="isEditing"></app-story-detail-photo>
     
-    <div class="box description">{{story.description}}</div>
+    <div class="box description">
+      <app-story-detail-description [story]="story" [isEditing]="isEditing"></app-story-detail-description>
+    </div>
     
     <h2>Location</h2>
     <div class="box unspaced">
-      <iframe
-        height="400"
-        frameborder="0" style="border:0; width: 100%"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDPQLa3pdoBVIfPj8Hj5mO7wQhW-z8b5jU&q=Space+Needle,Seattle+WA" allowfullscreen>
-      </iframe>
+      <app-story-detail-map [story]="story" [isEditing]="isEditing"></app-story-detail-map>
     </div>
-    
   </div>
 </div>

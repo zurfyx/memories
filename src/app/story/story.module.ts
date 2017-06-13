@@ -1,23 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-  MdButtonModule,
-} from '@angular/material';
 
-import { StoryDetailComponent } from './detail/story-detail.component';
 import { StoryResolver } from './story-resolver.service';
+import { StoryDetailModule } from './detail/story-detail.module';
 import { StoryRoutingModule } from './story-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    MdButtonModule,
+    StoryDetailModule,
     StoryRoutingModule,
   ],
   exports: [],
-  declarations: [
-    StoryDetailComponent,
-  ],
+  declarations: [],
   providers: [
     StoryResolver,
   ],

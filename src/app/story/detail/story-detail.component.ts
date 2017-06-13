@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {
@@ -32,5 +32,13 @@ export class StoryDetailComponent implements OnInit {
     this.userService.readUser(this.story.owner, ['photoURL']).subscribe((user: User) => {
       this.owner = user;
     });
+  }
+
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
+  submitStory(story: Story) {
+
   }
 }
