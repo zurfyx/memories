@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   MdInputModule,
   MdButtonModule,
@@ -21,6 +22,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     MdInputModule,
     MdButtonModule,

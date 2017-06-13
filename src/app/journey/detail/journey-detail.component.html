@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="box story-new" [hidden]="!isNewStoryVisible">
-      <app-story-new 
+      <app-story-new
         [journey]="journey"
         (success)="toggleNewStory()"
         (fail)="toggleNewStory()"
@@ -19,10 +19,10 @@
       </app-story-new>
     </div>
     <div class="box">
-      <md-list-item class="story clickable" *ngFor="let story of stories">
+      <md-list-item class="story clickable" *ngFor="let story of stories" (click)="navigateToStory(story.$key)">
         <div class="storyInfo">
           <h3 md-line>
-            <a class="invisible" href="#">{{story.title}}</a>
+            <a class="invisible" [routerLink]="getRouterStoryPath(story.$key)">{{story.title}}</a>
           </h3>
           <p md-line>{{story.dateStart}}</p>
         </div>

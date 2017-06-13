@@ -5,7 +5,7 @@
         <div md-card-image class="cover" [style.backgroundImage]="journey.coverURL && 'url(' + journey.coverURL + ')'"></div>
         <md-card-content>
           <md-card-title>
-            <a class="invisible" (click)="navigateToJourney(journey.$key)">{{journey.title}}</a>
+            <a class="invisible" [routerLink]="getRouterStoryPath(journey.$key)">{{journey.title}}</a>
           </md-card-title>
           <p>
             <app-journey-list-owner [owner]="journey.owner"></app-journey-list-owner>

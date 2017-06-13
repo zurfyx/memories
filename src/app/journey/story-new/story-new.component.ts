@@ -55,7 +55,6 @@ export class StoryNewComponent implements OnInit {
       .subscribe(
         _ => {
           this.success.emit();
-          window.alert('Done!');
           this.storyForm.reset();
           this.isSubmitting = false;
         },

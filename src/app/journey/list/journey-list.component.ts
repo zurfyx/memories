@@ -31,7 +31,12 @@ export class JourneyListComponent implements OnInit {
     return journeys.sort((a, b) => b.updatedAt - a.updatedAt);
   }
 
+  getRouterStoryPath(uid: string) {
+    return [`/journeys/${uid}`];
+  }
+
   navigateToJourney(uid: string) {
-    this.router.navigate([`journeys/${uid}`]);
+    const routerPath = this.getRouterStoryPath(uid);
+    this.router.navigate(routerPath);
   }
 }

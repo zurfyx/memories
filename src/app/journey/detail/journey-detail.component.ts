@@ -51,4 +51,13 @@ export class JourneyDetailComponent implements OnInit {
     }
     this.isNewStoryVisible = !this.isNewStoryVisible;
   }
+
+  getRouterStoryPath(uid: string) {
+    return [`/stories/${uid}`];
+  }
+
+  navigateToStory(uid: string) {
+    const routerPath = this.getRouterStoryPath(uid);
+    this.router.navigate(routerPath);
+  }
 }
