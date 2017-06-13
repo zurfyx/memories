@@ -4,4 +4,16 @@
   @include bg-image();
   height: 250px;
   width: 100%;
+
+  .action-buttons {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    .fa {
+      position: absolute;
+      right: 2rem;
+      bottom: 2rem;
+    }
+  }
 }

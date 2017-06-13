@@ -3,19 +3,24 @@ import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable } from 'rxjs/Rx';
 
 import {
-  // Story,
-  // StoryService,
+  Story,
+  StoryService,
 } from '../shared';
 
 @Injectable()
 export class StoryResolver implements Resolve<any> {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private storyService: StoryService,
+  ) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): Observable<any> {
-    return Observable.of(null);
+  ): Observable<Story> {
+    const storyUid = route.params['uid'];
+    return this.storyService.readStory(storyUid).first()
+      .catch((error) => this.router.navigateByUrl('/'));
   }
 }

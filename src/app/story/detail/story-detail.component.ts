@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   User,
   UserService,
+  Story,
 } from '../../shared';
 
 @Component({
@@ -12,18 +13,24 @@ import {
   styleUrls: ['story-detail.component.scss'],
 })
 export class StoryDetailComponent implements OnInit {
-  story: any;
+  story: Story;
+  owner: User; // Story owner.
+
+  isEditing = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
   ) {
-    this.route.data.subscribe((params: { story: any }) => {
+    this.route.data.subscribe((params: { story: Story }) => {
       this.story = params.story;
     });
   }
 
   ngOnInit() {
+    this.userService.readUser(this.story.owner, ['photoURL']).subscribe((user: User) => {
+      this.owner = user;
+    });
   }
 }

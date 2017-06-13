@@ -28,8 +28,14 @@ export class StoryService {
         equalTo: journeyUid,
       }
     };
-    return this.afDatabase.list('/stories', afListOptions).map((snapshot: any[]) => (
+    return this.afDatabase.list('stories', afListOptions).map((snapshot: any[]) => (
       snapshot.map(storyValues => new Story(storyValues))
+    ));
+  }
+
+  readStory(uid: string): Observable<Story> {
+    return this.afDatabase.object(`stories/${uid}`).map((snapshot: any) => (
+      new Story(snapshot)
     ));
   }
 }
