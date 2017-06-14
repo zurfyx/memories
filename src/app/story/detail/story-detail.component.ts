@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MdSnackBar } from '@angular/material';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 
@@ -28,6 +29,7 @@ export class StoryDetailComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private storyService: StoryService,
+    private snackBar: MdSnackBar,
   ) {
     this.route.data.subscribe((params: { story: Story }) => {
       this.story = params.story;
@@ -110,6 +112,7 @@ export class StoryDetailComponent implements OnInit {
     this.story.updatedAt = firebase.database.ServerValue.TIMESTAMP;
     this.storyService.updateStory(this.story).subscribe(() => {
       this.editState = EditState.View;
+      this.snackBar.open('Saved!', null, { duration: 3000 });
     });
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MdButtonModule,
   MdInputModule,
+  MdSnackBarModule,
 } from '@angular/material';
 
 import {
