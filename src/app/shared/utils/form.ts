@@ -12,7 +12,10 @@ export class FormUtils {
     const result = new BehaviorSubject(undefined);
     const reader = new FileReader();
 
-    reader.onload = e => result.next(reader.result);
+    reader.onload = () => {
+      result.next(reader.result);
+      result.complete();
+    };
     reader.readAsDataURL(image);
 
     return result;
