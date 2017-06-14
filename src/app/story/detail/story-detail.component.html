@@ -1,24 +1,31 @@
-<app-story-detail-banner [story]="story" [isEditing]="isEditing"></app-story-detail-banner>
+<app-story-detail-banner
+  [story]="story"
+  [editState]="editState"
+  (pending)="setPending('banner')"
+  (unpending)="setUnpending('banner')">
+</app-story-detail-banner>
 <div class="avatar" [style.backgroundImage]="'url(' + owner?.photoURL + ')'"></div>
 
 <div class="page story-detail-page">
   <div class="container">
     <div class="container__head-buttons">
-      <app-story-detail-title [story]="story" [isEditing]="isEditing"></app-story-detail-title>
+      <app-story-detail-title [story]="story" [isEditing]="false"></app-story-detail-title>
       <div class="buttons">
-        <a (click)="toggleEdit()" md-button>Edit</a>
+        <a (click)="edit()" *ngIf="!isEditing()" md-button>Edit</a>
+        <a (click)="cancel()" *ngIf="isEditing()" [disabled]="!isActivelyEditing()" md-button>Cancel</a>
+        <a (click)="save()" *ngIf="isEditing()" [disabled]="!isActivelyEditing()" md-button>Save</a>
       </div>
     </div>
 
-    <app-story-detail-photo [story]="story" [isEditing]="isEditing"></app-story-detail-photo>
+    <app-story-detail-photo [story]="story" [isEditing]="false"></app-story-detail-photo>
     
     <div class="box description">
-      <app-story-detail-description [story]="story" [isEditing]="isEditing"></app-story-detail-description>
+      <app-story-detail-description [story]="story" [isEditing]="false"></app-story-detail-description>
     </div>
     
     <h2>Location</h2>
     <div class="box unspaced">
-      <app-story-detail-map [story]="story" [isEditing]="isEditing"></app-story-detail-map>
+      <app-story-detail-map [story]="story" [isEditing]="false"></app-story-detail-map>
     </div>
   </div>
 </div>

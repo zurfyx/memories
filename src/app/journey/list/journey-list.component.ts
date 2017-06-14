@@ -28,7 +28,7 @@ export class JourneyListComponent implements OnInit {
   }
 
   sortJourneysByDateDesc(journeys: Journey[]) {
-    return journeys.sort((a, b) => b.updatedAt - a.updatedAt);
+    return journeys.sort((a, b) => (b.updatedAt as number) - (a.updatedAt as number));
   }
 
   getRouterStoryPath(uid: string) {

@@ -4,7 +4,7 @@ export class Story extends Base {
   journey: string;
   owner: string;
   dateStart: number;
-  updatedAt: number;
+  updatedAt: Object | number;
   title: string;
   description: string;
   map: {

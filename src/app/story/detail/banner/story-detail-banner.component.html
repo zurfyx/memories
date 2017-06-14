@@ -1,5 +1,16 @@
-<div class="content__banner" [style.backgroundImage]="'url(' + story.coverURL + ')'">
-  <div class="action-buttons" *ngIf="isEditing">
+<div
+  class="content__banner"
+  [style.backgroundImage]="newCover64 || 'url(' + story.coverURL + ')'"
+  [class.active]="isEditing()"
+  (click)="executeCoverInput()">
+  <div class="action-buttons" *ngIf="isEditing()">
     <i class="fa fa-camera"></i>
   </div>
 </div>
+
+<input
+  type="file"
+  class="file-input"
+  accept="image/x-png,image/gif,image/jpeg"
+  (change)="coverChange($event)"
+  #coverInput />

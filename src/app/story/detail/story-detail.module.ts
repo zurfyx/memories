@@ -5,6 +5,9 @@ import {
   MdInputModule,
 } from '@angular/material';
 
+import {
+  SafeStylePipe,
+} from '../../shared';
 import { StoryDetailComponent } from './story-detail.component';
 import { StoryDetailBannerComponent } from './banner/story-detail-banner.component';
 import { StoryDetailDescriptionComponent } from './description/story-detail-description.component';
@@ -27,6 +30,8 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     StoryDetailPhotoComponent,
     StoryDetailTitleComponent,
   ],
-  providers: [],
+  providers: [
+    SafeStylePipe,
+  ],
 })
 export class StoryDetailModule { }

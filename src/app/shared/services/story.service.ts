@@ -16,8 +16,8 @@ export class StoryService {
 
   createStory(story: Story): Observable<void> {
     const storyId = this.idService.short();
-    const stories = this.afDatabase.object(`stories/${storyId}`);
-    const setPromise = stories.set(story);
+    const dbObject = this.afDatabase.object(`stories/${storyId}`);
+    const setPromise = dbObject.set(story);
     return Observable.fromPromise(setPromise);
   }
 
@@ -37,5 +37,14 @@ export class StoryService {
     return this.afDatabase.object(`stories/${uid}`).map((snapshot: any) => (
       new Story(snapshot)
     ));
+  }
+
+  updateStory(story: Story): Observable<void> {
+    const storyId = story.$key;
+    const unkeyedStory = Object.assign({}, story);
+    delete unkeyedStory.$key;
+    const dbObject = this.afDatabase.object(`stories/${storyId}`);
+    const setPromise = dbObject.set(unkeyedStory);
+    return Observable.fromPromise(setPromise);
   }
 }
