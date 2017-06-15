@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
 
 import { environment } from '../environments/environment';
@@ -21,6 +22,9 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     HttpModule,
     MaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.maps.apiKey,
+    }),
     AngularFireModule.initializeApp(environment.firebase),
     SharedModule,
     JourneyModule,

@@ -1,5 +1,11 @@
-<iframe
-  height="400"
-  frameborder="0" style="border:0; width: 100%"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDPQLa3pdoBVIfPj8Hj5mO7wQhW-z8b5jU&q=Space+Needle,Seattle+WA" allowfullscreen>
-</iframe>
+<agm-map
+  [latitude]="story.map?.lat || DEFAULT_LAT"
+  [longitude]="story.map?.long || DEFAULT_LONG"
+  [zoom]="story.map?.lat ? 7 : 2"
+  (mapClick)="mapClick($event)">
+  <agm-marker
+    [latitude]="newLat || story.map.lat"
+    [longitude]="newLong || story.map.long"
+    *ngIf="newLat || story.map?.lat">
+  </agm-marker>
+</agm-map>

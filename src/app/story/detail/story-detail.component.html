@@ -35,7 +35,12 @@
     
     <h2>Location</h2>
     <div class="box unspaced">
-      <app-story-detail-map [story]="story" [isEditing]="false"></app-story-detail-map>
+      <app-story-detail-map
+        [story]="story"
+        [editState]="editState"
+        (pending)="setPending('map')"
+        (unpending)="setUnpending('map')">
+      </app-story-detail-map>
     </div>
   </div>
 </div>

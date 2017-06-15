@@ -17,8 +17,8 @@ export class StoryDetailTitleComponent extends StoryDetailEditComponent {
   }
 
   cleanup(): void {
-    this.unsetPending();
     this.newTitle = undefined;
+    this.unsetPending();
   }
 
   updateStory(): Observable<void> {

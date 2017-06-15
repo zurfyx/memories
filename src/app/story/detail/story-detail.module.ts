@@ -5,6 +5,7 @@ import {
   MdInputModule,
   MdSnackBarModule,
 } from '@angular/material';
+import { AgmCoreModule } from '@agm/core';
 
 import {
   SafeStylePipe,
@@ -21,6 +22,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     CommonModule,
     MdButtonModule,
     MdInputModule,
+    AgmCoreModule,
   ],
   exports: [],
   declarations: [

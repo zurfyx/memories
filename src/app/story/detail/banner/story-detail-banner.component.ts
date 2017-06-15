@@ -52,10 +52,10 @@ export class StoryDetailBannerComponent extends StoryDetailEditComponent {
   }
 
   cleanup(): void {
-    this.unsetPending();
     this.coverInput.nativeElement.value = '';
     this.newCover = undefined;
     this.newCover64 = undefined;
+    this.unsetPending();
   }
 
   updateStory(): Observable<void> {
