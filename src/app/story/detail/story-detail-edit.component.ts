@@ -11,8 +11,6 @@ import { Story } from '../../shared';
 import { EditState } from './edit-state';
 
 export abstract class StoryDetailEditComponent implements OnChanges {
-  abstract ID: string; // Unique component identifier amongst the story edit components.
-
   @Input() story: Story;
   @Input() editState;
   @Output() pending = new EventEmitter<void>();

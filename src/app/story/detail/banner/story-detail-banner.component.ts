@@ -20,8 +20,6 @@ import { StoryDetailEditComponent } from '../story-detail-edit.component';
   styleUrls: ['story-detail-banner.component.scss'],
 })
 export class StoryDetailBannerComponent extends StoryDetailEditComponent {
-  ID = 'banner';
-
   @ViewChild('coverInput') coverInput: ElementRef;
 
   newCover: File;
@@ -63,7 +61,7 @@ export class StoryDetailBannerComponent extends StoryDetailEditComponent {
   updateStory(): Observable<void> {
     if (!this.newCover) {
       this.unsetPending();
-      return;
+      return Observable.of(null);
     }
 
     // TODO: Delete current cover.
