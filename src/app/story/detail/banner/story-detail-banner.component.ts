@@ -9,6 +9,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { SafeStyle } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Rx';
 
 import {
   FormUtils,
@@ -44,7 +45,7 @@ export class StoryDetailBannerComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const editState = changes['editState'] && changes['editState'].currentValue;
     if (editState === EditState.Save) {
-      this.updateStory();
+      this.updateStory().subscribe(() => this.cleanup());
     } else if (editState === EditState.Cancel) {
       this.cleanup();
     }
@@ -83,21 +84,21 @@ export class StoryDetailBannerComponent implements OnChanges {
     );
   }
 
-  cleanup() {
+  cleanup(): void {
     this.unsetPending();
     this.coverInput.nativeElement.value = '';
     this.newCover = undefined;
     this.newCover64 = undefined;
   }
 
-  updateStory() {
+  updateStory(): Observable<void> {
     if (!this.newCover) {
       this.unsetPending();
       return;
     }
 
     // TODO: Delete current cover.
-    this.imageService.createImage(this.newCover).subscribe((image) => {
+    return this.imageService.createImage(this.newCover).map((image) => {
       this.story.coverURL = image.downloadURL;
       this.unsetPending();
     });
