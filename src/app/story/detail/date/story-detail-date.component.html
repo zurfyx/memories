@@ -1,0 +1,13 @@
+<div class="detail-date-page">
+  <span *ngIf="!isEditing()">{{story.dateStart | date}}</span>
+  <md-input-container *ngIf="isEditing()">
+    <input
+      placeholder="Choose a date"
+      [value]="(story.dateStart | date) || ''"
+      [mdDatepicker]="datePicker"
+      mdInput
+      readonly />
+    <button [mdDatepickerToggle]="datePicker" mdSuffix></button>
+    <md-datepicker (selectedChanged)="dateChange($event)" #datePicker></md-datepicker>
+  </md-input-container>
+</div>
