@@ -1,8 +1,13 @@
+<div class="no-location" *ngIf="!isEditing() && !story.map?.lat">
+  <i>No location has been set yet.</i>
+</div>
+
 <agm-map
   [latitude]="story.map?.lat || DEFAULT_LAT"
   [longitude]="story.map?.long || DEFAULT_LONG"
   [zoom]="story.map?.lat ? 7 : 2"
-  (mapClick)="mapClick($event)">
+  (mapClick)="mapClick($event)"
+  *ngIf="isEditing() || story.map?.lat">
   <agm-marker
     [latitude]="newLat || story.map.lat"
     [longitude]="newLong || story.map.long"

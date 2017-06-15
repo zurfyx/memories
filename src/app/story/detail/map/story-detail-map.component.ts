@@ -7,7 +7,7 @@ import { StoryDetailEditComponent } from '../story-detail-edit.component';
 @Component({
   selector: 'app-story-detail-map',
   templateUrl: 'story-detail-map.component.html',
-  styleUrls: ['story-detail.component.scss'],
+  styleUrls: ['story-detail-map.component.scss'],
 })
 export class StoryDetailMapComponent extends StoryDetailEditComponent {
   DEFAULT_LAT = 58;
