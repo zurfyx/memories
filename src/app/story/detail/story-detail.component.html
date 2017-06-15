@@ -25,7 +25,12 @@
     <app-story-detail-photo [story]="story" [isEditing]="false"></app-story-detail-photo>
     
     <div class="box description">
-      <app-story-detail-description [story]="story" [isEditing]="false"></app-story-detail-description>
+      <app-story-detail-description
+        [story]="story"
+        [editState]="editState"
+        (pending)="setPending('description')"
+        (unpending)="setUnpending('description')">
+      </app-story-detail-description>
     </div>
     
     <h2>Location</h2>

@@ -5,7 +5,8 @@
       class="title-input"
       type="text"
       placeholder="Title"
-      [value]="newTitle !== undefined ? newTitle : story.title"
+      [value]="newTitle !== undefined ? newTitle : story.title || ''"
+      [disabled]="!isActivelyEditing()"
       (keyup)="titleChange($event)"
       mdInput
       required />

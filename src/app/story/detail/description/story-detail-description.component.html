@@ -1,4 +1,12 @@
-<p class="description-text" *ngIf="!isEditing">{{story.description}}abc</p>
-<md-input-container class="description-input-container" *ngIf="isEditing">
-  <textarea class="description-input" placeholder="Description" mdInput mdTextareaAutosize>{{story.description}}</textarea>
+<p class="description-text" *ngIf="!isEditing()">{{story.description}}</p>
+<md-input-container class="description-input-container" *ngIf="isEditing()">
+  <textarea
+    class="description-input"
+    placeholder="Description"
+    [value]="newDescription !== undefined ? newDescription : story.description || ''"
+    [disabled]="!isActivelyEditing()"
+    (keyup)="descriptionChange($event)"
+    mdInput
+    mdTextareaAutosize>
+  </textarea>
 </md-input-container>

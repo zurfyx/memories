@@ -52,13 +52,20 @@ export abstract class StoryDetailEditComponent implements OnChanges {
   }
 
   /**
-   * Returns true if currently editing, that is either one the following states:
+   * Returns true if currently editing, which means one the following states:
    * EditState.Edit, EditState.Cancel, EditState.Save.
    */
   isEditing(): boolean {
     return this.editState === EditState.Edit
         || this.editState === EditState.Cancel
         || this.editState === EditState.Save;
+  }
+
+  /**
+   * Return true iff the state is EditState.Edit.
+   */
+  isActivelyEditing(): boolean {
+    return this.editState === EditState.Edit;
   }
 
   /**

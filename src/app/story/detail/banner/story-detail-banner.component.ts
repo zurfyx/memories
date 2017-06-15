@@ -33,7 +33,7 @@ export class StoryDetailBannerComponent extends StoryDetailEditComponent {
   }
 
   executeCoverInput() {
-    if (this.editState === EditState.Edit) {
+    if (this.isActivelyEditing()) {
       this.coverInput.nativeElement.click();
     }
   }
