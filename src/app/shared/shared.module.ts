@@ -5,6 +5,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { NavbarModule, NavbarComponent } from './navbar';
 import { SidenavModule, SidenavComponent } from './sidenav';
 import {
+  SafeHtmlPipe,
+  SafeStylePipe,
+} from './pipes';
+import {
   AuthService,
   IdService,
   ImageService,
@@ -22,7 +26,10 @@ import {
     NavbarComponent,
     SidenavComponent,
   ],
-  declarations: [],
+  declarations: [
+    SafeHtmlPipe,
+    SafeStylePipe,
+  ],
   providers: [
     AngularFireAuth,
     AngularFireDatabase,
