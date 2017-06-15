@@ -1,10 +1,5 @@
 import {
   Component,
-  OnChanges,
-  SimpleChanges,
-  EventEmitter,
-  Input,
-  Output,
   ViewChild,
   ElementRef,
 } from '@angular/core';
@@ -15,22 +10,17 @@ import {
   FormUtils,
   ImageService,
   SafeStylePipe,
-  Story,
 } from '../../../shared';
 import { EditState } from '../edit-state';
+import { StoryDetailEditComponent } from '../story-detail-edit.component';
 
 @Component({
   selector: 'app-story-detail-banner',
   templateUrl: 'story-detail-banner.component.html',
   styleUrls: ['story-detail-banner.component.scss'],
 })
-export class StoryDetailBannerComponent implements OnChanges {
+export class StoryDetailBannerComponent extends StoryDetailEditComponent {
   ID = 'banner';
-
-  @Input() story: Story;
-  @Input() editState;
-  @Output() pending = new EventEmitter<void>();
-  @Output() unpending = new EventEmitter<void>();
 
   @ViewChild('coverInput') coverInput: ElementRef;
 
@@ -40,29 +30,8 @@ export class StoryDetailBannerComponent implements OnChanges {
   constructor(
     private imageService: ImageService,
     private safeStylePipe: SafeStylePipe,
-  ) { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const editState = changes['editState'] && changes['editState'].currentValue;
-    if (editState === EditState.Save) {
-      this.updateStory().subscribe(() => this.cleanup());
-    } else if (editState === EditState.Cancel) {
-      this.cleanup();
-    }
-  }
-
-  setPending() {
-    this.pending.emit();
-  }
-
-  unsetPending() {
-    this.unpending.emit();
-  }
-
-  isEditing(): boolean {
-    return this.editState === EditState.Edit
-        || this.editState === EditState.Cancel
-        || this.editState === EditState.Save;
+  ) {
+    super();
   }
 
   executeCoverInput() {
