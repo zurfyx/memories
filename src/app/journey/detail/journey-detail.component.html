@@ -24,7 +24,7 @@
           <h3 md-line>
             <a class="invisible" [routerLink]="getRouterStoryPath(story.$key)">{{story.title}}</a>
           </h3>
-          <p md-line>{{story.dateStart}}</p>
+          <p md-line>{{story.dateStart | date}}</p>
         </div>
         <div class="storyCover" *ngIf="story?.coverURL">
           <div [style.backgroundImage]="'url(' + story.coverURL + ')'"></div>
