@@ -27,6 +27,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() { }
 
   openSigninDialog() {
-    const dialogRef = this.dialog.open(SigninComponent);
+    this.dialog.open(SigninComponent);
   }
 }
