@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
+import { CastModule } from './cast';
 import { NavbarModule, NavbarComponent } from './navbar';
 import { SidenavModule, SidenavComponent } from './sidenav';
 import {
@@ -19,6 +20,7 @@ import {
 
 @NgModule({
   imports: [
+    CastModule,
     NavbarModule,
     SidenavModule,
   ],

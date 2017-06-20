@@ -6,14 +6,16 @@ import {
 } from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { CastModule } from '../cast';
 import { NavbarComponent } from './navbar.component';
 import { SigninComponent } from './signin.component';
 
 @NgModule({
   imports: [
+    CommonModule,
     MdButtonModule,
     MdToolbarModule,
-    CommonModule,
+    CastModule,
   ],
   exports: [NavbarComponent],
   declarations: [
