@@ -3,7 +3,7 @@
   <nav class="navbar__links filler">
     <ng-container *ngIf="(user | async); then signedinBlock; else signinBlock"></ng-container>
     <ng-template #signedinBlock>
-      <a class="navbar-icon text-icon"><app-cast></app-cast></a>
+      <a class="navbar-icon text-icon" [class.active]="activeCast | async"><app-cast></app-cast></a>
       <a
         [style.background-image]="sanitizer.bypassSecurityTrustStyle('url(' + (user | async)?.photoURL + ')')" 
         class="navbar-icon rounded-full">

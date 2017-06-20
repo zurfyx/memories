@@ -1,11 +1,11 @@
 <h1>Cast To</h1>
 <div md-dialog-actions>
   <md-list>
-    <md-list-item>
-      <i class="fa fa-television"></i> Device I
-    </md-list-item>
-    <md-list-item>
-      <i class="fa fa-television"></i> Device II
+    <md-list-item
+      *ngFor="let server of servers"
+      [class.active]="server.uri === active.value?.uri"
+      (click)="connect(server)">
+      <i class="fa fa-television"></i> {{server.uri}}
     </md-list-item>
   </md-list>
 </div>
