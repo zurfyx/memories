@@ -10,6 +10,7 @@ import {
   UserService,
   Story,
   StoryService,
+  CastService,
 } from '../../shared';
 
 @Component({
@@ -30,6 +31,7 @@ export class JourneyDetailComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private storyService: StoryService,
+    private castService: CastService,
   ) {
     this.route.data.subscribe((params: { journey: Journey }) => {
       this.journey = params.journey;

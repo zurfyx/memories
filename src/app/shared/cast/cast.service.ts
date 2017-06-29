@@ -26,6 +26,7 @@ export class CastService {
       this.attemptDisconnect();
     }
 
+    server = new LiquidGalaxyServer('http://192.168.88.242:3030'); // TODO: delete me
     this.lastAttemptedConnect = server;
     server.connect();
     server.onConnectionEstablished(() => this.onConnectionEstablished(server));
