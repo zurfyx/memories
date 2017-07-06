@@ -4,8 +4,8 @@
     <md-list-item
       *ngFor="let server of servers"
       [class.active]="server.uri === active.value?.uri"
-      (click)="connect(server)">
-      <i class="fa fa-television"></i> {{server.uri}}
+      (click)="setActive(server)">
+      <i class="fa fa-television"></i> {{server.uid}}
     </md-list-item>
   </md-list>
 </div>

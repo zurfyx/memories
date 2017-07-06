@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/Rx';
 import { LiquidGalaxy, LiquidGalaxyServer } from 'liquid-galaxy';
 
 import { CastService } from './cast.service';
@@ -11,18 +11,20 @@ import { CastService } from './cast.service';
 })
 export class CastToComponent implements OnInit {
   servers: LiquidGalaxyServer[];
-  active: Observable<LiquidGalaxyServer>;
+  active: BehaviorSubject<LiquidGalaxyServer>;
 
   constructor(private castService: CastService) {
-    this.active = castService.getActive();
+    this.active = castService.active;
   }
 
   ngOnInit() {
     const findServers = new LiquidGalaxy().findServers();
-    findServers.then(servers => this.servers = servers);
+    findServers.then(servers => {
+      this.servers = servers;
+    });
   }
 
-  connect(server: LiquidGalaxyServer) {
-    this.castService.attemptConnect(server);
+  setActive(server: LiquidGalaxyServer) {
+    this.castService.setActive(server);
   }
 }

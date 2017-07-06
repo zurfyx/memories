@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
     private castService: CastService,
   ) {
     this.user = afAuth.authState;
-    this.activeCast = this.castService.getActive();
+    this.activeCast = this.castService.active;
   }
 
   ngOnInit() { }
