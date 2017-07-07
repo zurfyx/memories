@@ -2,6 +2,7 @@ dist: trusty
 language: node_js
 node_js:
   - '8'
+  - '7'
 
 branches:
   only:
@@ -23,6 +24,7 @@ install:
 
 script:
   - npm run build
+  - npm run lint
   - npm run coverage
 
 after_success:
