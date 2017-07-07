@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { LiquidGalaxyServer } from 'liquid-galaxy';
 
 import {
   Journey,
@@ -11,6 +12,7 @@ import {
   Story,
   StoryService,
   CastService,
+  KmlService,
 } from '../../shared';
 
 @Component({
@@ -32,6 +34,7 @@ export class JourneyDetailComponent implements OnInit {
     private userService: UserService,
     private storyService: StoryService,
     private castService: CastService,
+    private kmlService: KmlService,
   ) {
     this.route.data.subscribe((params: { journey: Journey }) => {
       this.journey = params.journey;
@@ -44,6 +47,11 @@ export class JourneyDetailComponent implements OnInit {
     });
     this.storyService.readStories(this.journey.$key).subscribe((stories: Story[]) => {
       this.stories = stories;
+    });
+    this.castService.active.subscribe((server) => {
+      if (server) {
+        this.cast();
+      }
     });
   }
 
@@ -61,5 +69,11 @@ export class JourneyDetailComponent implements OnInit {
   navigateToStory(uid: string) {
     const routerPath = this.getRouterStoryPath(uid);
     this.router.navigate(routerPath);
+  }
+
+  cast() {
+    const kml = this.kmlService.journey();
+    const server: LiquidGalaxyServer = this.castService.active.value;
+    server.writeKML(kml);
   }
 }

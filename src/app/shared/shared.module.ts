@@ -16,6 +16,7 @@ import {
   JourneyService,
   UserService,
   StoryService,
+  KmlService,
 } from './services';
 
 @NgModule({
@@ -41,6 +42,7 @@ import {
     JourneyService,
     UserService,
     StoryService,
+    KmlService,
   ],
 })
 export class SharedModule { }
