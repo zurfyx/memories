@@ -28,5 +28,5 @@ script:
   - npm run coverage
 
 after_success:
-  - cat ./coverage/lcov.info | coveralls
-  - firebase deploy --token $FIREBASE_TOKEN --non-interactive
+  - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ]; then cat ./coverage/lcov.info | coveralls ; fi'
+  - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ]; then firebase deploy --token $FIREBASE_TOKEN --non-interactive ; fi'
