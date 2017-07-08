@@ -22,6 +22,7 @@ install:
   - npm install -g coveralls
 
 script:
+  - npm run lint
   - npm run build
   - npm run coverage
 
