@@ -2,10 +2,10 @@
 
 > A social platform to share your worldwide memories
 
-[![Build Status](https://travis-ci.org/LiquidGalaxyLAB/memories.svg?branch=master)](https://travis-ci.org/LiquidGalaxyLAB/memories)
-[![David](https://david-dm.org/LiquidGalaxyLAB/memories.svg)](https://david-dm.org/LiquidGalaxyLAB/memories)
-[![Code Climate](https://codeclimate.com/github/LiquidGalaxyLAB/memories/badges/gpa.svg)](https://codeclimate.com/github/LiquidGalaxyLAB/memories)
-![Physical Web](https://img.shields.io/badge/Physical%20Web-%E2%9C%94-blue.svg) 
+[![Build Status](https://travis-ci.org/zurfyx/memories.svg?branch=master)](https://travis-ci.org/zurfyx/memories)
+[![David](https://david-dm.org/zurfyx/memories.svg)](https://david-dm.org/zurfyx/memories)
+[![Code Climate](https://codeclimate.com/github/zurfyx/memories/badges/gpa.svg)](https://codeclimate.com/github/zurfyx/memories)
+![Physical Web](https://img.shields.io/badge/Physical%20Web-%E2%9C%94-blue.svg)
 ![Liquid Galaxy](https://img.shields.io/badge/Liquid%20Galaxy-%E2%9C%94-blue.svg)
 
 ## Live
