@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
+import { Observable } from 'rxjs/Rx';
 
 import {
   Journey,
@@ -41,18 +42,27 @@ export class JourneyDetailComponent implements OnInit {
     });
   }
 
+  /**
+   * 1. Read journey owner information.
+   * 2. Read journey stories.
+   * 3. Cast stories into the casting device (if available).
+   */
   ngOnInit() {
     this.userService.readUser(this.journey.owner, ['photoURL']).subscribe((owner: User) => {
       this.owner = owner;
     });
-    this.storyService.readStories(this.journey.$key).subscribe((stories: Story[]) => {
-      this.stories = stories;
-    });
-    this.castService.active.subscribe((server) => {
-      if (server) {
-        this.cast();
-      }
-    });
+    this.storyService.readStories(this.journey.$key)
+      .flatMap((stories: Story[]) => {
+        this.stories = stories;
+
+        // Cast new stories (if a casting serving is active).
+        return this.castService.active;
+      })
+      .subscribe((server: LiquidGalaxyServer) => {
+        if (server) {
+          this.cast(this.stories);
+        }
+      });
   }
 
   toggleNewStory(event?: Event) {
@@ -71,8 +81,8 @@ export class JourneyDetailComponent implements OnInit {
     this.router.navigate(routerPath);
   }
 
-  cast() {
-    const kml = this.kmlService.journey();
+  cast(stories: Story[]) {
+    const kml = this.kmlService.journey(stories);
     const server: LiquidGalaxyServer = this.castService.active.value;
     server.writeKML(kml);
   }

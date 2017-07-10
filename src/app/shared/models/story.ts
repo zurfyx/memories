@@ -16,4 +16,10 @@ export class Story extends Base {
     url: string;
     title: string;
   };
+
+  isGeolocalized(): boolean {
+    return !!this.map
+        && !!this.map.lat
+        && !!this.map.long;
+  }
 }
