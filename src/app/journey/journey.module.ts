@@ -11,6 +11,9 @@ import {
 } from '@angular/material';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import {
+  PwModule,
+} from '../shared';
 import { StoryNewModule } from './story-new/story-new.module';
 import { JourneyListComponent } from './list/journey-list.component';
 import { JourneyListOwnerComponent } from './list/journey-list-owner.component';
@@ -32,6 +35,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     MdMenuModule,
     JourneyRoutingModule,
     AngularFireAuthModule,
+    PwModule,
     StoryNewModule,
   ],
   exports: [],

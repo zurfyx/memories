@@ -5,7 +5,7 @@
     <ng-template #signedinBlock>
       <a class="navbar-icon text-icon" [class.active]="activeCast | async"><app-cast></app-cast></a>
       <a
-        [style.background-image]="sanitizer.bypassSecurityTrustStyle('url(' + (user | async)?.photoURL + ')')" 
+        [style.background-image]="sanitizer.bypassSecurityTrustStyle('url(' + (user | async)?.photoURL + ')')"
         class="navbar-icon rounded-full">
         {{(user | async)?.displayName}}
       </a>

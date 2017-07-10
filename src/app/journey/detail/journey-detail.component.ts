@@ -86,6 +86,4 @@ export class JourneyDetailComponent implements OnInit {
     const server: LiquidGalaxyServer = this.castService.active.value;
     server.writeKML(kml);
   }
-
-  recordPW() { }
 }
