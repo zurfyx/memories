@@ -11,3 +11,7 @@ a.full, button.full {
 button.label {
   color: $unimportant;
 }
+
+.mat-button.menu-button {
+  min-width: 0;
+}
