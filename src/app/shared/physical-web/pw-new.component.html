@@ -1,1 +1,20 @@
 <h1>Record to Physical Web</h1>
+Set your beacon into configuration mode and press scan.
+<button md-button (click)="scan()">Scan</button>
+
+{{eddystone?.name}}
+<form class="withLines" [formGroup]="beaconForm" (ngSubmit)="save()">
+  <fieldset [disabled]="isSubmitting">
+    <fieldset>
+      <md-input-container>
+        <input type="text" formControlName="title" placeholder="Title" mdInput required />
+      </md-input-container>
+      <md-input-container>
+        <input type="text" formControlName="description" placeholder="Description" mdInput />
+      </md-input-container>
+    </fieldset>
+    <div class="input-row submit-row">
+      <button type="submit" color="primary" md-raised-button>Save</button>
+    </div>
+  </fieldset>
+</form>
