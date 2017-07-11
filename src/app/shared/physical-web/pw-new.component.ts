@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 @Component({
   selector: 'app-pw-new',
   templateUrl: 'pw-new.component.html',
+  styleUrls: ['pw-new.component.scss'],
 })
 export class PwNewComponent {
   eddystone: Eddystone;

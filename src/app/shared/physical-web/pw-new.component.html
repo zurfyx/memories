@@ -1,9 +1,15 @@
-<h1>Record to Physical Web</h1>
-Set your beacon into configuration mode and press scan.
-<button md-button (click)="scan()">Scan</button>
+<div class="pw-new-page">
+  <h1>Record to Physical Web</h1>
+  <div class="content">
+    <p>Set your beacon into configuration mode and press scan.</p>
+  </div>
+  <div class="buttons">
+    <button color="primary" md-raised-button (click)="scan()">Scan</button>
+  </div>
+</div>
 
-{{eddystone?.name}}
-<form class="withLines" [formGroup]="beaconForm" (ngSubmit)="save()">
+<!--{{eddystone?.name}}-->
+<!--<form class="withLines" [formGroup]="beaconForm" (ngSubmit)="save()">
   <fieldset [disabled]="isSubmitting">
     <fieldset>
       <md-input-container>
@@ -17,4 +23,4 @@ Set your beacon into configuration mode and press scan.
       <button type="submit" color="primary" md-raised-button>Save</button>
     </div>
   </fieldset>
-</form>
+</form>-->
