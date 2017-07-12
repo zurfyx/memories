@@ -4,8 +4,12 @@
   color: #555;
 
   .fa {
-    color: #00ff52;
+    color: #ff001a;
     margin-right: 0.5rem;
+    
+    &.active {
+      color: #00ff52;
+    }
   }
 }
 

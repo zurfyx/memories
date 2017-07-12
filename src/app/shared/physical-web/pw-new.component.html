@@ -1,7 +1,23 @@
 <div class="pw-new-page">
   <h1>Record to Physical Web</h1>
 
-  <app-pw-new-scan class="content" *ngIf="step === 0"></app-pw-new-scan>
-  <app-pw-new-save class="content" *ngIf="step === 1"></app-pw-new-save>
-  <app-pw-new-complete class="content" *ngIf="step === 2"></app-pw-new-complete>
+  <!-- Step 0 -->
+  <app-pw-new-scan
+    class="content"
+    (beacon)="setBeacon($event)"
+    *ngIf="step === 0">
+  </app-pw-new-scan>
+
+  <!-- Step 1 -->
+  <app-pw-new-save
+    class="content"
+    [beacon]="beacon"
+    *ngIf="step === 1">
+  </app-pw-new-save>
+
+  <!-- Step 2 -->
+  <app-pw-new-complete
+    class="content"
+    *ngIf="step === 2">
+  </app-pw-new-complete>
 </div>

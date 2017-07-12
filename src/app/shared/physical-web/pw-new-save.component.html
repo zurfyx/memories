@@ -1,5 +1,6 @@
 <div class="connected">
-  <i class="fa fa-circle" aria-hidden="true"></i> {{eddystone?.name || 'Unnamed beacon'}}
+  <i class="fa fa-circle" aria-hidden="true" [class.active]="beaconService"></i>
+  {{beacon.device.name || 'Unnamed beacon'}}
 </div>
 
 <form class="withLines" [formGroup]="beaconForm" (ngSubmit)="save()">
@@ -13,7 +14,7 @@
       </md-input-container>
     </fieldset>
     <div class="input-row submit-row">
-      <button type="submit" color="primary" md-raised-button>Save</button>
+      <button type="submit" color="primary" [disabled]="!beaconService" md-raised-button>Save</button>
     </div>
   </fieldset>
 </form>

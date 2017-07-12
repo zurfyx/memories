@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Eddystone } from 'eddystone-web-bluetooth';
+import { Eddystone, Beacon } from 'eddystone-web-bluetooth';
 
 @Component({
   selector: 'app-pw-new-scan',
@@ -17,7 +17,7 @@ export class PwNewScanComponent {
   }
 
   scan() {
-    Observable.fromPromise(this.eddystone.request()).subscribe((beacon) => {
+    Observable.fromPromise(this.eddystone.request()).subscribe((beacon: Beacon) => {
       this.beacon.emit(beacon);
     });
   }
