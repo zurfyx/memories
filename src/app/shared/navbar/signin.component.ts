@@ -7,7 +7,8 @@ import { AuthService } from '../services';
 @Component({
   moduleId: module.id,
   selector: 'app-sd-signin',
-  templateUrl: 'signin.component.html'
+  templateUrl: 'signin.component.html',
+  styleUrls: ['signin.component.scss'],
 })
 export class SigninComponent implements OnInit {
   constructor(
