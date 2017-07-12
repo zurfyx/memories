@@ -1,0 +1,14 @@
+.connected {
+  margin-bottom: 1rem;
+  font-size: 0.9em;
+  color: #555;
+
+  .fa {
+    color: #00ff52;
+    margin-right: 0.5rem;
+  }
+}
+
+form.withLines md-input-container + md-input-container {
+  margin-top: 0;
+}

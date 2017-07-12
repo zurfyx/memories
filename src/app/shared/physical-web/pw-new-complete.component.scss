@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.buttons {
+  text-align: right;
+}
+
+.extra {
+  font-style: italic;
+  font-size: 0.9em;
+}

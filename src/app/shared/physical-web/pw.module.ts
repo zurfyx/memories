@@ -7,6 +7,9 @@ import {
 } from '@angular/material';
 
 import { PwNewComponent } from './pw-new.component';
+import { PwNewScanComponent } from './pw-new-scan.component';
+import { PwNewSaveComponent } from './pw-new-save.component';
+import { PwNewCompleteComponent } from './pw-new-complete.component';
 import { PwNewDirective } from './pw-new.directive';
 
 @NgModule({
@@ -23,6 +26,9 @@ import { PwNewDirective } from './pw-new.directive';
   ],
   declarations: [
     PwNewComponent,
+    PwNewScanComponent,
+    PwNewSaveComponent,
+    PwNewCompleteComponent,
     PwNewDirective,
   ],
   entryComponents: [

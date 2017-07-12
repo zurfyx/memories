@@ -1,16 +1,11 @@
 .pw-new-page {
   display: flex;
   flex-direction: column;
-  height: 250px;
+  min-height: 250px;
   max-height: 100%;
+  max-width: 420px;
 }
 
 .content {
   flex: 1;
-  align-self: flex-start;
-  
-}
-
-.buttons {
-  text-align: right;
 }
