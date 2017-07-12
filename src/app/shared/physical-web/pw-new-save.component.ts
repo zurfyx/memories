@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Observable } from 'rxjs/Rx';
 import { Beacon, BeaconService } from 'eddystone-web-bluetooth';
 
+import { UrlShortenerService } from '../services/url-shortener.service';
+
 @Component({
   selector: 'app-pw-new-save',
   templateUrl: 'pw-new-save.component.html',
@@ -17,6 +19,7 @@ export class PwNewSaveComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private urlShortenerService: UrlShortenerService,
   ) {
     this.beaconForm = this.formBuilder.group({
       title: ['Memories', Validators.required],
@@ -25,6 +28,11 @@ export class PwNewSaveComponent implements OnInit {
   }
 
   ngOnInit() {
+    const currentUrl = this.urlShortenerService.currentUrl();
+    console.info(currentUrl);
+    this.urlShortenerService.shorten(currentUrl).subscribe((shortened) => {
+      console.info(shortened);
+    });
     console.info(this.beacon);
     Observable.fromPromise(this.beacon.connect()).subscribe((service: BeaconService) => {
       console.info('service');

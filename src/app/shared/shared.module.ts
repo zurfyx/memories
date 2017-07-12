@@ -14,9 +14,10 @@ import {
   IdService,
   ImageService,
   JourneyService,
-  UserService,
-  StoryService,
   KmlService,
+  StoryService,
+  UrlShortenerService,
+  UserService,
 } from './services';
 
 @NgModule({
@@ -40,9 +41,10 @@ import {
     IdService,
     ImageService,
     JourneyService,
-    UserService,
-    StoryService,
     KmlService,
+    StoryService,
+    UrlShortenerService,
+    UserService,
   ],
 })
 export class SharedModule { }
