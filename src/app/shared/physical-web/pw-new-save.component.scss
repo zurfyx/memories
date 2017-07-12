@@ -1,12 +1,14 @@
+@import "../stylesheets/index";
+
 .connected {
   margin-bottom: 1rem;
-  font-size: 0.9em;
-  color: #555;
+  font-size: 0.8em;
+  color: $unimportant;
 
   .fa {
     color: #ff001a;
     margin-right: 0.5rem;
-    
+
     &.active {
       color: #00ff52;
     }

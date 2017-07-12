@@ -1,3 +1,5 @@
+@import "../stylesheets/index";
+
 :host {
   display: flex;
   flex-direction: column;
@@ -11,7 +13,9 @@
   text-align: right;
 }
 
-.extra {
-  font-style: italic;
-  font-size: 0.9em;
+.hint {
+  color: $unimportant;
+  font-size: 0.8em;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
 }
