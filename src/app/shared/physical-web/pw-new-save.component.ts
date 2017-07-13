@@ -47,8 +47,8 @@ export class PwNewSaveComponent implements OnInit {
    */
   save() {
     this.isSubmitting = true;
-    const title = 'test';
-    const description = 'javascript ftw';
+    const title = this.beaconForm.value['title'];
+    const description = this.beaconForm.value['description'];
     const redirectUri = this.locationService.currentUrl();
 
     this.fileService.createRedirectHtml({ title, description, redirectUri })
