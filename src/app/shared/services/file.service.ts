@@ -14,12 +14,13 @@ export class FileService {
   /**
    * Creates file to user auth-protected storage.
    */
-  createFile(file: File | any): Observable<firebase.storage.UploadTaskSnapshot> {
+  createFile(file: File | string): Observable<firebase.storage.UploadTaskSnapshot> {
     return this.afAuth.authState.first().flatMap((user) => {
       const filename = uuid();
       const userUid = user.uid;
       const path = `${userUid}/${filename}`;
-      const putPromise = firebase.storage().ref(path).put(file);
+      const storage = firebase.storage().ref(path);
+      const putPromise = file instanceof File ? storage.put(file) : storage.putString(file);
       return Observable.fromPromise(putPromise);
     });
   }

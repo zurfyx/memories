@@ -7,9 +7,7 @@ import { PwNewComponent } from './pw-new.component';
 export class PwNewDirective {
   constructor(
     private dialog: MdDialog,
-  ) {
-    this.dialog.open(PwNewComponent);; // Remove me!!
-  }
+  ) { }
 
   @HostListener('click') onClick() {
     this.dialog.open(PwNewComponent);

@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { Beacon, BeaconService } from 'eddystone-web-bluetooth';
+import * as firebase from 'firebase';
 
 import { LocationService } from '../services/location.service';
 import { FileService } from '../services/file.service';
@@ -14,6 +15,8 @@ import { UrlShortenerService } from '../services/url-shortener.service';
 })
 export class PwNewSaveComponent implements OnInit {
   @Input() beacon: Beacon;
+  @Output() complete: EventEmitter<any> = new EventEmitter();
+
   beaconService: BeaconService;
 
   beaconForm: FormGroup;
@@ -32,15 +35,7 @@ export class PwNewSaveComponent implements OnInit {
   }
 
   ngOnInit() {
-    const currentUrl = this.urlShortenerService.currentUrl();
-    console.info(currentUrl);
-    this.urlShortenerService.shorten(currentUrl).subscribe((shortened) => {
-      console.info(shortened);
-    });
-    console.info(this.beacon);
     Observable.fromPromise(this.beacon.connect()).subscribe((service: BeaconService) => {
-      console.info('service');
-      console.info(this.beaconService);
       this.beaconService = service;
     });
   }
@@ -52,7 +47,21 @@ export class PwNewSaveComponent implements OnInit {
    */
   save() {
     this.isSubmitting = true;
+    const title = 'test';
+    const description = 'javascript ftw';
+    const redirectUri = this.locationService.currentUrl();
 
-    this.isSubmitting = false;
+    this.fileService.createRedirectHtml({ title, description, redirectUri })
+      .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => (
+        this.urlShortenerService.shorten(snapshot.downloadURL)
+      ))
+      .flatMap((shortUrl: string) => (
+        this.beaconService.writeUrl(shortUrl)
+      ))
+      .subscribe(() => {
+        this.isSubmitting = false;
+        this.beacon.disconnect();
+        this.complete.emit();
+      });
   }
 }

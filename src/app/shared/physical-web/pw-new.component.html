@@ -12,6 +12,7 @@
   <app-pw-new-save
     class="content"
     [beacon]="beacon"
+    (complete)="nextStep($event)"
     *ngIf="step === 1">
   </app-pw-new-save>
 
