@@ -29,4 +29,8 @@ script:
 
 after_success:
   - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ]; then cat ./coverage/lcov.info | coveralls ; fi'
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then firebase deploy --token $FIREBASE_TOKEN --non-interactive ; fi'
+
+deploy:
+  provider: firebase
+  token:
+    secure: 'Bu+ZDbpqduj549SgfB/VX2wtmnaJaWuFT68+aQNizVHETM71pSl4uw/XmzbEuwMDNJOAtlepcFvB0E9WdMfxxOeNQ8ptUPKyN9XrjwpbQp2OANwVKEtaNKPGzkLM767EcNYTSXqtQn+kFNWRxY1I4n2UTH5LFKFWtt9M1IeNJJ030hF4lSknuaxHXZv1CvX3igYdc1avaktys3SBOLuTbX7D711QnUYRQmGuzQFUR//AZlhayyPTDQYLpK4AnOE8tggvmXxT3YXFuDZLy61dfIH+tCnwVQx2X2oUlsGTMTdx/eloHwLEnNGASdkGFS4ej975YFnOTNhFDJRr1zoCgCi09uWBYIr5jAUAFY6dh+puUTIelL3UXy1z4hcmMYtx805Z55xto6dQbvqOT5dW5s55q7W1tHb33IOl6F312+C2QcxzUoiALOPOJT92vJFdQ9B4Vll/wEH7WN78cN7ZiwPHgUdQ2ri4pe4Y0L6hzkuzlcVqxUH6KKPlQM+AaRrS6u0CC3IDnGKJrSN/8kQNONwPWfObOxahx8UGMKcOR3eT69LXqqAyp5X+jhKLGmysDFdGsePViWtezJrnNdsykiUYUkWe2qT0CEtvEPy0DMCArpJiQDafUZKntvHqNnzyHRTbBjiIniWmP3KUxSpXfmxK604g+dqwSZ3DpAc2K0c='
