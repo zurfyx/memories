@@ -4,7 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { JourneyService } from './journey.service';
-import { ImageService } from './image.service';
+import { FileService } from './file.service';
 import { IdService } from './id.service';
 import { Journey } from '../models';
 
@@ -36,7 +36,7 @@ describe('JourneyService', () => {
         JourneyService,
         { provide: AngularFireDatabase, useClass: MockAngularFireDatabase },
         { provide: IdService, useClass: MockIdService },
-        { provide: ImageService, useClass: MockImageService },
+        { provide: FileService, useClass: MockImageService },
       ],
     });
   });

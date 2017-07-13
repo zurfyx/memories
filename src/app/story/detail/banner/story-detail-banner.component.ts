@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 
 import {
   FormUtils,
-  ImageService,
+  FileService,
   SafeStylePipe,
 } from '../../../shared';
 import { EditState } from '../edit-state';
@@ -26,7 +26,7 @@ export class StoryDetailBannerComponent extends StoryDetailEditComponent {
   newCover64: SafeStyle;
 
   constructor(
-    private imageService: ImageService,
+    private imageService: FileService,
     private safeStylePipe: SafeStylePipe,
   ) {
     super();
