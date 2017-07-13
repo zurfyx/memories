@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Observable } from 'rxjs/Rx';
 import { Beacon, BeaconService } from 'eddystone-web-bluetooth';
 
+import { LocationService } from '../services/location.service';
+import { FileService } from '../services/file.service';
 import { UrlShortenerService } from '../services/url-shortener.service';
 
 @Component({
@@ -19,6 +21,8 @@ export class PwNewSaveComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private locationService: LocationService,
+    private fileService: FileService,
     private urlShortenerService: UrlShortenerService,
   ) {
     this.beaconForm = this.formBuilder.group({
@@ -41,6 +45,11 @@ export class PwNewSaveComponent implements OnInit {
     });
   }
 
+  /**
+   * 1. Create redirect HTML with the current page location, form title and description.
+   * 2. Shorten the firebase redirect endpoint.
+   * 3. Save shortened url into the beacon.
+   */
   save() {
     this.isSubmitting = true;
 
