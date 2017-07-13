@@ -1,38 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Eddystone } from 'eddystone-web-bluetooth';
+import { Beacon } from 'eddystone-web-bluetooth';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-pw-new',
   templateUrl: 'pw-new.component.html',
+  styleUrls: ['pw-new.component.scss'],
 })
 export class PwNewComponent {
-  eddystone: Eddystone;
-  activeBeacon;
+  step = 0; // 0 => scan; 1 => save; 2 => complete.
 
-  beaconForm: FormGroup;
-  isSubmitting = false;
+  beacon: Beacon;
 
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {
-    this.eddystone = new Eddystone();
-    this.beaconForm = this.formBuilder.group({
-      title: ['Memories', Validators.required],
-      description: [''],
-    });
+  constructor() { }
+
+  // Step 0 -> 1.
+  setBeacon(beacon: Beacon) {
+    this.beacon = beacon;
+    this.nextStep();
   }
 
-  scan() {
-   Observable.fromPromise(this.eddystone.request()).subscribe((beacon) => {
-     this.activeBeacon = beacon;
-   });
-  }
-
-  save() {
-    this.isSubmitting = true;
-
-    this.isSubmitting = false;
+  nextStep() {
+    this.step += 1;
   }
 }

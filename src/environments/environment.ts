@@ -15,5 +15,8 @@ export const environment = {
   },
   maps: {
     apiKey: 'AIzaSyDPQLa3pdoBVIfPj8Hj5mO7wQhW-z8b5jU',
+  },
+  urlShortener: {
+    apiKey: 'AIzaSyDiF9IhtPET7-f0F698WfbH30ZehuV4hZU',
   }
 };

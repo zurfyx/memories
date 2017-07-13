@@ -1,0 +1,20 @@
+<div class="connected">
+  <i class="fa fa-circle" aria-hidden="true" [class.active]="beaconService"></i>
+  {{beacon.device.name || 'Unnamed beacon'}}
+</div>
+
+<form class="withLines" [formGroup]="beaconForm" (ngSubmit)="save()">
+  <fieldset [disabled]="isSubmitting">
+    <fieldset>
+      <md-input-container>
+        <input type="text" formControlName="title" placeholder="Title" mdInput required />
+      </md-input-container>
+      <md-input-container>
+        <input type="text" formControlName="description" placeholder="Description" mdInput />
+      </md-input-container>
+    </fieldset>
+    <div class="input-row submit-row">
+      <button type="submit" color="primary" [disabled]="!beaconService" md-raised-button>Save</button>
+    </div>
+  </fieldset>
+</form>

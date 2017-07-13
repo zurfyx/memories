@@ -11,12 +11,14 @@ import {
 } from './pipes';
 import {
   AuthService,
+  FileService,
   IdService,
-  ImageService,
   JourneyService,
-  UserService,
-  StoryService,
   KmlService,
+  LocationService,
+  StoryService,
+  UrlShortenerService,
+  UserService,
 } from './services';
 
 @NgModule({
@@ -37,12 +39,14 @@ import {
     AngularFireAuth,
     AngularFireDatabase,
     AuthService,
+    FileService,
     IdService,
-    ImageService,
     JourneyService,
-    UserService,
-    StoryService,
     KmlService,
+    LocationService,
+    StoryService,
+    UrlShortenerService,
+    UserService,
   ],
 })
 export class SharedModule { }
