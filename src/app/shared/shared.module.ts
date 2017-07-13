@@ -11,8 +11,8 @@ import {
 } from './pipes';
 import {
   AuthService,
+  FileService,
   IdService,
-  ImageService,
   JourneyService,
   KmlService,
   StoryService,
@@ -38,8 +38,8 @@ import {
     AngularFireAuth,
     AngularFireDatabase,
     AuthService,
+    FileService,
     IdService,
-    ImageService,
     JourneyService,
     KmlService,
     StoryService,

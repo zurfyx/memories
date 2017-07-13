@@ -4,7 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 import { Journey } from '../models';
-import { ImageService } from './image.service';
+import { FileService } from './file.service';
 import { IdService } from './id.service';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class JourneyService {
 
   constructor(
     private afDatabase: AngularFireDatabase,
-    private imageService: ImageService,
+    private imageService: FileService,
     private idService: IdService,
   ) { }
 
