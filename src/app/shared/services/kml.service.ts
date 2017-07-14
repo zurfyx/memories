@@ -30,28 +30,28 @@ export class KmlService {
     // TODO.
     const randomNumber = ~~(Math.random() * 10); // tslint:disable-line:no-bitwise
     const demoKml = `<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2">
-  <Document>
-    <Placemark>
-      <name>Demo ${randomNumber}</name>
-      <description>
-        <![CDATA[
-          <html>
-          <head>
-            <style>html, body { margin: 0; padding: 0; }</style>
-          <body>
-            <h1>Demo</h1>
-          </body>
-        </html>
-        ]]>
-      </description>
-      <gx:balloonVisibility>0</gx:balloonVisibility>
-      <Point>
-        <coordinates>102,14</coordinates>
-      </Point>
-    </Placemark>
-  </Document>
-</kml>`;
+      <kml xmlns="http://www.opengis.net/kml/2.2">
+        <Document>
+          <Placemark>
+            <name>Demo ${randomNumber}</name>
+            <description>
+              <![CDATA[
+                <html>
+                <head>
+                  <style>html, body { margin: 0; padding: 0; }</style>
+                <body>
+                  <h1>Demo</h1>
+                </body>
+              </html>
+              ]]>
+            </description>
+            <gx:balloonVisibility>0</gx:balloonVisibility>
+            <Point>
+              <coordinates>102,14</coordinates>
+            </Point>
+          </Placemark>
+        </Document>
+      </kml>`;
     return demoKml;
   }
 
@@ -60,10 +60,11 @@ export class KmlService {
             <kml xmlns="http://www.opengis.net/kml/2.2">
               <Document>${content}</Document>
             </kml>`;
-    return this.minimize(output);
+    return this.minify(output);
   }
 
-  private minimize(output: string): string {
-    return output;
+  private minify(kmlText: string): string {
+    const minified = kmlText.trim().replace(/>\s+</g, '><');
+    return minified;
   }
 }

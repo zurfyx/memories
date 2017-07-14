@@ -14,13 +14,16 @@ export class FileService {
   /**
    * Creates file to user auth-protected storage.
    */
-  createFile(file: File | string): Observable<firebase.storage.UploadTaskSnapshot> {
+  createFile(file: File | string, contentType?: string): Observable<firebase.storage.UploadTaskSnapshot> {
     return this.afAuth.authState.first().flatMap((user) => {
-      const filename = uuid();
       const userUid = user.uid;
+      const filename = uuid();
       const path = `${userUid}/${filename}`;
       const storage = firebase.storage().ref(path);
-      const putPromise = file instanceof File ? storage.put(file) : storage.putString(file);
+      const metadata: firebase.storage.UploadMetadata = contentType && { contentType };
+      const putPromise = file instanceof File
+        ? storage.put(file, contentType)
+        : storage.putString(file, firebase.storage.StringFormat.RAW, metadata);
       return Observable.fromPromise(putPromise);
     });
   }
@@ -37,9 +40,9 @@ export class FileService {
         <meta name="description" content="${values.description}" />
         <script>window.location.href = '${values.redirectUri}';</script>
       </head>
-      </html>
-    `;
-    return this.createFile(body);
+      </html>`;
+    const minified = body.trim().replace(/>\s+</g, '><');
+    return this.createFile(minified, 'text/html');
   }
 }
 
