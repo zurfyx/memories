@@ -18,6 +18,29 @@ export class KmlService {
         <Point>
           <coordinates>${story.map.long},${story.map.lat},0</coordinates>
         </Point>
+        <description>
+          <![CDATA[
+            <html>
+            <head>
+              <style>
+                html, body {
+                  margin: 0;
+                  padding: 0;
+                  font-family: 'Helvetica', Arial, sans-serif;
+                }
+                .banner {
+                  width: 420px;
+                  max-height: 420px;
+                }
+              </style>
+            </head>
+            <body>
+              ${story.coverURL ? `<img class="banner" src="${story.coverURL}" />` : ''}
+            </body>
+          </html>
+          ]]>
+        </description>
+        <gx:balloonVisibility>1</gx:balloonVisibility>
       </Placemark>`
     ));
     return this.wrapper(content.join('\n'));
