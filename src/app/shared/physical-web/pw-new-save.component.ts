@@ -35,6 +35,7 @@ export class PwNewSaveComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.info(this.beacon);
     Observable.fromPromise(this.beacon.connect()).subscribe((service: BeaconService) => {
       this.beaconService = service;
     });

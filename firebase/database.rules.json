@@ -92,6 +92,36 @@
           }
         }
       }
+    },
+    "physicalWeb": {
+      "$owner": {
+        ".read": "$owner === auth.uid",
+        ".write": "$owner === auth.uid",
+        "$uid": {
+          ".validate": "!data.exists() && newData.hasChildren(['url', 'createdAt', 'beacon'])",
+          "url": {
+            ".validate": "newData.isString()"
+          },
+          "title": {
+            ".validate": "newData.isString()"
+          },
+          "description": {
+            ".validate": "newData.isString()"
+          },
+          "createdAt": {
+            ".validate": "newData.val() === now"
+          },
+          "beacon": {
+            ".validate": "newData.hasChildren(['id'])",
+            "id": {
+              ".validate": "newData.isString()"
+            },
+            "name": {
+              ".validate": "newData.isString()"
+            }
+          }
+        }
+      }
     }
   }
 }
