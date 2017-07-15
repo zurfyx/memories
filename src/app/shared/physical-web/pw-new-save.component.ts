@@ -2,11 +2,16 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { Beacon, BeaconService } from 'eddystone-web-bluetooth';
+import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 
-import { LocationService } from '../services/location.service';
-import { FileService } from '../services/file.service';
-import { UrlShortenerService } from '../services/url-shortener.service';
+import { Pw } from '../models';
+import {
+  LocationService,
+  FileService,
+  UrlShortenerService,
+  PwService,
+} from '../services';
 
 @Component({
   selector: 'app-pw-new-save',
@@ -24,9 +29,11 @@ export class PwNewSaveComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private afAuth: AngularFireAuth,
     private locationService: LocationService,
     private fileService: FileService,
     private urlShortenerService: UrlShortenerService,
+    private pwService: PwService,
   ) {
     this.beaconForm = this.formBuilder.group({
       title: ['Memories', Validators.required],
@@ -35,7 +42,6 @@ export class PwNewSaveComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.info(this.beacon);
     Observable.fromPromise(this.beacon.connect()).subscribe((service: BeaconService) => {
       this.beaconService = service;
     });
@@ -45,6 +51,7 @@ export class PwNewSaveComponent implements OnInit {
    * 1. Create redirect HTML with the current page location, form title and description.
    * 2. Shorten the firebase redirect endpoint.
    * 3. Save shortened url into the beacon.
+   * 4. (if signed in) Save Physical Web log entry onto Firebase.
    */
   save() {
     this.isSubmitting = true;
@@ -57,12 +64,36 @@ export class PwNewSaveComponent implements OnInit {
         this.urlShortenerService.shorten(snapshot.downloadURL)
       ))
       .flatMap((shortUrl: string) => (
-        this.beaconService.writeUrl(shortUrl)
+        Observable.forkJoin(Observable.of(shortUrl), this.beaconService.writeUrl(shortUrl))
+      ))
+      .flatMap(([shortUrl]: [string, void]) => (
+        this.saveLog({ title, description, redirectUri, shortUrl })
       ))
       .subscribe(() => {
         this.isSubmitting = false;
         this.beacon.disconnect();
         this.complete.emit();
       });
+  }
+
+  saveLog({ title, description, redirectUri, shortUrl }): Observable<Pw> {
+    return this.afAuth.authState.first().flatMap((user) => {
+      if (!user) {
+        return Observable.of(null);
+      }
+
+      const pw = new Pw({
+        title,
+        description,
+        shortUrl,
+        url: redirectUri,
+        beacon: {
+          id: this.beacon.device.id,
+          name: this.beacon.device.name,
+        },
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
+      });
+      return this.pwService.createPw(pw);
+    });
   }
 }

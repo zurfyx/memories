@@ -102,6 +102,9 @@
           "url": {
             ".validate": "newData.isString()"
           },
+          "shortUrl": {
+            ".validate": "newData.isString()"
+          },
           "title": {
             ".validate": "newData.isString()"
           },

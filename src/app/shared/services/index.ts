@@ -4,6 +4,7 @@ export * from './file.service';
 export * from './journey.service';
 export * from './kml.service';
 export * from './location.service';
+export * from './pw.service';
 export * from './story.service';
 export * from './url-shortener.service';
 export * from './user.service';
