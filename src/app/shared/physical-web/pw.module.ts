@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MdInputModule,
   MdButtonModule,
+  MdDialogModule,
 } from '@angular/material';
 
 import { PwNewComponent } from './pw-new.component';
@@ -19,6 +20,7 @@ import { PwNewDirective } from './pw-new.directive';
     ReactiveFormsModule,
     MdInputModule,
     MdButtonModule,
+    MdDialogModule,
   ],
   exports: [
     PwNewComponent,
