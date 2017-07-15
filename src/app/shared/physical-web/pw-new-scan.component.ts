@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Eddystone, Beacon } from 'eddystone-web-bluetooth';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-pw-new-scan',
@@ -11,9 +12,13 @@ export class PwNewScanComponent {
   @Output() beacon: EventEmitter<any> = new EventEmitter();
 
   eddystone: Eddystone;
+  user: Observable<firebase.User>;
 
-  constructor() {
+  constructor(
+    private afAuth: AngularFireAuth,
+  ) {
     this.eddystone = new Eddystone();
+    this.user = afAuth.authState;
   }
 
   scan() {

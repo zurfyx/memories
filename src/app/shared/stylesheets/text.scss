@@ -1,0 +1,16 @@
+@import "./colors";
+
+.hint {
+  color: $unimportant;
+  font-size: 0.8em;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.warn {
+  color: $warn;
+}
+
+.error {
+  color: $error;
+}
