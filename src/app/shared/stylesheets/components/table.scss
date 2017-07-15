@@ -1,0 +1,10 @@
+md-row.mat-row {
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+md-header-cell + md-header-cell,
+md-cell + md-cell {
+  padding-left: 10px;
+}

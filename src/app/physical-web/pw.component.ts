@@ -11,31 +11,31 @@ import {
 @Component({
   selector: 'app-pw',
   templateUrl: 'pw.component.html',
+  styleUrls: ['pw.component.scss'],
 })
 export class PwComponent implements OnInit {
-  dataSource: DataSource<Pw>;
-  columns: ['id'];
+  dataSource: PwDataSource;
+  displayedColumns = ['title', 'shortUrl', 'createdAt', 'beacon'];
 
   constructor(
     private pwService: PwService,
-  ) {
-    // this.dataSource = new DataSource();
-    // this.dataSource = new BehaviorSubject<Pw>(undefined);
-  }
+  ) { }
 
   ngOnInit() {
-    this.pwService.readPws().subscribe((pws: Pw[]) => {
-      console.info(pws);
-    });
+    const pws = this.pwService.readPws();
+    const pwDataSource = new PwDataSource(pws);
+    this.dataSource = pwDataSource;
   }
 }
 
-// class PwDataSource extends DataSource<Pw[]> {
-//   constructor(pws: Observable<Pw[]>) {
-//     super();
-//   }
+class PwDataSource extends DataSource<Pw> {
+  constructor(private pws: Observable<Pw[]>) {
+    super();
+  }
 
-//   connect() { }
+  connect(): Observable<Pw[]> {
+    return this.pws;
+  }
 
-//   disconnect() { }
-// }
+  disconnect() { }
+}

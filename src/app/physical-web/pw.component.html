@@ -1,9 +1,30 @@
-<md-table>
-  <ng-container cdkColumnDef="id">
-    <md-header-cell *cdkHeaderCellDef>Id</md-header-cell>
-    <md-cell *cdkCellDef="let pw">{{pw.id}}</md-cell>
-  </ng-container>
+<div class="page">
+  <div class="container box">
+    <md-table [dataSource]="dataSource">
+      <ng-container cdkColumnDef="title">
+        <md-header-cell class="title" *cdkHeaderCellDef>Title</md-header-cell>
+        <md-cell class="title" *cdkCellDef="let row">{{row.title}}</md-cell>
+      </ng-container>
 
-  <md-header-row *cdkHeaderRowDef="columns"></md-header-row>
-  <md-row *cdkRowDef="let row; columns: columns"></md-row>
-</md-table>
+      <ng-container cdkColumnDef="shortUrl">
+        <md-header-cell class="shortUrl" *cdkHeaderCellDef>URL</md-header-cell>
+        <md-cell class="shortUrl" *cdkCellDef="let row">
+          <a [href]="row.shortUrl" target="_blank">{{row.shortUrl}}</a>
+        </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="createdAt">
+        <md-header-cell *cdkHeaderCellDef>Created</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{row.createdAt | date}}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="beacon">
+        <md-header-cell *cdkHeaderCellDef>Beacon</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{row.beacon.name || 'Unnamed'}}</md-cell>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+  </div>
+</div>
