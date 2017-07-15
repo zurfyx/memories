@@ -6,6 +6,23 @@
   padding: 42px;
 }
 
+.box.info {
+  display: flex;
+  flex-direction: row;
+  box-shadow: none;
+  background-color: #e6f8ff;
+  color: #004563;
+
+  .fa {
+    margin-right: 20px;
+    align-self: center;
+  }
+}
+
+.box + .box {
+  margin-top: 2rem;
+}
+
 .box.unspaced {
   padding: 0;
 }

@@ -1,4 +1,12 @@
 <div class="page">
+  <div class="container box info" *ngIf="(pws | async)?.length === 0">
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+    <span>
+      It looks like you have no Physical Web entries. You can make an Eddystone beacon broadcast a
+      <strong>journey</strong> or <strong>story</strong> by visiting a user's journey or story.
+    </span>
+  </div>
+
   <div class="container box">
     <md-table [dataSource]="dataSource">
       <ng-container cdkColumnDef="title">

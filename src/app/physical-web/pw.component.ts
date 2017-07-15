@@ -17,14 +17,16 @@ export class PwComponent implements OnInit {
   dataSource: PwDataSource;
   displayedColumns = ['title', 'shortUrl', 'createdAt', 'beacon'];
 
+  pws: Observable<Pw[]>; // That's not the table data. It's only used to count entries to get to
+                         // know when to display the info message.
+
   constructor(
     private pwService: PwService,
   ) { }
 
   ngOnInit() {
-    const pws = this.pwService.readPws();
-    const pwDataSource = new PwDataSource(pws);
-    this.dataSource = pwDataSource;
+    this.pws = this.pwService.readPws();
+    this.dataSource = new PwDataSource(this.pws);
   }
 }
 
