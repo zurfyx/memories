@@ -1,12 +1,19 @@
-<div class="hint" *ngIf="!(user | async)">
-  <i class="fa fa-exclamation-triangle warn" aria-hidden="true"></i>
-  Sign in to keep track of your records.
-</div>
+<ng-container *ngIf="!(user | async)">
+  <div class="content">
+    <p>Sign in to start.</p>
+  </div>
 
-<div class="content">
-  <p>Set your beacon into configuration mode and press scan.</p>
-</div>
+  <div class="buttons">
+    <button color="primary" md-raised-button (click)="scan()">Close</button>
+  </div>
+</ng-container>
 
-<div class="buttons">
-  <button color="primary" md-raised-button (click)="scan()">Scan</button>
-</div>
+<ng-container *ngIf="(user | async)">
+  <div class="content">
+    <p>Set your beacon into configuration mode and press scan.</p>
+  </div>
+
+  <div class="buttons">
+    <button color="primary" md-raised-button (click)="scan()">Scan</button>
+  </div>
+</ng-container>

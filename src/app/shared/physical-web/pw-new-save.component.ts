@@ -2,7 +2,6 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { Beacon, BeaconService } from 'eddystone-web-bluetooth';
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 
 import { Pw } from '../models';
@@ -29,7 +28,6 @@ export class PwNewSaveComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private afAuth: AngularFireAuth,
     private locationService: LocationService,
     private fileService: FileService,
     private urlShortenerService: UrlShortenerService,
@@ -77,23 +75,17 @@ export class PwNewSaveComponent implements OnInit {
   }
 
   saveLog({ title, description, redirectUri, shortUrl }): Observable<Pw> {
-    return this.afAuth.authState.first().flatMap((user) => {
-      if (!user) {
-        return Observable.of(null);
-      }
-
-      const pw = new Pw({
-        title,
-        description,
-        shortUrl,
-        url: redirectUri,
-        beacon: {
-          id: this.beacon.device.id,
-          name: this.beacon.device.name,
-        },
-        createdAt: firebase.database.ServerValue.TIMESTAMP,
-      });
-      return this.pwService.createPw(pw);
+    const pw = new Pw({
+      title,
+      description,
+      shortUrl,
+      url: redirectUri,
+      beacon: {
+        id: this.beacon.device.id,
+        name: this.beacon.device.name,
+      },
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
     });
+    return this.pwService.createPw(pw);
   }
 }
