@@ -1,0 +1,9 @@
+<md-table>
+  <ng-container cdkColumnDef="id">
+    <md-header-cell *cdkHeaderCellDef>Id</md-header-cell>
+    <md-cell *cdkCellDef="let pw">{{pw.id}}</md-cell>
+  </ng-container>
+
+  <md-header-row *cdkHeaderRowDef="columns"></md-header-row>
+  <md-row *cdkRowDef="let row; columns: columns"></md-row>
+</md-table>

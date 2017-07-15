@@ -10,6 +10,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
 import { JourneyModule } from './journey/journey.module';
+import { PwModule } from './physical-web/pw.module';
 import { StoryModule } from './story/story.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './shared';
@@ -28,6 +29,7 @@ import { AppRoutingModule } from './app-routing.module';
     AngularFireModule.initializeApp(environment.firebase),
     SharedModule,
     JourneyModule,
+    PwModule,
     StoryModule,
     AppRoutingModule,
   ],
