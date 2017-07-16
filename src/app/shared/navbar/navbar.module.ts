@@ -5,6 +5,7 @@ import {
   MdToolbarModule,
 } from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ResponsiveModule } from 'ng2-responsive';
 
 import { CastModule } from '../cast';
 import { NavbarComponent } from './navbar.component';
@@ -16,6 +17,7 @@ import { SidenavService } from '../sidenav/sidenav.service';
     CommonModule,
     MdButtonModule,
     MdToolbarModule,
+    ResponsiveModule,
     CastModule,
   ],
   exports: [NavbarComponent],
