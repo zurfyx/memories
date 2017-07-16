@@ -4,7 +4,6 @@ md-sidenav {
   width: 256px;
   position: fixed;
   left: -256px;
-  transform: none !important;
   transition: .4s all !important;
   z-index: 44;
 
@@ -13,8 +12,12 @@ md-sidenav {
   }
 }
 
+.mat-sidenav-container, 
 /deep/ .mat-sidenav-content {
   transform: none !important;
+}
+
+/deep/ .mat-sidenav-content {
   min-height: 100vh;
 }
 
