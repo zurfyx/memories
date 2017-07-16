@@ -1,12 +1,19 @@
-<!--<md-sidenav-container class="sidenav-mobile">
-  <md-sidenav mode="over" opened="true">
-    Side nav links.
-  </md-sidenav>
-</md-sidenav-container>-->
-
-<md-sidenav-container class="sidenav-desktop">
-  <md-sidenav mode="side" opened="true">
+<md-sidenav-container class="sidenav-mobile" *showItBootstrap="['xs', 'sm', 'md']">
+  <md-sidenav mode="over" [opened]="(isMobileNavbarOpen | async)">
+    <a href="/" id="sidenav-logo" class="neat">Memories</a>
     <app-sd-sidenav-links></app-sd-sidenav-links>
   </md-sidenav>
-  <router-outlet></router-outlet>
+  <app-sd-navbar></app-sd-navbar>
+  <div class="below-navbar">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
+
+<md-sidenav-container class="sidenav-desktop" *hideItBootstrap="['xs', 'sm', 'md']">
+  <md-sidenav class="below-navbar" mode="side" opened="true">
+    <app-sd-sidenav-links></app-sd-sidenav-links>
+  </md-sidenav>
+  <div class="below-navbar">
+    <router-outlet></router-outlet>
+  </div>
 </md-sidenav-container>

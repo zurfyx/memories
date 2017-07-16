@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { ResponsiveModule } from 'ng2-responsive';
 import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
 
@@ -23,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     HttpModule,
     MaterialModule,
+    ResponsiveModule,
     AgmCoreModule.forRoot({
       apiKey: environment.maps.apiKey,
     }),
