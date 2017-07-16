@@ -9,6 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { CastModule } from '../cast';
 import { NavbarComponent } from './navbar.component';
 import { SigninComponent } from './signin.component';
+import { SidenavService } from '../sidenav/sidenav.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { SigninComponent } from './signin.component';
   ],
   providers: [
     AngularFireAuth,
+    SidenavService, // This is an exceptional case because they mutually include each other.
   ],
 })
 export class NavbarModule { }

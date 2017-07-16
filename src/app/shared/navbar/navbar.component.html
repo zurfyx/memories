@@ -1,4 +1,5 @@
 <md-toolbar color="primary">
+  <i class="fa fa-bars" (click)="toggleSidenav()"></i>
   <a href="/" id="logo" class="neat">Memories</a>
   <nav class="navbar__links filler">
     <ng-container *ngIf="(user | async); then signedinBlock; else signinBlock"></ng-container>

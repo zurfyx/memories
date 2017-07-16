@@ -14,8 +14,6 @@ export class SidenavComponent implements OnInit {
 
   constructor(private sidenavService: SidenavService) {
     this.isMobileNavbarOpen = sidenavService.isMobileNavbarOpen;
-
-    setTimeout(() => this.isMobileNavbarOpen.next(true), 3000);
   }
 
   ngOnInit() { }
