@@ -6,12 +6,14 @@
     <div class="container__head-buttons">
       <h1>{{journey.title}}</h1>
       <div class="buttons">
-        <a href="#" md-button>Edit journey</a>
-        <a href="#" md-button (click)="toggleNewStory($event)">Add story</a>        
+        <a md-button *hideItBootstrap="['xs']">Edit journey</a>
+        <a md-button (click)="toggleNewStory($event)" *hideItBootstrap="['xs']">Add story</a>        
         <a class="menu-button" md-button [mdMenuTriggerFor]="detailMenu">
           <i class="fa fa-ellipsis-v"></i>
         </a>
         <md-menu #detailMenu="mdMenu">
+          <a md-menu-item *showItBootstrap="['xs']">Edit journey</a>
+          <a md-menu-item (click)="toggleNewStory($event)" *showItBootstrap="['xs']">Add story</a>        
           <a md-menu-item appPwNew>Physical Web</a>
         </md-menu>
       </div>

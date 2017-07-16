@@ -9,6 +9,7 @@ import {
   MdListModule,
   MdMenuModule,
 } from '@angular/material';
+import { ResponsiveModule } from 'ng2-responsive';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {
@@ -33,10 +34,11 @@ import { JourneyRoutingModule } from './journey-routing.module';
     MdCardModule,
     MdListModule,
     MdMenuModule,
-    JourneyRoutingModule,
+    ResponsiveModule,
     AngularFireAuthModule,
     PwModule,
     StoryNewModule,
+    JourneyRoutingModule,
   ],
   exports: [],
   declarations: [
