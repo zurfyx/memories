@@ -1,6 +1,6 @@
 <md-toolbar color="primary">
   <i class="fa fa-bars" (click)="openSidenav()" *showItBootstrap="['xs', 'sm', 'md']"></i>
-  <a href="/" id="logo" class="neat">Memories</a>
+  <a [routerLink]="['/']" id="logo" class="neat">Memories</a>
   <nav class="navbar__links filler">
     <ng-container *ngIf="(user | async); then signedinBlock; else signinBlock"></ng-container>
     <ng-template #signedinBlock>

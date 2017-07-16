@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import {
   MdButtonModule,
   MdToolbarModule,
@@ -15,6 +16,7 @@ import { SidenavService } from '../sidenav/sidenav.service';
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     MdButtonModule,
     MdToolbarModule,
     ResponsiveModule,

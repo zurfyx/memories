@@ -1,6 +1,6 @@
 <md-sidenav-container class="sidenav-mobile" *showItBootstrap="['xs', 'sm', 'md']">
   <md-sidenav mode="over" [opened]="(isMobileNavbarOpen | async)">
-    <a href="/" id="sidenav-logo" class="neat">Memories</a>
+    <a [routerLink]="['/']" id="sidenav-logo" class="neat">Memories</a>
     <app-sd-sidenav-links></app-sd-sidenav-links>
   </md-sidenav>
   <app-sd-navbar></app-sd-navbar>
