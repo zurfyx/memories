@@ -2,9 +2,9 @@
   <i class="fa fa-bars" (click)="openSidenav()" *showItBootstrap="['xs', 'sm', 'md']"></i>
   <a [routerLink]="['/']" id="logo" class="neat">Memories</a>
   <nav class="navbar__links filler">
+    <a class="navbar-icon text-icon" [class.active]="activeCast | async"><app-cast></app-cast></a>
     <ng-container *ngIf="(user | async); then signedinBlock; else signinBlock"></ng-container>
     <ng-template #signedinBlock>
-      <a class="navbar-icon text-icon" [class.active]="activeCast | async"><app-cast></app-cast></a>
       <a
         [style.background-image]="sanitizer.bypassSecurityTrustStyle('url(' + (user | async)?.photoURL + ')')"
         class="navbar-icon rounded-full">
