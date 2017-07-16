@@ -7,6 +7,7 @@ import * as firebase from 'firebase/app';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 import { BehaviorSubject } from 'rxjs/Rx';
 
+import { AuthService } from '../services';
 import { CastService } from '../cast';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { SigninComponent } from './signin.component';
@@ -27,6 +28,7 @@ export class NavbarComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private dialog: MdDialog,
     private afAuth: AngularFireAuth,
+    private authService: AuthService,
     private castService: CastService,
     private sidenavService: SidenavService,
   ) {
@@ -50,5 +52,9 @@ export class NavbarComponent implements OnInit {
 
   openSigninDialog() {
     this.dialog.open(SigninComponent);
+  }
+
+  signout() {
+    this.authService.signout();
   }
 }

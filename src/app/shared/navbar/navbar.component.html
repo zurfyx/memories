@@ -6,10 +6,14 @@
     <ng-container *ngIf="(user | async); then signedinBlock; else signinBlock"></ng-container>
     <ng-template #signedinBlock>
       <a
+        class="navbar-icon rounded-full"
         [style.background-image]="sanitizer.bypassSecurityTrustStyle('url(' + (user | async)?.photoURL + ')')"
-        class="navbar-icon rounded-full">
+        [mdMenuTriggerFor]="userMenu">
         {{(user | async)?.displayName}}
       </a>
+      <md-menu #userMenu="mdMenu">
+        <a md-menu-item (click)="signout()">Sign out</a>
+      </md-menu>
     </ng-template>
     <ng-template #signinBlock>
       <button (click)="openSigninDialog()" md-button>Sign in</button>

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import {
   MdButtonModule,
   MdToolbarModule,
+  MdMenuModule,
 } from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ResponsiveModule } from 'ng2-responsive';
@@ -19,6 +20,7 @@ import { SidenavService } from '../sidenav/sidenav.service';
     RouterModule,
     MdButtonModule,
     MdToolbarModule,
+    MdMenuModule,
     ResponsiveModule,
     CastModule,
   ],

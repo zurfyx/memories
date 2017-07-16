@@ -6,19 +6,12 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
-  private synchning = false;
-
   constructor(
     private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase,
   ) { }
 
   syncWithFirebase() {
-    if (this.synchning) {
-      return;
-    }
-    this.synchning = true;
-
     const user: Observable<firebase.User> = this.afAuth.authState;
     user.subscribe(me => me && this.uploadUser(me));
   }
@@ -26,6 +19,10 @@ export class AuthService {
   googleSignin() {
     const provider = new firebase.auth.GoogleAuthProvider();
     this.afAuth.auth.signInWithRedirect(provider);
+  }
+
+  signout() {
+    firebase.auth().signOut();
   }
 
   private uploadUser(user: firebase.User): firebase.Promise<void> {
