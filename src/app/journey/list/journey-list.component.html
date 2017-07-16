@@ -1,7 +1,7 @@
 <div class="page">
   <ul class="grid">
-    <li *ngFor="let journey of journeys">
-      <md-card class="journey-card clickable" (click)="navigateToJourney(journey.$key)">
+    <li class="journey-card-container" *ngFor="let journey of journeys">
+      <md-card class="clickable" (click)="navigateToJourney(journey.$key)">
         <div md-card-image class="cover" [style.backgroundImage]="journey.coverURL && 'url(' + journey.coverURL + ')'"></div>
         <md-card-content>
           <md-card-title>
