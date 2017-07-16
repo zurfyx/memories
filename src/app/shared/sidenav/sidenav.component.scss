@@ -13,16 +13,17 @@ md-sidenav {
   }
 }
 
-md-sidenav-container {
-  transform: none;
-}
-
 /deep/ .mat-sidenav-content {
   transform: none !important;
+  min-height: 100vh;
 }
 
-/deep/ .mat-sidenav-backdrop.mat-sidenav-shown {
-  background: none;
+/deep/ .mat-sidenav-backdrop {
+  z-index: 44 !important;
+
+  &.mat-sidenav-shown {
+    background: rgba(0, 0, 0, 0.2);
+  }
 }
 
 .sidenav-mobile {

@@ -37,8 +37,15 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() { }
 
-  toggleSidenav() {
-    this.isMobileNavbarOpen.next(!this.isMobileNavbarOpen.value);
+  openSidenav() {
+    this.isMobileNavbarOpen.next(false);
+    // Hack: sidenav broke because we had to disable translate3d in order to use position: fixed.
+    // Sidenav is now unable to recognise when it's fully opened, nor when it's closed.
+    // However, sidenav needs to have its property as closed before opening it back again. By
+    // pushing the new state in the next tick we are unsuring it toggles states and it performs just
+    // well.
+    // https://github.com/angular/material2/issues/998
+    setTimeout(() => this.isMobileNavbarOpen.next(true));
   }
 
   openSigninDialog() {
