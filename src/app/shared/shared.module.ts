@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -24,6 +25,7 @@ import {
 
 @NgModule({
   imports: [
+    CommonModule,
     CastModule,
     NavbarModule,
     SidenavModule,
@@ -39,6 +41,7 @@ import {
   providers: [
     AngularFireAuth,
     AngularFireDatabase,
+    DatePipe,
     AuthService,
     FileService,
     IdService,
