@@ -17,20 +17,18 @@ export class KmlService {
   /**
    * Generates a KML with the journey placemarks.
    */
-  placemarks(stories: Story[]): Observable<string> {
-    const geolocalized = stories.filter(story => story.isGeolocalized());
-    const owners: string[] = geolocalized.map(story => story.owner);
-    const ownersObs: Observable<User>[] = owners.map(owner => this.userService.readUser(owner, ['displayName']));
-    return Observable.forkJoin(ownersObs).map((users: User[]) => {
-      const content = users.map((user, i) => this.placemark(geolocalized[i], user));
-      return this.wrapper(content.join('\n'));
-    });
+  placemarks(stories: Story[], user: User): string {
+    const content = stories.map(story => this.placemark(story, user));
+    return this.wrapper(content.join('\n'));
   }
 
   /**
    * Generates a KML with the journey placemarks and the active story bubble.
    */
-  private placemark(story: Story, user: User, showBubble = false) {
+  private placemark(story: Story, user: User, showBubble = false): string {
+    if (!story.isGeolocalized()) {
+      return '';
+    }
     return `<Placemark>
       <name>${story.title}</name>
       <Point>

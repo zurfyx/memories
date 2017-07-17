@@ -48,19 +48,20 @@ export class JourneyDetailComponent implements OnInit {
    * 3. Cast stories into the casting device (if available).
    */
   ngOnInit() {
-    this.userService.readUser(this.journey.owner, ['photoURL']).subscribe((owner: User) => {
-      this.owner = owner;
-    });
+
     this.storyService.readStories(this.journey.$key)
       .flatMap((stories: Story[]) => {
         this.stories = stories;
-
+        return this.userService.readUser(this.journey.owner, ['photoURL', 'displayName']);
+      })
+      .flatMap((owner: User) => {
+        this.owner = owner;
         // Cast new stories (if a casting serving is active).
         return this.castService.active;
       })
       .subscribe((server: LiquidGalaxyServer) => {
         if (server) {
-          this.cast(this.stories);
+          this.cast();
         }
       });
   }
@@ -81,11 +82,9 @@ export class JourneyDetailComponent implements OnInit {
     this.router.navigate(routerPath);
   }
 
-  cast(stories: Story[]) {
-    this.kmlService.placemarks(stories).subscribe((kml) => {
-      console.info(kml);
-      const server: LiquidGalaxyServer = this.castService.active.value;
-      server.writeKML(kml);
-    });
+  cast() {
+    const kml = this.kmlService.placemarks(this.stories, this.owner);
+    const server: LiquidGalaxyServer = this.castService.active.value;
+    server.writeKML(kml);
   }
 }
