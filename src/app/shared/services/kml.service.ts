@@ -17,8 +17,8 @@ export class KmlService {
   /**
    * Generates a KML with the journey placemarks.
    */
-  placemarks(stories: Story[], user: User): string {
-    const content = stories.map(story => this.placemark(story, user));
+  placemarks(stories: Story[], user: User, highlight?: Story): string {
+    const content = stories.map(story => this.placemark(story, user, story.$key === highlight.$key));
     return this.wrapper(content.join('\n'));
   }
 
@@ -42,6 +42,7 @@ export class KmlService {
             ownerDisplayName: user.displayName,
             description: story.description,
           })}
+          ${showBubble && 'yes'}
         ]]>
       </description>
       <gx:balloonVisibility>${showBubble ? 1 : 0}</gx:balloonVisibility>
@@ -50,7 +51,8 @@ export class KmlService {
 
   private wrapper(content: string) {
     const output = `<?xml version="1.0" encoding="UTF-8"?>
-            <kml xmlns="http://www.opengis.net/kml/2.2">
+            <kml xmlns="http://www.opengis.net/kml/2.2"
+                 xmlns:gx="http://www.google.com/kml/ext/2.2">
               <Document>${content}</Document>
             </kml>`;
     return this.minify(output);
