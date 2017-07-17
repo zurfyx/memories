@@ -19,10 +19,14 @@ export class UserService {
    * desired properties have to be passed through parameters. I.e. (['displayName', 'email'])
    */
   readUser(uid: string, properties: string[]): Observable<User> {
-    const property = properties[0]; // TODO: Fetch more than one property at once.
     const options = { preserveSnapshot: true };
-    return this.afDatabase.object(`users/${uid}/${property}`, options).map((snapshot: any) => (
-      new User({ [property]: snapshot.val() })
-    ));
+    const fetchers = properties.map(prop => this.afDatabase.object(`/users/${uid}/${prop}`, options).first());
+    return Observable.forkJoin(fetchers).map((snapshots: any[]) => {
+      const values = {};
+      snapshots.forEach((snapshot, i) => {
+        values[properties[i]] = snapshot.val();
+      });
+      return new User(values);
+    });
   }
 }
