@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
-import { Observable } from 'rxjs/Rx';
 
 import {
   Journey,
@@ -48,7 +48,6 @@ export class JourneyDetailComponent implements OnInit {
    * 3. Cast stories into the casting device (if available).
    */
   ngOnInit() {
-
     this.storyService.readStories(this.journey.$key)
       .flatMap((stories: Story[]) => {
         this.stories = stories;

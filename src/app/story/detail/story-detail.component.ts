@@ -3,12 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
+import { LiquidGalaxyServer } from 'liquid-galaxy';
 
 import {
   User,
   UserService,
   Story,
   StoryService,
+  CastService,
+  KmlService,
 } from '../../shared';
 import { EditState } from './edit-state';
 
@@ -30,6 +33,8 @@ export class StoryDetailComponent implements OnInit {
     private userService: UserService,
     private storyService: StoryService,
     private snackBar: MdSnackBar,
+    private castService: CastService,
+    private kmlService: KmlService,
   ) {
     this.route.data.subscribe((params: { story: Story }) => {
       this.story = params.story;
@@ -37,9 +42,17 @@ export class StoryDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.readUser(this.story.owner, ['photoURL']).subscribe((user: User) => {
-      this.owner = user;
-    });
+    this.userService.readUser(this.story.owner, ['photoURL', 'displayName'])
+      .flatMap((user: User) => {
+        this.owner = user;
+        // Cast journey stories (if a casting serving is active).
+        return this.castService.active;
+      })
+      .subscribe((server: LiquidGalaxyServer) => {
+        if (server) {
+          this.cast();
+        }
+      });
   }
 
   isActivelyEditing(): boolean {
@@ -114,5 +127,15 @@ export class StoryDetailComponent implements OnInit {
       this.editState = EditState.View;
       this.snackBar.open('Saved!', null, { duration: 3000 });
     });
+  }
+
+  cast() {
+    // We'll highlight the current story (but we will show others in the same journey as well).
+    this.storyService.readStories(this.story.journey)
+      .subscribe((stories: Story[]) => {
+        const kml = this.kmlService.placemarks(stories, this.owner);
+        const server: LiquidGalaxyServer = this.castService.active.value;
+        server.writeKML(kml);
+      });
   }
 }
