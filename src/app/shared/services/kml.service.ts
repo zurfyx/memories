@@ -1,72 +1,53 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import ellipsis from 'text-ellipsis';
+import { Observable } from 'rxjs/Rx';
 
-import { Story } from '../models';
+import { Story, User } from '../models';
+import { UserService } from './user.service';
 
 @Injectable()
 export class KmlService {
 
   constructor(
     private datePipe: DatePipe,
+    private userService: UserService,
   ) { }
 
   /**
    * Generates a KML with the journey placemarks.
    */
-  journey(stories: Story[]): string {
-    const geolocalized: Story[] = stories.filter(story => story.isGeolocalized());
-    const content = geolocalized.map(story => (
-      `<Placemark>
-        <name>${story.title}</name>
-        <Point>
-          <coordinates>${story.map.long},${story.map.lat},0</coordinates>
-        </Point>
-        <description>
-          <![CDATA[
-            ${KML_HTML_TEMPLATES.bubble({
-              imageUrl: story.coverURL,
-              dateText: this.datePipe.transform(story.dateStart),
-              ownerDisplayName: story.owner,
-              description: story.description,
-            })}
-          ]]>
-        </description>
-      </Placemark>`
-    ));
-    return this.wrapper(content.join('\n'));
+  placemarks(stories: Story[]): Observable<string> {
+    const geolocalized = stories.filter(story => story.isGeolocalized());
+    const owners: string[] = geolocalized.map(story => story.owner);
+    const ownersObs: Observable<User>[] = owners.map(owner => this.userService.readUser(owner, ['displayName']));
+    return Observable.forkJoin(ownersObs).map((users: User[]) => {
+      const content = users.map((user, i) => this.placemark(geolocalized[i], user));
+      return this.wrapper(content.join('\n'));
+    });
   }
 
   /**
    * Generates a KML with the journey placemarks and the active story bubble.
    */
-  story(): string {
-    // TODO.
-    const randomNumber = ~~(Math.random() * 10); // tslint:disable-line:no-bitwise
-    const demoKml = `<?xml version="1.0" encoding="UTF-8"?>
-      <kml xmlns="http://www.opengis.net/kml/2.2">
-        <Document>
-          <Placemark>
-            <name>Demo ${randomNumber}</name>
-            <description>
-              <![CDATA[
-                <html>
-                <head>
-                  <style>html, body { margin: 0; padding: 0; }</style>
-                <body>
-                  <h1>Demo</h1>
-                </body>
-              </html>
-              ]]>
-            </description>
-            <gx:balloonVisibility>0</gx:balloonVisibility>
-            <Point>
-              <coordinates>102,14</coordinates>
-            </Point>
-          </Placemark>
-        </Document>
-      </kml>`;
-    return demoKml;
+  private placemark(story: Story, user: User, showBubble = false) {
+    return `<Placemark>
+      <name>${story.title}</name>
+      <Point>
+        <coordinates>${story.map.long},${story.map.lat},0</coordinates>
+      </Point>
+      <description>
+        <![CDATA[
+          ${KML_HTML_TEMPLATES.bubble({
+            imageUrl: story.coverURL,
+            dateText: this.datePipe.transform(story.dateStart),
+            ownerDisplayName: user.displayName,
+            description: story.description,
+          })}
+        ]]>
+      </description>
+      <gx:balloonVisibility>${showBubble ? 1 : 0}</gx:balloonVisibility>
+    </Placemark>`;
   }
 
   private wrapper(content: string) {

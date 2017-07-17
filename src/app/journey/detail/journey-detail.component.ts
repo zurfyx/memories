@@ -82,8 +82,10 @@ export class JourneyDetailComponent implements OnInit {
   }
 
   cast(stories: Story[]) {
-    const kml = this.kmlService.journey(stories);
-    const server: LiquidGalaxyServer = this.castService.active.value;
-    server.writeKML(kml);
+    this.kmlService.placemarks(stories).subscribe((kml) => {
+      console.info(kml);
+      const server: LiquidGalaxyServer = this.castService.active.value;
+      server.writeKML(kml);
+    });
   }
 }
