@@ -130,12 +130,20 @@ export class StoryDetailComponent implements OnInit {
   }
 
   cast() {
+    const server: LiquidGalaxyServer = this.castService.active.value;
+
     // We'll highlight the current story (but we will show others in the same journey as well).
     this.storyService.readStories(this.story.journey)
-      .subscribe((stories: Story[]) => {
-        const kml = this.kmlService.placemarks(stories, this.owner, this.story);
-        const server: LiquidGalaxyServer = this.castService.active.value;
-        server.writeKML(kml);
+      .flatMap((stories: Story[]) => {
+        // const kml = this.kmlService.placemarks(stories, this.owner, this.story);
+        const kml = this.kmlService.placemarkTour(this.story, this.owner);
+        return Observable.fromPromise(server.writeKML(kml));
+      })
+      .subscribe(() => {
+        setTimeout(() => {
+
+        server.writeQuery('playtour=main');
+        }, 300)
       });
   }
 }

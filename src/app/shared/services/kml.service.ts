@@ -17,22 +17,30 @@ export class KmlService {
   /**
    * Generates a KML with the journey placemarks.
    */
-  placemarks(stories: Story[], user: User, highlight?: Story): string {
+  placemarks(
+    stories: Story[],
+    user: User,
+    { highlight, headers = true }: { highlight?: Story; headers?: boolean } = {},
+  ): string {
     const content = stories.map((story) => {
       const isHighlighted = !!highlight && story.$key === highlight.$key
       return this.placemark(story, user, isHighlighted);
-    });
-    return this.wrapper(content.join('\n'));
+    }).join('\n');
+    return this.wrap(content, headers);
   }
 
   /**
    * Generates a KML with the journey placemarks and the active story bubble.
    */
-  private placemark(story: Story, user: User, showBubble = false): string {
+  placemark(
+    story: Story,
+    user: User,
+    { highlight = false, headers = true }: { highlight?: boolean; headers?: boolean } = {}
+  ): string {
     if (!story.isGeolocalized()) {
       return '';
     }
-    return `<Placemark>
+    const content = `<Placemark id="0">
       <name>${story.title}</name>
       <Point>
         <coordinates>${story.map.long},${story.map.lat},0</coordinates>
@@ -47,17 +55,77 @@ export class KmlService {
           })}
         ]]>
       </description>
-      <gx:balloonVisibility>${showBubble ? 1 : 0}</gx:balloonVisibility>
+      <gx:balloonVisibility>${highlight ? 1 : 0}</gx:balloonVisibility>
     </Placemark>`;
+    return this.wrap(content, headers);
   }
 
-  private wrapper(content: string) {
-    const output = `<?xml version="1.0" encoding="UTF-8"?>
+  placemarkTour(
+    story: Story,
+    user: User,
+    { headers = true }: { headers?: boolean } = {}
+  ): string {
+    if (!story.isGeolocalized()) {
+      return '';
+    }
+    const placemarks = this.placemark(story, user, { headers: false });
+    const content = `
+      ${placemarks}
+      <gx:Tour>
+        <name>main</name>
+        <gx:Playlist>
+          <gx:AnimatedUpdate id="tour_1">
+            <gx:duration>0.1</gx:duration>
+            <Update>
+              <targetHref/>
+              <Change>
+                <Placemark targetId="0">
+                  <visibility>1</visibility>
+                  <gx:balloonVisibility>1</gx:balloonVisibility>
+                </Placemark>
+              </Change>
+            </Update>
+          </gx:AnimatedUpdate>
+          <gx:FlyTo id="tour_2">
+            <gx:duration>1.0</gx:duration>
+            <gx:flyToMode>smooth</gx:flyToMode>
+            <LookAt>
+              <longitude>0.598055555556</longitude>
+              <latitude>41.6261111111</latitude>
+              <altitude>1000</altitude>
+              <heading>0</heading>
+              <tilt>77</tilt>
+              <range>5000</range>
+              <gx:altitudeMode>relativeToSeaFloor </gx:altitudeMode>
+            </LookAt>
+          </gx:FlyTo>
+          <gx:FlyTo id="tour_3">
+            <gx:duration>1.0</gx:duration>
+            <gx:flyToMode>smooth</gx:flyToMode>
+            <LookAt>
+              <longitude>0.598055555556</longitude>
+              <latitude>41.6261111111</latitude>
+              <altitude>1000</altitude>
+              <heading>10</heading>
+              <tilt>77</tilt>
+              <range>5000</range>
+              <gx:altitudeMode>relativeToSeaFloor </gx:altitudeMode>
+            </LookAt>
+            </gx:FlyTo>
+        </gx:Playlist>
+      </gx:Tour>
+    `;
+    return this.wrap(content, headers);
+  }
+
+  wrap(content: string, includeHeaders = true): string {
+    const withHeaders = `<?xml version="1.0" encoding="UTF-8"?>
             <kml xmlns="http://www.opengis.net/kml/2.2"
                  xmlns:gx="http://www.google.com/kml/ext/2.2">
               <Document>${content}</Document>
             </kml>`;
-    return this.minify(output);
+    const minified = this.minify(includeHeaders ? withHeaders : content);
+    return this.minify(minified);
   }
 
   private minify(kmlText: string): string {
