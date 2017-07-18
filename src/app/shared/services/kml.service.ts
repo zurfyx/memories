@@ -36,13 +36,12 @@ export class KmlService {
       </Point>
       <description>
         <![CDATA[
-          ${KML_HTML_TEMPLATES.bubble({
+          ${KML_TEMPLATES.bubble({
             imageUrl: story.coverURL,
             dateText: this.datePipe.transform(story.dateStart),
             ownerDisplayName: user.displayName,
             description: story.description,
           })}
-          ${showBubble && 'yes'}
         ]]>
       </description>
       <gx:balloonVisibility>${showBubble ? 1 : 0}</gx:balloonVisibility>
@@ -64,7 +63,7 @@ export class KmlService {
   }
 }
 
-const KML_HTML_TEMPLATES = {
+const KML_TEMPLATES = {
   bubble: ({imageUrl, dateText, ownerDisplayName, description}) => `
     ${imageUrl ? `<img class="banner" src="${imageUrl}" />` : ''}
     <div class="separator"></div>
@@ -78,12 +77,6 @@ const KML_HTML_TEMPLATES = {
       <i class="fa fa-globe" aria-hidden="true"></i>
     </div>
     <div class="copyright tcenter">Geographical Memories @ 2017</div>
-    ${KML_STYLES.bubble}
-  `,
-}
-
-const KML_STYLES = {
-  bubble: `
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
     html, body {
