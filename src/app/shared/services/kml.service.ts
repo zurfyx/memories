@@ -18,7 +18,10 @@ export class KmlService {
    * Generates a KML with the journey placemarks.
    */
   placemarks(stories: Story[], user: User, highlight?: Story): string {
-    const content = stories.map(story => this.placemark(story, user, story.$key === highlight.$key));
+    const content = stories.map((story) => {
+      const isHighlighted = !!highlight && story.$key === highlight.$key
+      return this.placemark(story, user, isHighlighted);
+    });
     return this.wrapper(content.join('\n'));
   }
 
