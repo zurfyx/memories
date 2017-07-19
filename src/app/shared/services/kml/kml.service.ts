@@ -42,23 +42,35 @@ export class KmlService {
     if (!story.isGeolocalized()) {
       return '';
     }
-    const content = `<Placemark id="${placemarkId}">
-      <name>${story.title}</name>
-      <Point>
-        <coordinates>${story.map.long},${story.map.lat},0</coordinates>
-      </Point>
-      <description>
-        <![CDATA[
-          ${html.bubble({
-            imageUrl: story.coverURL,
-            dateText: this.datePipe.transform(story.dateStart),
-            ownerDisplayName: user.displayName,
-            description: story.description,
-          })}
-        ]]>
-      </description>
-      <gx:balloonVisibility>${highlight ? 1 : 0}</gx:balloonVisibility>
-    </Placemark>`;
+    const content = xml.placemark({
+      id: placemarkId,
+      title: story.title,
+      lat: story.map.lat,
+      long: story.map.long,
+      html: html.bubble({
+        imageUrl: story.coverURL,
+        dateText: this.datePipe.transform(story.dateStart),
+        ownerDisplayName: user.displayName,
+        description: story.description,
+      }),
+    });
+    // const content = `<Placemark id="${placemarkId}">
+    //   <name>${story.title}</name>
+    //   <Point>
+    //     <coordinates>${story.map.long},${story.map.lat},0</coordinates>
+    //   </Point>
+    //   <description>
+    //     <![CDATA[
+    //       ${html.bubble({
+    //         imageUrl: story.coverURL,
+    //         dateText: this.datePipe.transform(story.dateStart),
+    //         ownerDisplayName: user.displayName,
+    //         description: story.description,
+    //       })}
+    //     ]]>
+    //   </description>
+    //   <gx:balloonVisibility>${highlight ? 1 : 0}</gx:balloonVisibility>
+    // </Placemark>`;
     return this.wrap(content, headers);
   }
 
@@ -73,49 +85,23 @@ export class KmlService {
     const placemarks = this.placemark(story, user, { headers: false });
     const showBubble = this.placemarkTourShowBubble(placemarkId);
     const fly360 = this.placemarkTour360(story);
-    const content = `
-      ${placemarks}
-      <gx:Tour>
-        <name>main</name>
-        <gx:Playlist>
-          ${showBubble}
-          ${fly360}
-        </gx:Playlist>
-      </gx:Tour>
-    `;
+    const tour = xml.tour.document(`${showBubble}${fly360}`);
+    const content = `${placemarks}${tour}`;
     return this.wrap(content, headers);
   }
 
   private placemarkTourShowBubble(targetId: number): string {
-    return `<gx:AnimatedUpdate>
-          <gx:duration>0.1</gx:duration>
-          <Update>
-            <targetHref/>
-            <Change>
-              <Placemark targetId="${targetId}">
-                <gx:balloonVisibility>1</gx:balloonVisibility>
-              </Placemark>
-            </Change>
-          </Update>
-        </gx:AnimatedUpdate>`;
+    return xml.tour.toggleBallon(targetId, true);
   }
 
   private placemarkTour360(story: Story): string {
     const degress = Array.from(Array(36), (_, i) => i * 10); // 360º
-    return degress.map((degree) => (
-       `<gx:FlyTo>
-          <gx:duration>1.0</gx:duration>
-          <gx:flyToMode>smooth</gx:flyToMode>
-          <LookAt>
-            <longitude>${story.map.long}</longitude>
-            <latitude>${story.map.lat}</latitude>
-            <altitude>1000</altitude>
-            <heading>${degree}</heading>
-            <tilt>77</tilt>
-            <range>5000</range>
-            <gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
-          </LookAt>
-        </gx:FlyTo>`
+    return degress.map((heading) => (
+      xml.tour.flyTo({
+        heading,
+        lat: story.map.lat,
+        long: story.map.long,
+      })
     )).join('\n');
   }
 
