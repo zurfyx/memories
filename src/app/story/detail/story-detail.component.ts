@@ -132,11 +132,11 @@ export class StoryDetailComponent implements OnInit {
   cast() {
     const server: LiquidGalaxyServer = this.castService.active.value;
 
-    // We'll highlight the current story (but we will show others in the same journey as well).
+    // We'll focus on the current story, but we'll show other story placemarks in the same journey
+    // as well.
     this.storyService.readStories(this.story.journey)
       .flatMap((stories: Story[]) => {
-        // const kml = this.kmlService.placemarks(stories, this.owner, this.story);
-        const kml = this.kmlService.placemarkTour(this.story, this.owner);
+        const kml = this.kmlService.soloTour(stories, this.story, this.owner);
         return Observable.fromPromise(server.writeKML(kml));
       })
       .subscribe(() => {
