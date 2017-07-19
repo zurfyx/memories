@@ -35,12 +35,13 @@ export class KmlService {
   placemark(
     story: Story,
     user: User,
-    { highlight = false, headers = true }: { highlight?: boolean; headers?: boolean } = {}
+    { highlight = false, headers = true, placemarkId = 0 }
+      : { highlight?: boolean; headers?: boolean, placemarkId?: number } = {}
   ): string {
     if (!story.isGeolocalized()) {
       return '';
     }
-    const content = `<Placemark id="0">
+    const content = `<Placemark id="${placemarkId}">
       <name>${story.title}</name>
       <Point>
         <coordinates>${story.map.long},${story.map.lat},0</coordinates>
@@ -63,14 +64,44 @@ export class KmlService {
   placemarkTour(
     story: Story,
     user: User,
-    { headers = true }: { headers?: boolean } = {}
+    { headers = true, placemarkId = 0 }: { headers?: boolean, placemarkId?: number } = {}
   ): string {
     if (!story.isGeolocalized()) {
       return '';
     }
     const placemarks = this.placemark(story, user, { headers: false });
+    const showBubble = this.placemarkTourShowBubble(placemarkId);
+    const fly360 = this.placemarkTour360(story);
+    const content = `
+      ${placemarks}
+      <gx:Tour>
+        <name>main</name>
+        <gx:Playlist>
+          ${showBubble}
+          ${fly360}
+        </gx:Playlist>
+      </gx:Tour>
+    `;
+    return this.wrap(content, headers);
+  }
+
+  private placemarkTourShowBubble(targetId: number): string {
+    return `<gx:AnimatedUpdate>
+          <gx:duration>0.1</gx:duration>
+          <Update>
+            <targetHref/>
+            <Change>
+              <Placemark targetId="${targetId}">
+                <gx:balloonVisibility>1</gx:balloonVisibility>
+              </Placemark>
+            </Change>
+          </Update>
+        </gx:AnimatedUpdate>`;
+  }
+
+  private placemarkTour360(story: Story): string {
     const degress = Array.from(Array(36), (_, i) => i * 10); // 360º
-    const flyTo = degress.map((degree) => (
+    return degress.map((degree) => (
        `<gx:FlyTo>
           <gx:duration>1.0</gx:duration>
           <gx:flyToMode>smooth</gx:flyToMode>
@@ -84,29 +115,7 @@ export class KmlService {
             <gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
           </LookAt>
         </gx:FlyTo>`
-    ));
-    const content = `
-      ${placemarks}
-      <gx:Tour>
-        <name>main</name>
-        <gx:Playlist>
-          <gx:AnimatedUpdate id="tour_1">
-            <gx:duration>0.1</gx:duration>
-            <Update>
-              <targetHref/>
-              <Change>
-                <Placemark targetId="0">
-                  <visibility>1</visibility>
-                  <gx:balloonVisibility>1</gx:balloonVisibility>
-                </Placemark>
-              </Change>
-            </Update>
-          </gx:AnimatedUpdate>
-         ${flyTo}
-        </gx:Playlist>
-      </gx:Tour>
-    `;
-    return this.wrap(content, headers);
+    )).join('\n');
   }
 
   wrap(content: string, includeHeaders = true): string {
