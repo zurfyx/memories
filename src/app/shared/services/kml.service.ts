@@ -69,6 +69,22 @@ export class KmlService {
       return '';
     }
     const placemarks = this.placemark(story, user, { headers: false });
+    const degress = Array.from(Array(36), (_, i) => i * 10); // 360º
+    const flyTo = degress.map((degree) => (
+       `<gx:FlyTo>
+          <gx:duration>1.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <LookAt>
+            <longitude>${story.map.long}</longitude>
+            <latitude>${story.map.lat}</latitude>
+            <altitude>1000</altitude>
+            <heading>${degree}</heading>
+            <tilt>77</tilt>
+            <range>5000</range>
+            <gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+          </LookAt>
+        </gx:FlyTo>`
+    ));
     const content = `
       ${placemarks}
       <gx:Tour>
@@ -86,32 +102,7 @@ export class KmlService {
               </Change>
             </Update>
           </gx:AnimatedUpdate>
-          <gx:FlyTo id="tour_2">
-            <gx:duration>1.0</gx:duration>
-            <gx:flyToMode>smooth</gx:flyToMode>
-            <LookAt>
-              <longitude>0.598055555556</longitude>
-              <latitude>41.6261111111</latitude>
-              <altitude>1000</altitude>
-              <heading>0</heading>
-              <tilt>77</tilt>
-              <range>5000</range>
-              <gx:altitudeMode>relativeToSeaFloor </gx:altitudeMode>
-            </LookAt>
-          </gx:FlyTo>
-          <gx:FlyTo id="tour_3">
-            <gx:duration>1.0</gx:duration>
-            <gx:flyToMode>smooth</gx:flyToMode>
-            <LookAt>
-              <longitude>0.598055555556</longitude>
-              <latitude>41.6261111111</latitude>
-              <altitude>1000</altitude>
-              <heading>10</heading>
-              <tilt>77</tilt>
-              <range>5000</range>
-              <gx:altitudeMode>relativeToSeaFloor </gx:altitudeMode>
-            </LookAt>
-            </gx:FlyTo>
+         ${flyTo}
         </gx:Playlist>
       </gx:Tour>
     `;

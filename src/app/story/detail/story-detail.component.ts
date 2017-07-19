@@ -140,10 +140,8 @@ export class StoryDetailComponent implements OnInit {
         return Observable.fromPromise(server.writeKML(kml));
       })
       .subscribe(() => {
-        setTimeout(() => {
-
-        server.writeQuery('playtour=main');
-        }, 300)
+        // Liquid Galaxy tick time to read new sent KML files is ~1s.
+        setTimeout(() => server.writeQuery('playtour=main'), 1000);
       });
   }
 }
