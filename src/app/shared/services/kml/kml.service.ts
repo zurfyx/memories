@@ -16,18 +16,7 @@ export class KmlService {
   ) { }
 
   tour(stories: Story[], user: User): string {
-    const placemarks: string = stories.map((story, i) => xml.placemark({
-      id: story.$key,
-      title: story.title,
-      lat: story.map.lat,
-      long: story.map.long,
-      html: html.bubble({
-        imageUrl: story.coverURL,
-        dateText: this.datePipe.transform(story.dateStart),
-        ownerDisplayName: user.displayName,
-        description: story.description,
-      }),
-    })).join('\n');
+    const placemarks: string = this.placemarks(stories, user);
     const tourData: string = stories.map((story, i) => `
       ${xml.tour.toggleBallon(story.$key, true)}
       ${this.fly360(story)}
@@ -38,7 +27,17 @@ export class KmlService {
   }
 
   soloTour(stories: Story[], focus: Story, user: User): string {
-    const placemarks: string = stories.map((story, i) => xml.placemark({
+    const placemarks: string = this.placemarks(stories, user);
+    const tour: string = xml.tour.document(`
+      ${xml.tour.toggleBallon(focus.$key, true)}
+      ${this.fly360(focus)}
+    `);
+    const document: string = xml.document(`${placemarks}${tour}`);
+    return this.minify(document);
+  }
+
+  private placemarks(stories: Story[], user: User): string {
+    return stories.map((story, i) => xml.placemark({
       id: story.$key,
       title: story.title,
       lat: story.map.lat,
@@ -50,12 +49,6 @@ export class KmlService {
         description: story.description,
       }),
     })).join('\n');
-    const tour: string = xml.tour.document(`
-      ${xml.tour.toggleBallon(focus.$key, true)}
-      ${this.fly360(focus)}
-    `);
-    const document: string = xml.document(`${placemarks}${tour}`);
-    return this.minify(document);
   }
 
   private fly360(story: Story): string {
