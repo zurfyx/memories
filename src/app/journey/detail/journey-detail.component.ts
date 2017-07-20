@@ -82,8 +82,12 @@ export class JourneyDetailComponent implements OnInit {
   }
 
   cast() {
-    // const kml = this.kmlService.placemarks(this.stories, this.owner);
-    // const server: LiquidGalaxyServer = this.castService.active.value;
-    // server.writeKML(kml);
+    const server: LiquidGalaxyServer = this.castService.active.value;
+    const kml = this.kmlService.tour(this.stories, this.owner);
+    Observable.fromPromise(server.writeKML(kml))
+      .subscribe(() => {
+        // Liquid Galaxy tick time to read new sent KML files is ~1s.
+        setTimeout(() => server.writeQuery('playtour=main'), 1000);
+      });
   }
 }

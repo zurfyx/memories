@@ -15,6 +15,28 @@ export class KmlService {
     private userService: UserService,
   ) { }
 
+  tour(stories: Story[], user: User): string {
+    const placemarks: string = stories.map((story, i) => xml.placemark({
+      id: story.$key,
+      title: story.title,
+      lat: story.map.lat,
+      long: story.map.long,
+      html: html.bubble({
+        imageUrl: story.coverURL,
+        dateText: this.datePipe.transform(story.dateStart),
+        ownerDisplayName: user.displayName,
+        description: story.description,
+      }),
+    })).join('\n');
+    const tourData: string = stories.map((story, i) => `
+      ${xml.tour.toggleBallon(story.$key, true)}
+      ${this.fly360(story)}
+    `).join('\n');
+    const tour: string = xml.tour.document(tourData);
+    const document: string = xml.document(`${placemarks}${tour}`);
+    return this.minify(document);
+  }
+
   soloTour(stories: Story[], focus: Story, user: User): string {
     const placemarks: string = stories.map((story, i) => xml.placemark({
       id: story.$key,

@@ -141,7 +141,7 @@ export class StoryDetailComponent implements OnInit {
       })
       .subscribe(() => {
         // Liquid Galaxy tick time to read new sent KML files is ~1s.
-        setTimeout(() => server.writeQuery('playtour=main'), 1500);
+        setTimeout(() => server.writeQuery('playtour=main'), 1000);
       });
   }
 }
