@@ -82,7 +82,7 @@
         },
         "photos": {
           "$photoUid": {
-            ".validate": "$photoUid >= 0 && $photoUid < 10 && newData.hasChildren(['url', 'title'])",
+            ".validate": "$photoUid >= '0' && $photoUid < '10' && newData.hasChildren(['url', 'title'])",
             "url": {
               ".validate": "newData.val().matches(/^https:\\/\\/firebasestorage.googleapis.com\\//)"
             },
