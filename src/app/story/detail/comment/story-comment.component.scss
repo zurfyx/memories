@@ -1,0 +1,50 @@
+.comment {
+  display: flex;
+}
+
+.comment__avatar img {
+  border-radius: 99px;
+  width: 48px;
+  height: 48px;
+}
+
+@media (min-width: 550px) {
+  .comment__avatar img {
+    width: 73px;
+    height: 73px;
+  }
+}
+
+.comment__body {
+  flex: 1;
+  padding-left: 10px;
+}
+
+@media (min-width: 550px) {
+  .comment__body {
+    padding-left: 20px;
+  }
+}
+
+.comment__header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.comment__owner {
+  flex: 1;
+  font-weight: 600;
+}
+
+.comment__date {
+  white-space: nowrap;
+}
+
+.comment__description {
+  padding-top: 5px;
+}
+
+form.withLines .submit-row {
+  margin-top: 0;
+}
