@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
@@ -9,6 +10,7 @@ import { User } from '../models';
 export class UserService {
 
   constructor(
+    private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase,
   ) { }
 
@@ -28,5 +30,11 @@ export class UserService {
       });
       return new User(values);
     });
+  }
+
+  readCurrentUser(properties: string[]): Observable<User> {
+    return this.afAuth.authState.flatMap((user: firebase.User) => (
+      this.readUser(user.uid, properties)
+    ));
   }
 }

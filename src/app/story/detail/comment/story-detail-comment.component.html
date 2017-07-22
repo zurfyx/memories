@@ -1,0 +1,18 @@
+<app-story-detail-comment-new [story]="story"></app-story-detail-comment-new>
+
+<div class="box">
+  <md-list-item class="comment" *ngFor="let comment of comments">
+    <div class="comment__avatar">
+      <img [src]="this.users[comment.owner]?.photoURL" />
+    </div>
+    <div class="comment__body">
+      <div class="comment__header">
+        <a href="#" class="comment__owner neat">{{this.users[comment.owner]?.displayName}}</a>
+        <span class="comment__date">{{comment.updatedAt | date}}</span>
+      </div>
+      <div class="comment__description">
+        {{comment.description}}
+      </div>
+    </div>
+  </md-list-item>
+</div>

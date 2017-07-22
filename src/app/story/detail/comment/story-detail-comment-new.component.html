@@ -1,0 +1,27 @@
+<div class="box" [class.shine]="hasJustSubmitted">
+  <div class="comment comment-new">
+    <div class="comment__avatar">
+      <img [src]="user?.photoURL" />
+    </div>
+    <div class="comment__body">
+      <div class="published shineText" *ngIf="hasJustSubmitted">
+        Your comment has been published!
+      </div>
+
+      <form class="withLines" [formGroup]="form" (ngSubmit)="submitForm()" *ngIf="!hasJustSubmitted">
+        <fieldset [disabled]="isSubmitting">
+          <fieldset>
+            <md-input-container>
+              <textarea formControlName="description" placeholder="Your thoughts..." mdInput></textarea>
+            </md-input-container>
+          </fieldset>
+        </fieldset>
+        <div class="input-row submit-row">
+          <button type="submit" color="primary" [disabled]="!form.valid" md-raised-button>
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

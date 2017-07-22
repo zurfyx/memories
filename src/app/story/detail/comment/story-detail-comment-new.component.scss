@@ -1,0 +1,25 @@
+@import "./story-detail-comment.component.scss";
+
+.box {
+  margin-bottom: 25px; // Due to being in a different component we don't get box + box properties.
+}
+
+.comment__body {
+  align-self: center;
+}
+
+.shine {
+  background-color: #009688;
+}
+
+.shineText {
+  color: #fff;
+}
+
+.published {
+  text-align: center;
+}
+
+form.withLines .submit-row {
+  margin-top: 0;
+}

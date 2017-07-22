@@ -5,8 +5,9 @@
   "scripts": {
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build --prod",
-    "test": "ng test --watch false",
-    "test-watch": "ng test",
+    "test": "npm run lint && npm run test-firebase && npm run test-cli",
+    "test-cli": "ng test --watch false",
+    "test-cli-watch": "ng test",
     "test-firebase": "jest",
     "test-firebase-watch": "jest --watch",
     "lint": "ng lint",

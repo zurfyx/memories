@@ -29,7 +29,7 @@ export class StoryNewComponent implements OnInit {
     private storyService: StoryService,
   ) {
     this.storyForm = this.formBuilder.group({
-      title: [''],
+      title: ['', Validators.required],
     });
   }
 
