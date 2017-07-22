@@ -5,6 +5,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 
 import {
+  User,
+  UserService,
   Story,
   Comment,
   CommentService,
@@ -15,21 +17,30 @@ import {
   templateUrl: 'story-comment-new.component.html',
   styleUrls: ['story-comment-new.component.scss'],
 })
-export class StoryCommentNewComponent {
+export class StoryCommentNewComponent implements OnInit {
   @Input() story: Story;
 
   form: FormGroup;
   isSubmitting = false;
   hasJustSubmitted = false;
 
+  user: User;
+
   constructor(
     private formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
+    private userService: UserService,
     private commentService: CommentService,
   ) {
     this.form = this.formBuilder.group({
       description: ['', Validators.required],
     })
+  }
+
+  ngOnInit() {
+    this.userService.readCurrentUser(['photoURL']).subscribe((user: User) => {
+      this.user = user;
+    });
   }
 
   submitForm() {

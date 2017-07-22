@@ -1,7 +1,7 @@
 <div class="box" [class.shine]="hasJustSubmitted">
   <div class="comment comment-new">
     <div class="comment__avatar">
-      <img src="https://pbs.twimg.com/profile_images/830871765480042496/Yx4YVRGC_bigger.jpg" />
+      <img [src]="user?.photoURL" />
     </div>
     <div class="comment__body">
       <div class="published shineText" *ngIf="hasJustSubmitted">
