@@ -5,9 +5,10 @@
   "scripts": {
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build --prod",
-    "test": "jest && ng test --watch false",
+    "test": "ng test --watch false",
     "test-watch": "ng test",
-    "test-firebase": "jest --watch",
+    "test-firebase": "jest",
+    "test-firebase-watch": "jest --watch",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "coverage": "ng test --watch false --code-coverage"

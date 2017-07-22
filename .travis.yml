@@ -24,6 +24,7 @@ install:
 script:
   - npm run lint
   - npm run build
+  - npm run test-firebase
   - npm run coverage
 
 after_success:
