@@ -12,6 +12,7 @@ import {
 } from './pipes';
 import {
   AuthService,
+  CommentService,
   FileService,
   IdService,
   JourneyService,
@@ -43,6 +44,7 @@ import {
     AngularFireDatabase,
     DatePipe,
     AuthService,
+    CommentService,
     FileService,
     IdService,
     JourneyService,

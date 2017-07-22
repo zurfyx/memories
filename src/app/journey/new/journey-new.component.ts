@@ -17,13 +17,13 @@ import {
   styleUrls: ['journey-new.component.scss'],
 })
 export class JourneyNewComponent implements OnInit {
+  @ViewChild('coverInput') coverInput: ElementRef;
+
   journeyForm: FormGroup;
   isSubmitting = false;
 
   coverResult: File;
   coverResultBase64: string;
-
-  @ViewChild('coverInput') coverInput: ElementRef;
 
   constructor(
     private router: Router,
@@ -71,7 +71,7 @@ export class JourneyNewComponent implements OnInit {
       })
       .subscribe(
         (journey: Journey) => this.router.navigate([`/journeys/${journey.$key}`]),
-        error => {
+        (error) => {
           console.error(error);
           window.alert('An error has occurred.');
           this.isSubmitting = false;

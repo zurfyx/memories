@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   MdButtonModule,
   MdInputModule,
@@ -25,6 +26,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MdButtonModule,
     MdInputModule,
     MdNativeDateModule,
