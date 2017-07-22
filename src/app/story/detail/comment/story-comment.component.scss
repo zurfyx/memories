@@ -1,5 +1,11 @@
 .comment {
   display: flex;
+
+  & + & {
+    border-top: 1px solid #d1d1d1;
+    margin-top: 25px;
+    padding-top: 25px;
+  }
 }
 
 .comment__avatar img {
