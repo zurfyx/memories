@@ -13,11 +13,11 @@ import {
 } from '../../../shared';
 
 @Component({
-  selector: 'app-story-comment-new',
-  templateUrl: 'story-comment-new.component.html',
-  styleUrls: ['story-comment-new.component.scss'],
+  selector: 'app-story-detail-comment-new',
+  templateUrl: 'story-detail-comment-new.component.html',
+  styleUrls: ['story-detail-comment-new.component.scss'],
 })
-export class StoryCommentNewComponent implements OnInit {
+export class StoryDetailCommentNewComponent implements OnInit {
   @Input() story: Story;
 
   form: FormGroup;

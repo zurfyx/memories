@@ -15,8 +15,8 @@ import {
 } from '../../shared';
 import { StoryDetailComponent } from './story-detail.component';
 import { StoryDetailBannerComponent } from './banner/story-detail-banner.component';
-import { StoryCommentComponent } from './comment/story-comment.component';
-import { StoryCommentNewComponent } from './comment/story-comment-new.component';
+import { StoryDetailCommentComponent } from './comment/story-detail-comment.component';
+import { StoryDetailCommentNewComponent } from './comment/story-detail-comment-new.component';
 import { StoryDetailDateComponent } from './date/story-detail-date.component';
 import { StoryDetailDescriptionComponent } from './description/story-detail-description.component';
 import { StoryDetailMapComponent } from './map/story-detail-map.component';
@@ -38,8 +38,8 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
   declarations: [
     StoryDetailComponent,
     StoryDetailBannerComponent,
-    StoryCommentComponent,
-    StoryCommentNewComponent,
+    StoryDetailCommentComponent,
+    StoryDetailCommentNewComponent,
     StoryDetailDateComponent,
     StoryDetailDescriptionComponent,
     StoryDetailMapComponent,

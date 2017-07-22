@@ -9,11 +9,11 @@ import {
 } from '../../../shared';
 
 @Component({
-  selector: 'app-story-comment',
-  templateUrl: 'story-comment.component.html',
-  styleUrls: ['story-comment.component.scss'],
+  selector: 'app-story-detail-comment',
+  templateUrl: 'story-detail-comment.component.html',
+  styleUrls: ['story-detail-comment.component.scss'],
 })
-export class StoryCommentComponent implements OnInit {
+export class StoryDetailCommentComponent implements OnInit {
   @Input() story: Story;
 
   comments: Comment[];
