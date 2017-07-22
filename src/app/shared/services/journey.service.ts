@@ -48,7 +48,7 @@ export class JourneyService {
 
   readJourneys(): Observable<Journey[]> {
     const afListOptions = {
-      query: { orderByChild: 'updatedAt' }
+      query: { orderByChild: 'updatedAt' },
     };
     return this.afDatabase.list('journeys', afListOptions).map((snapshot: any[]) => (
       snapshot.map(journeyValues => new Journey(journeyValues))
