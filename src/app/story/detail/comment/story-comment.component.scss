@@ -1,3 +1,5 @@
+@import "../../../shared/index";
+
 .comment {
   display: flex;
 
@@ -44,7 +46,8 @@
 }
 
 .comment__date {
-  white-space: nowrap;
+  color: $unimportant;
+  font-size: 0.8em;
 }
 
 .comment__description {
