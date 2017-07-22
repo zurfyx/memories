@@ -18,7 +18,7 @@ export class CommentService {
 
   readComments(storyId: string): Observable<Comment[]> {
     const afListOptions = {
-      query: { orderByChild: 'updatedAt' },
+      query: { orderByChild: 'story', equalTo: storyId },
     };
     return this.afDatabase.list('comments', afListOptions).map((snapshot: any[]) => (
       snapshot.map(commentValues => new Comment(commentValues))

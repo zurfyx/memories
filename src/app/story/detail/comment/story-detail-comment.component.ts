@@ -27,9 +27,7 @@ export class StoryDetailCommentComponent implements OnInit {
 
   ngOnInit() {
     this.commentService.readComments(this.story.$key).subscribe((comments: Comment[]) => {
-      // Comments are given from first to last. We are going to display them last to first.
-      const commentsReversed = comments.reverse();
-      this.comments = commentsReversed;
+      this.comments = comments.sort((a, b) => (b.updatedAt as number) - (a.updatedAt as number));
 
       // Gather user data associated with these comments.
       comments.forEach(comment => this.refreshUser(comment.owner));
