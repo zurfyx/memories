@@ -1,6 +1,11 @@
 <div class="page">
+  <div>
+    <input type="text" class="filter" placeholder="Title..." (keyup)="filter($event)" />
+    <i class="fa fa-search input-icon" aria-hidden="true"></i>
+  </div>
+
   <ul class="grid">
-    <li class="journey-card-container" *ngFor="let journey of journeys">
+    <li class="journey-card-container" *ngFor="let journey of journeysFiltered || journeys">
       <md-card class="clickable" (click)="navigateToJourney(journey.$key)">
         <div md-card-image class="cover" [style.backgroundImage]="journey.coverURL && 'url(' + journey.coverURL + ')'"></div>
         <md-card-content>

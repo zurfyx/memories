@@ -15,6 +15,8 @@ import {
 })
 export class JourneyListComponent implements OnInit {
   journeys: Journey[];
+  showFiltered = false;
+  journeysFiltered: Journey[];
 
   constructor(
     private router: Router,
@@ -24,6 +26,19 @@ export class JourneyListComponent implements OnInit {
   ngOnInit() {
     this.journeyService.readJourneys().subscribe((journeys: Journey[]) => {
       this.journeys = this.sortJourneysByDateDesc(journeys);
+    });
+  }
+
+  filter(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const title = input.value;
+    if (title === '') {
+      this.showFiltered = false;
+      return;
+    }
+    this.showFiltered = true;
+    this.journeyService.readJourneysByTitle(title).first().subscribe((journeys: Journey[]) => {
+      this.journeysFiltered = this.sortJourneysByDateDesc(journeys);
     });
   }
 
