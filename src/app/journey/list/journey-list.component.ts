@@ -15,7 +15,6 @@ import {
 })
 export class JourneyListComponent implements OnInit {
   journeys: Journey[];
-  showFiltered = false;
   journeysFiltered: Journey[];
 
   constructor(
@@ -33,13 +32,12 @@ export class JourneyListComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     const title = input.value;
     if (title === '') {
-      this.showFiltered = false;
+      this.journeysFiltered = null;
       return;
     }
-    this.showFiltered = true;
-    this.journeyService.readJourneysByTitle(title).first().subscribe((journeys: Journey[]) => {
-      this.journeysFiltered = this.sortJourneysByDateDesc(journeys);
-    });
+    this.journeysFiltered = this.journeys.filter((journey: Journey) => (
+      journey.title.toLowerCase().includes(title.toLowerCase())
+    ));
   }
 
   sortJourneysByDateDesc(journeys: Journey[]) {

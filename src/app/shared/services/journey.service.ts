@@ -55,13 +55,6 @@ export class JourneyService {
     ));
   }
 
-  readJourneysByTitle(title: string): Observable<Journey[]> {
-    const afListOptions = {
-      query: { orderByChild: 'title', equalTo: title }
-    };
-    return this.readJourneys(afListOptions);
-  }
-
   readJourney(uid: string): Observable<Journey> {
     return this.afDatabase.object(`journeys/${uid}`).map((snapshot: any) => (
       new Journey(snapshot)
