@@ -1,6 +1,6 @@
 <app-story-detail-comment-new [story]="story"></app-story-detail-comment-new>
 
-<div class="box">
+<div class="box" *ngIf="comments?.length > 0">
   <md-list-item class="comment" *ngFor="let comment of comments">
     <div class="comment__avatar">
       <img [src]="this.users[comment.owner]?.photoURL" />
