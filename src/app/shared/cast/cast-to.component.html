@@ -6,7 +6,7 @@
         *ngFor="let server of servers"
         [class.active]="server.uri === active.value?.uri"
         (click)="setActive(server)">
-        <i class="fa fa-television"></i> {{server.uid}}
+        <i class="fa fa-television"></i> {{server.info.displayName || 'Unnamed'}}
       </md-list-item>
     </md-list>
   </div>
