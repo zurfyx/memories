@@ -97,20 +97,12 @@
       ".read": true,
       ".indexOn": ["story"],
       "$uid": {
-        ".write": "(data.child('owner').val() === auth.uid || (!newData.exists() && root.child('stories/' + data.child('story').val() + '/owner').val() === auth.uid)) && auth !== null",
-        ".validate": "newData.hasChildren(['story', 'owner', 'updatedAt', 'description'])",
-        "story": {
-          ".validate": "newData.val().matches(/^[a-zA-Z0-9_-]+$/) && root.child('stories/' + newData.val()).exists()"
-        },
-        "owner": {
-          ".validate": "newData.val() === auth.uid && (!data.exists() || data.val() === auth.uid) && root.child('users/' + newData.val()).exists()"
-        },
-        "updatedAt": {
-          ".validate": "newData.val() === now"
-        },
-        "description": {
-          ".validate": "newData.isString()"
-        }
+        ".write": "(!data.exists() && newData.exists() && auth !== null) || (data.exists() && newData.exists() && auth !== null) || (data.exists() && !newData.exists() && (data.child('owner').val() === auth.uid || root.child('stories/' + data.child('story').val() + '/owner').val() === auth.uid))",
+        ".validate": "newData.child('story').val().matches(/^[a-zA-Z0-9_-]+$/) && root.child('stories/' + newData.child('story').val()).exists() &&    newData.child('owner').val() === auth.uid && (!data.child('owner').exists() || data.child('owner').val() === auth.uid) && root.child('users/' + newData.child('owner').val()).exists() &&    newData.child('updatedAt').val() === now &&    newData.child('description').isString()",
+        "story": {},
+        "owner": {},
+        "updatedAt": {},
+        "description": {}
       }
     },
     "physicalWeb": {
