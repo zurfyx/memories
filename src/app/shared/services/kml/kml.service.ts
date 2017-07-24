@@ -16,8 +16,13 @@ export class KmlService {
   ) { }
 
   tour(stories: Story[], user: User): string {
-    const placemarks: string = this.placemarks(stories, user);
-    const tourData: string = stories.map((story, i) => `
+    const geolocalized = this.excludeUngeolocalized(stories);
+    if (geolocalized.length === 0) {
+      return '';
+    }
+
+    const placemarks: string = this.placemarks(geolocalized, user);
+    const tourData: string = geolocalized.map((story, i) => `
       ${xml.tour.toggleBallon(story.$key, true)}
       ${this.fly360(story)}
     `).join('\n');
@@ -27,13 +32,22 @@ export class KmlService {
   }
 
   soloTour(stories: Story[], focus: Story, user: User): string {
-    const placemarks: string = this.placemarks(stories, user);
+    const geolocalized = this.excludeUngeolocalized(stories);
+    if (geolocalized.length === 0) {
+      return '';
+    }
+
+    const placemarks: string = this.placemarks(geolocalized, user);
     const tour: string = xml.tour.document(`
       ${xml.tour.toggleBallon(focus.$key, true)}
       ${this.fly360(focus)}
     `);
     const document: string = xml.document(`${placemarks}${tour}`);
     return this.minify(document);
+  }
+
+  private excludeUngeolocalized(stories: Story[]): Story[] {
+    return stories.filter(story => story.isGeolocalized());
   }
 
   private placemarks(stories: Story[], user: User): string {
