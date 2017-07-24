@@ -1,7 +1,8 @@
 <div class="overlay-dialog">
   <h1>Cast To</h1>
   <div md-dialog-actions>
-    <md-list>
+    <md-spinner class="default" *ngIf="isLoading"></md-spinner>
+    <md-list *ngIf="!isLoading">
       <md-list-item
         *ngFor="let server of servers"
         [class.active]="server.uri === active.value?.uri"

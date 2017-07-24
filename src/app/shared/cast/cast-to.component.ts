@@ -10,6 +10,7 @@ import { CastService } from './cast.service';
   styleUrls: ['cast-to.component.scss'],
 })
 export class CastToComponent implements OnInit {
+  isLoading = true;
   servers: LiquidGalaxyServer[];
   active: BehaviorSubject<LiquidGalaxyServer>;
 
@@ -20,6 +21,7 @@ export class CastToComponent implements OnInit {
   ngOnInit() {
     const findServers = new LiquidGalaxy().findServers();
     findServers.then(servers => {
+      this.isLoading = false;
       this.servers = servers;
     });
   }
