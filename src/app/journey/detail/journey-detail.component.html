@@ -4,7 +4,11 @@
   (stopTour)="castStopTour()">
 </app-casting>
 
-<div class="content__banner" [style.backgroundImage]="'url(' + journey.coverURL + ')'"></div>
+<div class="content__banner" [style.backgroundImage]="'url(' + journey.coverURL + ')'">
+  <div class="banner__action-left" [routerLink]="['/journeys']">
+    <span class="arrow">&#x2303;</span>
+  </div>
+</div>
 <div class="avatar" [style.backgroundImage]="'url(' + owner?.photoURL + ')'"></div>
 
 <div class="page journey-detail-page">
