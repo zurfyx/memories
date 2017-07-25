@@ -38,10 +38,12 @@ export class KmlService {
     }
 
     const placemarks: string = this.placemarks(geolocalized, user);
-    const tour: string = xml.tour.document(`
-      ${xml.tour.toggleBallon(focus.$key, true)}
-      ${this.fly360(focus)}
-    `);
+    const tour: string = focus.isGeolocalized()
+      ? xml.tour.document(`
+          ${xml.tour.toggleBallon(focus.$key, true)}
+          ${this.fly360(focus)}
+        `)
+      : ''; // Can't tour the focus story because it's not geolocalized.
     const document: string = xml.document(`${placemarks}${tour}`);
     return this.minify(document);
   }
