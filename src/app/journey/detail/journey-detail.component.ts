@@ -91,7 +91,7 @@ export class JourneyDetailComponent implements OnInit {
     Observable.fromPromise(server.writeKML(kml))
       .subscribe(() => {
         // Liquid Galaxy tick time to read new sent KML files is ~1s.
-        setTimeout(async () => this.castPlayTour(), 1000);
+        setTimeout(() => this.castPlayTour(), 1000);
       });
   }
 
