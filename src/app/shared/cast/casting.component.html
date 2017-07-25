@@ -1,14 +1,31 @@
 <div class="casting" *ngIf="server | async">
   <i class="fa fa-rocket casting__identifier" aria-hidden="true"></i>
+
+  <!-- Not ready -->
   <ng-container *ngIf="state === 0">
-    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+    <md-spinner class="casting__spinner"></md-spinner>
   </ng-container>
+
+  <!-- Playing tour -->
   <ng-container *ngIf="state === 1">
     Playing tour
-    <i class="fa fa-stop casting__action" aria-hidden="true" (click)="executeStopTour()"></i>
+
+    <ng-container *ngIf="pendingStateUpdate">
+      <md-spinner class="casting__spinner"></md-spinner>
+    </ng-container>
+    <ng-container *ngIf="!pendingStateUpdate">
+      <i class="fa fa-stop casting__action" aria-hidden="true" (click)="executeStopTour()"></i>
+    </ng-container>
   </ng-container>
+
+  <!-- Not playing tour -->
   <ng-container *ngIf="state === 2">
     Play tour
-    <i class="fa fa-play casting__action" aria-hidden="true" (click)="executePlayTour()"></i>
+    <ng-container *ngIf="pendingStateUpdate">
+      <md-spinner class="casting__spinner"></md-spinner>
+    </ng-container>
+    <ng-container *ngIf="!pendingStateUpdate">
+      <i class="fa fa-play casting__action" aria-hidden="true" (click)="executePlayTour()"></i>
+    </ng-container>
   </ng-container>
 </div>

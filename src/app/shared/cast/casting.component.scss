@@ -4,7 +4,7 @@
   color: #fff;
   background-color: #292929;
   display: inline-block;
-  padding: 15px 25px;
+  padding: 20px 25px;
   width: 100%;
   z-index: 2;
 }
@@ -18,4 +18,15 @@
 
 .casting__action {
   margin-left: 20px;
+}
+
+.casting__spinner {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+
+}
+
+.casting__spinner /deep/ path {
+  stroke: #fff;
 }
