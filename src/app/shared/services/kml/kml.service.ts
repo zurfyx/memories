@@ -15,10 +15,14 @@ export class KmlService {
     private userService: UserService,
   ) { }
 
+  empty(): string {
+    return xml.document();
+  }
+
   tour(stories: Story[], user: User): string {
     const geolocalized = this.excludeUngeolocalized(stories);
     if (geolocalized.length === 0) {
-      return '';
+      return this.empty();
     }
 
     const placemarks: string = this.placemarks(geolocalized, user);
@@ -34,7 +38,7 @@ export class KmlService {
   soloTour(stories: Story[], focus: Story, user: User): string {
     const geolocalized = this.excludeUngeolocalized(stories);
     if (geolocalized.length === 0) {
-      return '';
+      return this.empty();
     }
 
     const placemarks: string = this.placemarks(geolocalized, user);
