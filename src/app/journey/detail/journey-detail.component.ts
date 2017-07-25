@@ -30,7 +30,7 @@ export class JourneyDetailComponent implements OnInit {
   isNewStoryVisible = false;
 
   castServer: BehaviorSubject<LiquidGalaxyServer>;
-  castingState = 0; // 0 => Not ready (kml not uploaded); 1 => Tour playing; 2 => Tour stopped
+  castingState = 0;
 
   constructor(
     private route: ActivatedRoute,

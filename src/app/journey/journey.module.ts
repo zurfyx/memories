@@ -13,6 +13,7 @@ import { ResponsiveModule } from 'ng2-responsive';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {
+  CastModule,
   PwModule,
 } from '../shared';
 import { StoryNewModule } from './story-new/story-new.module';
@@ -36,6 +37,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     MdMenuModule,
     ResponsiveModule,
     AngularFireAuthModule,
+    CastModule,
     PwModule,
     StoryNewModule,
     JourneyRoutingModule,

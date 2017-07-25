@@ -8,6 +8,7 @@ import {
 import { CastService } from './cast.service';
 import { CastComponent } from './cast.component';
 import { CastToComponent } from './cast-to.component';
+import { CastingComponent } from './casting.component';
 
 @NgModule({
   imports: [
@@ -15,10 +16,14 @@ import { CastToComponent } from './cast-to.component';
     MdListModule,
     MdProgressSpinnerModule,
   ],
-  exports: [CastComponent],
+  exports: [
+    CastComponent,
+    CastingComponent,
+  ],
   declarations: [
     CastComponent,
     CastToComponent,
+    CastingComponent,
   ],
   entryComponents: [CastToComponent],
   providers: [CastService],
