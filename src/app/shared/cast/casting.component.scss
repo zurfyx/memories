@@ -1,0 +1,21 @@
+.casting {
+  position: fixed;
+  bottom: 0;
+  color: #fff;
+  background-color: #292929;
+  display: inline-block;
+  padding: 15px 25px;
+  width: 100%;
+  z-index: 2;
+}
+
+.casting__identifier {
+  color: #464646;
+  padding-right: 15px;
+  margin-right: 15px;
+  border-right: 1px solid #888;
+}
+
+.casting__action {
+  margin-left: 20px;
+}

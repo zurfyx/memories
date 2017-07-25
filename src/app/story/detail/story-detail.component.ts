@@ -27,6 +27,9 @@ export class StoryDetailComponent implements OnInit {
   editState = EditState.View;
   pending = new BehaviorSubject<Set<string>>(new Set());
 
+  castServer: BehaviorSubject<LiquidGalaxyServer>;
+  castingState = 0;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,6 +42,7 @@ export class StoryDetailComponent implements OnInit {
     this.route.data.subscribe((params: { story: Story }) => {
       this.story = params.story;
     });
+    this.castServer = this.castService.active;
   }
 
   ngOnInit() {
@@ -141,7 +145,19 @@ export class StoryDetailComponent implements OnInit {
       })
       .subscribe(() => {
         // Liquid Galaxy tick time to read new sent KML files is ~1s.
-        setTimeout(() => server.writeQuery('playtour=main'), 1000);
+        setTimeout(() => this.castPlayTour(), 1000);
       });
+  }
+
+  async castPlayTour() {
+    const server: LiquidGalaxyServer = this.castServer.value;
+    await server.writeQuery('playtour=main');
+    this.castingState = 1;
+  }
+
+  async castStopTour() {
+    const server: LiquidGalaxyServer = this.castServer.value;
+    await server.writeQuery('exittour=main');
+    this.castingState = 2;
   }
 }

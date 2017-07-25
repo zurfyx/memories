@@ -1,3 +1,9 @@
+<app-casting
+  [state]="castingState"
+  (playTour)="castPlayTour()"
+  (stopTour)="castStopTour()">
+</app-casting>
+
 <div class="content__banner" [style.backgroundImage]="'url(' + journey.coverURL + ')'"></div>
 <div class="avatar" [style.backgroundImage]="'url(' + owner?.photoURL + ')'"></div>
 

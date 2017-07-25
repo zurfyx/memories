@@ -12,6 +12,7 @@ import { AgmCoreModule } from '@agm/core';
 
 import {
   SafeStylePipe,
+  CastModule,
 } from '../../shared';
 import { StoryDetailComponent } from './story-detail.component';
 import { StoryDetailBannerComponent } from './banner/story-detail-banner.component';
@@ -33,6 +34,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     MdDatepickerModule,
     MdSnackBarModule,
     AgmCoreModule,
+    CastModule,
   ],
   exports: [],
   declarations: [

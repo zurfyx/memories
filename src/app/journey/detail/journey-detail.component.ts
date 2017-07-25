@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 
@@ -29,6 +29,9 @@ export class JourneyDetailComponent implements OnInit {
 
   isNewStoryVisible = false;
 
+  castServer: BehaviorSubject<LiquidGalaxyServer>;
+  castingState = 0;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -40,6 +43,7 @@ export class JourneyDetailComponent implements OnInit {
     this.route.data.subscribe((params: { journey: Journey }) => {
       this.journey = params.journey;
     });
+    this.castServer = this.castService.active;
   }
 
   /**
@@ -82,12 +86,24 @@ export class JourneyDetailComponent implements OnInit {
   }
 
   cast() {
-    const server: LiquidGalaxyServer = this.castService.active.value;
+    const server: LiquidGalaxyServer = this.castServer.value;
     const kml = this.kmlService.tour(this.stories, this.owner);
     Observable.fromPromise(server.writeKML(kml))
       .subscribe(() => {
         // Liquid Galaxy tick time to read new sent KML files is ~1s.
-        setTimeout(() => server.writeQuery('playtour=main'), 1000);
+        setTimeout(() => this.castPlayTour(), 1000);
       });
+  }
+
+  async castPlayTour() {
+    const server: LiquidGalaxyServer = this.castServer.value;
+    await server.writeQuery('playtour=main');
+    this.castingState = 1;
+  }
+
+  async castStopTour() {
+    const server: LiquidGalaxyServer = this.castServer.value;
+    await server.writeQuery('exittour=main');
+    this.castingState = 2;
   }
 }
