@@ -29,4 +29,8 @@ export class CastToComponent implements OnInit {
   setActive(server: LiquidGalaxyServer) {
     this.castService.setActive(server);
   }
+
+  unsetActive() {
+    this.castService.unsetActive();
+  }
 }

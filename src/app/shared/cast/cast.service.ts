@@ -12,4 +12,8 @@ export class CastService {
   setActive(server: LiquidGalaxyServer) {
     this.active.next(server);
   }
+
+  unsetActive() {
+    this.active.next(null);
+  }
 }

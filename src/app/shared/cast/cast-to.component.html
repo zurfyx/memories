@@ -1,6 +1,10 @@
 <div class="overlay-dialog">
   <h1>Cast To</h1>
   <div md-dialog-actions>
+    <div class="disconnect" (click)="unsetActive()" *ngIf="active | async">
+      <i class="fa fa-television"></i>
+      <span>Disconnect</span>
+    </div>
     <md-spinner class="default" *ngIf="isLoading"></md-spinner>
     <md-list *ngIf="!isLoading">
       <md-list-item
