@@ -10,10 +10,15 @@ export class CastService {
   constructor() { }
 
   setActive(server: LiquidGalaxyServer) {
+    this.unsetActive();
     this.active.next(server);
   }
 
   unsetActive() {
+    const activeServer: LiquidGalaxyServer = this.active.value;
+    if (activeServer) {
+      activeServer.cleanKml();
+    }
     this.active.next(null);
   }
 }
