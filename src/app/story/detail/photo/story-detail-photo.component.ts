@@ -40,7 +40,6 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     Observable.forkJoin(to64).subscribe((b64s: string[]) => {
       b64s.forEach((b64) => {
         const safeUrl: SafeStyle = this.safeUrlPipe.transform(b64);
-        console.info(safeUrl);
         this.newPhotos64.push(safeUrl);
       });
     })
@@ -53,9 +52,34 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   cleanup(): void {
     this.newPhotos = [];
     this.newPhotos64 = [];
+    this.unsetPending();
   }
 
   updateStory(): Observable<void> {
-    return Observable.of(null);
+    if (this.newPhotos.length === 0) {
+      this.unsetPending();
+      return Observable.of(null);
+    }
+
+    if (!this.story.photos) {
+      this.story.photos = {};
+    }
+
+    const createImages = this.newPhotos.map(photo => this.imageService.createImage(photo));
+    return Observable.forkJoin(...createImages).map((images: firebase.storage.UploadTaskSnapshot[]) => {
+      images.forEach((image) => {
+        const url = image.downloadURL;
+        this.story.photos[this.findEmptyPhotoIndex()] = { url };
+      });
+      this.unsetPending();
+    });
+  }
+
+  /**
+   * There's a limit of 10 photos per story, find an empty index number from 0-9.
+   * TODO
+   */
+  findEmptyPhotoIndex() {
+    return Object.keys(this.story.photos).length;
   }
 }
