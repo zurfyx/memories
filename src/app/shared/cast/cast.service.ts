@@ -17,6 +17,7 @@ export class CastService {
   unsetActive() {
     const activeServer: LiquidGalaxyServer = this.active.value;
     if (activeServer) {
+      activeServer.writeQuery('exittour=*');
       activeServer.cleanKml();
     }
     this.active.next(null);
