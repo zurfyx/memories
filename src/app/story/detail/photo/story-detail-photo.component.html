@@ -1,7 +1,15 @@
-<div class="add-photo-container" *ngIf="isEditing">
-  <button type="button" md-button>Add photo</button>
+<div class="add-photo-container" *ngIf="isEditing || !isEditing">
+  <input
+    type="file"
+    class="file-input"
+    accept="image/x-png,image/gif,image/jpeg"
+    multiple="multiple"
+    (change)="addPhoto($event)"
+    #addPhotoInput />
+  <button type="button" md-button (click)="executeAddPhoto()">Add photo</button>
 </div>
 
 <div class="photos">
+  <img [src]="photo64" *ngFor="let photo64 of newPhotos64" />
   <img [src]="photo.url" *ngFor="let photo of story.photos" />
 </div>

@@ -11,7 +11,6 @@ import {
   FileService,
   SafeStylePipe,
 } from '../../../shared';
-import { EditState } from '../edit-state';
 import { StoryDetailEditComponent } from '../story-detail-edit.component';
 
 @Component({

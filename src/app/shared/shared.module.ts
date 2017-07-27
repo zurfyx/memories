@@ -9,6 +9,7 @@ import { SidenavModule, SidenavComponent } from './sidenav';
 import {
   SafeHtmlPipe,
   SafeStylePipe,
+  SafeUrlPipe,
 } from './pipes';
 import {
   AuthService,
@@ -38,6 +39,7 @@ import {
   declarations: [
     SafeHtmlPipe,
     SafeStylePipe,
+    SafeUrlPipe,
   ],
   providers: [
     AngularFireAuth,
