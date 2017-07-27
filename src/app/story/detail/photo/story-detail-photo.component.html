@@ -11,4 +11,5 @@
 
 <div class="photos">
   <img [src]="photo64" *ngFor="let photo64 of newPhotos64" />
+  <img [src]="photo.url" *ngFor="let photo of storyPhotos()" />
 </div>

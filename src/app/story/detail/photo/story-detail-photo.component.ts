@@ -82,4 +82,8 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   findEmptyPhotoIndex() {
     return Object.keys(this.story.photos).length;
   }
+
+  storyPhotos() {
+    return Object.keys(this.story.photos).map(key => this.story.photos[key]);
+  }
 }
