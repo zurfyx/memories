@@ -1,4 +1,4 @@
-<div class="add-photo-container" *ngIf="isEditing || !isEditing">
+<div class="add-photo-container" *ngIf="isEditing()">
   <input
     type="file"
     class="file-input"
@@ -11,11 +11,23 @@
 
 <div class="photos">
   <div class="photo" *ngFor="let photo of newPhotos">
-    <a href="javascript:void(0)" class="photo__delete" (click)="deleteNewStoryPhoto(photo)"><i class="fa fa-times"></i></a>
+    <a
+      href="javascript:void(0)"
+      class="photo__delete"
+      (click)="deleteNewStoryPhoto(photo)"
+      *ngIf="isEditing()">
+      <i class="fa fa-times"></i>
+    </a>
     <img [src]="photo.safeStyle" />
   </div>
   <div class="photo" *ngFor="let photo of storyPhotos()">
-    <a href="javascript:void(0)" class="photo__delete" (click)="deleteStoryPhoto(photo)"><i class="fa fa-times"></i></a>
+    <a
+      href="javascript:void(0)"
+      class="photo__delete"
+      (click)="deleteStoryPhoto(photo)"
+      *ngIf="isEditing()">
+      <i class="fa fa-times"></i>
+    </a>
     <img [src]="photo.url" />
   </div>
 </div>
