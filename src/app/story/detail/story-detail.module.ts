@@ -13,6 +13,7 @@ import { AgmCoreModule } from '@agm/core';
 
 import {
   SafeStylePipe,
+  SafeUrlPipe,
   CastModule,
 } from '../../shared';
 import { StoryDetailComponent } from './story-detail.component';
@@ -52,6 +53,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
   ],
   providers: [
     SafeStylePipe,
+    SafeUrlPipe,
   ],
 })
 export class StoryDetailModule { }

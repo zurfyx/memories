@@ -35,7 +35,12 @@
       (unpending)="setUnpending('date')">
     </app-story-detail-date>
 
-    <app-story-detail-photo [story]="story" [isEditing]="false"></app-story-detail-photo>
+    <app-story-detail-photo
+      [story]="story"
+      [editState]="editState"
+      (pending)="setPending('photos')"
+      (unpending)="setUnpending('photos')">
+    </app-story-detail-photo>
     
     <div class="box description">
       <app-story-detail-description
