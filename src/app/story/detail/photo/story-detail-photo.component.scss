@@ -6,6 +6,10 @@
 .photos {
   columns: 250px 3;
   margin-bottom: 0.83em;
+}
+
+.photo {
+  position: relative;
 
   img {
     display: inline-block;
@@ -13,4 +17,11 @@
     break-inside: avoid-column;
     width: 100%;
   }
+}
+
+.photo__delete {
+  color: inherit;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }

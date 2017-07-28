@@ -10,6 +10,12 @@
 </div>
 
 <div class="photos">
-  <img [src]="photo64" *ngFor="let photo64 of newPhotos64" />
-  <img [src]="photo.url" *ngFor="let photo of storyPhotos()" />
+  <div class="photo" *ngFor="let photo of newPhotos">
+    <a href="javascript:void(0)" class="photo__delete" (click)="deleteNewStoryPhoto(photo)"><i class="fa fa-times"></i></a>
+    <img [src]="photo.safeStyle" />
+  </div>
+  <div class="photo" *ngFor="let photo of storyPhotos()">
+    <a href="javascript:void(0)" class="photo__delete"><i class="fa fa-times"></i></a>
+    <img [src]="photo.url" />
+  </div>
 </div>

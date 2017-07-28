@@ -17,8 +17,7 @@ import { StoryDetailEditComponent } from '../story-detail-edit.component';
 export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   @ViewChild('addPhotoInput') addPhotoInput: ElementRef;
 
-  newPhotos: File[] = [];
-  newPhotos64: SafeStyle[] = [];
+  newPhotos: { file: File, safeStyle: SafeStyle}[] = [];
 
   constructor(
     private imageService: FileService,
@@ -35,14 +34,16 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
       return;
     }
 
-    this.newPhotos.push(...files);
     const to64 = files.map(file => FormUtils.base64FromImageFile(file));
     Observable.forkJoin(to64).subscribe((b64s: string[]) => {
-      b64s.forEach((b64) => {
+      b64s.forEach((b64, i) => {
         const safeUrl: SafeStyle = this.safeUrlPipe.transform(b64);
-        this.newPhotos64.push(safeUrl);
+        this.newPhotos.push({
+          file: files[i],
+          safeStyle: b64,
+        });
       });
-    })
+    });
   }
 
   executeAddPhoto() {
@@ -51,7 +52,6 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
 
   cleanup(): void {
     this.newPhotos = [];
-    this.newPhotos64 = [];
     this.unsetPending();
   }
 
@@ -65,7 +65,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
       this.story.photos = {};
     }
 
-    const createImages = this.newPhotos.map(photo => this.imageService.createImage(photo));
+    const createImages = this.newPhotos.map(photo => this.imageService.createImage(photo.file));
     return Observable.forkJoin(...createImages).map((images: firebase.storage.UploadTaskSnapshot[]) => {
       images.forEach((image) => {
         const url = image.downloadURL;
@@ -77,13 +77,31 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
 
   /**
    * There's a limit of 10 photos per story, find an empty index number from 0-9.
-   * TODO
+   * TODO.
    */
   findEmptyPhotoIndex() {
     return Object.keys(this.story.photos).length;
   }
 
-  storyPhotos() {
+  storyPhotos(): { url: string, title?: string }[] {
+    if (!this.story.photos) {
+      return [];
+    }
     return Object.keys(this.story.photos).map(key => this.story.photos[key]);
+  }
+
+  /**
+   * Delete a photo that has been previously stored.
+   * TODO.
+   */
+  deleteStoryPhoto(photo: { url: string, title?: string }) {
+
+  }
+
+  /**
+   * Delete a new photo that hasn't been stored.
+   */
+  deleteNewStoryPhoto(photo) {
+    this.newPhotos = this.newPhotos.filter(newPhoto => newPhoto !== photo);
   }
 }
