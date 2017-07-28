@@ -15,7 +15,7 @@
     <img [src]="photo.safeStyle" />
   </div>
   <div class="photo" *ngFor="let photo of storyPhotos()">
-    <a href="javascript:void(0)" class="photo__delete"><i class="fa fa-times"></i></a>
+    <a href="javascript:void(0)" class="photo__delete" (click)="deleteStoryPhoto(photo)"><i class="fa fa-times"></i></a>
     <img [src]="photo.url" />
   </div>
 </div>

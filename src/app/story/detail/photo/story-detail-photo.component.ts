@@ -17,7 +17,11 @@ import { StoryDetailEditComponent } from '../story-detail-edit.component';
 export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   @ViewChild('addPhotoInput') addPhotoInput: ElementRef;
 
+  // New photos that haven't been saved yet.
   newPhotos: { file: File, safeStyle: SafeStyle}[] = [];
+
+  // Photos marked to be deleted (which won't be deleted until the editing is over).
+  pendingDelete: { url: string, title?: string }[] = [];
 
   constructor(
     private imageService: FileService,
@@ -52,21 +56,28 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
 
   cleanup(): void {
     this.newPhotos = [];
+    this.pendingDelete = [];
     this.unsetPending();
   }
 
   updateStory(): Observable<void> {
-    if (this.newPhotos.length === 0) {
-      this.unsetPending();
-      return Observable.of(null);
-    }
-
     if (!this.story.photos) {
       this.story.photos = {};
     }
 
+    // Delete "pendingDelete" photos.
+    // TODO delete photo from storage.
+    this.pendingDelete.forEach((pendingDeletePhoto) => {
+      const photoId = Object.keys(this.story.photos).filter(id => this.story.photos[id] === pendingDeletePhoto)[0];
+      delete this.story.photos[photoId];
+    });
+
+    // Create new photos.
     const createImages = this.newPhotos.map(photo => this.imageService.createImage(photo.file));
-    return Observable.forkJoin(...createImages).map((images: firebase.storage.UploadTaskSnapshot[]) => {
+    const emptyObs = Observable.of(null); // To prevent waiting indefinetely just because there are
+                                          // no new images to create.
+    return Observable.forkJoin(...createImages, emptyObs).map((images: firebase.storage.UploadTaskSnapshot[]) => {
+      images.splice(images.length - 1, 1); // Remove the emptyObs.
       images.forEach((image) => {
         const url = image.downloadURL;
         this.story.photos[this.findEmptyPhotoIndex()] = { url };
@@ -83,11 +94,17 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     return Object.keys(this.story.photos).length;
   }
 
+  /**
+   * Story photos that are NOT pending deletion.
+   * This method should be used to display to current stored photos.
+   */
   storyPhotos(): { url: string, title?: string }[] {
     if (!this.story.photos) {
       return [];
     }
-    return Object.keys(this.story.photos).map(key => this.story.photos[key]);
+    return Object.keys(this.story.photos)
+      .map(key => this.story.photos[key])
+      .filter(photo => !this.pendingDelete.includes(photo));
   }
 
   /**
@@ -95,7 +112,8 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
    * TODO.
    */
   deleteStoryPhoto(photo: { url: string, title?: string }) {
-
+    this.setPending();
+    this.pendingDelete = this.pendingDelete.concat(photo);
   }
 
   /**
