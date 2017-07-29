@@ -1,0 +1,44 @@
+@import "../shared/index";
+
+@media (min-width: 400) {
+  .content__header {
+    padding: 45px;
+  }
+}
+
+.content__header .title {
+  font-size: 1.5em;
+}
+
+.grid {
+  text-align: center;
+  margin-left: -10%;
+  padding-top: 25px;
+}
+
+md-card {
+  display: inline-block;
+  width: 250px;
+  margin-left: 10%;
+
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.mat-card-image {
+  color: $unimportant;
+  font-size: 3em;
+  text-align: center;
+  padding: 3rem;
+  transition: 0.2s all ease-in;
+
+  &:hover {
+    background-color: $primary;
+    color: #fff;
+  }
+}
+
+.mat-card-content {
+  text-align: center;
+}

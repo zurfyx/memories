@@ -1,0 +1,28 @@
+<div class="content__header">
+  <span class="title">Welcome to Memories, traveler!</span>
+  <span class="description">
+    Memories helps you store your worldwide traveling adventures in a dedicated social platform for them, available anywhere / anytime.
+  </span>
+</div>
+
+<div class="page">
+  <div class="grid">
+    <md-card class="clickable" [routerLink]="['/journeys/new']">
+      <div md-card-image>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </div>
+      <md-card-content>
+        New journey
+      </md-card-content>
+    </md-card>
+
+    <md-card class="clickable" [routerLink]="['/journeys']">
+      <div md-card-image>
+        <i class="fa fa-globe" aria-hidden="true"></i>
+      </div>
+      <md-card-content>
+        Explore
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

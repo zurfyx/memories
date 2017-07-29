@@ -6,6 +6,11 @@
 
 .mat-card.clickable {
   cursor: pointer;
+
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.1); 
+    outline: none;
+  }
 }
 
 .mat-card-image {

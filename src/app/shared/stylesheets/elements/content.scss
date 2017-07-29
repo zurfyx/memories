@@ -1,6 +1,30 @@
 @import "../colors";
 @import "../mixins";
 
+.content__header {
+  background-color: #fff;
+  border-bottom: 1px solid $separator;
+  width: 100%;
+  padding: 30px;
+
+  .title {
+    display: block;
+    color: #444;
+    font-size: 1.4em;
+    font-weight: 500;
+  }
+
+  .description {
+    color: $unimportant;
+    display: block;
+    max-width: 475px;
+  }
+
+  .title + .description {
+    margin-top: 15px;
+  }
+}
+
 .content__banner {
   @include bg-image();
   height: 250px;
