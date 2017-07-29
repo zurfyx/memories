@@ -19,3 +19,10 @@ agm-map {
     height: 600px;
   }
 }
+
+.current-location-container {
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  z-index: 2;
+}

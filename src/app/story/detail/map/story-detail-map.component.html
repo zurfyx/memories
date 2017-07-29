@@ -1,3 +1,14 @@
+<div class="current-location-container">
+  <button
+    class="current-location"
+    md-button
+    [disabled]="!isActivelyEditing()"
+    (click)="currentLocation()"
+    *ngIf="isEditing()">
+    Current location
+  </button>
+</div>
+
 <div class="no-location" *ngIf="!isEditing() && !story.map?.lat">
   <i>No location has been set yet.</i>
 </div>

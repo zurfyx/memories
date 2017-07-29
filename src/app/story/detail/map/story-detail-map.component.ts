@@ -17,12 +17,29 @@ export class StoryDetailMapComponent extends StoryDetailEditComponent {
   newLong: number;
 
   mapClick(event: MouseEvent) {
+    this.changeNewLocation({
+      lat: event.coords.lat,
+      long: event.coords.lng,
+    });
+  }
+
+  currentLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position: Position) => this.changeNewLocation({
+        lat: position.coords.latitude,
+        long: position.coords.longitude,
+      }),
+      () => alert('Current location couldn\'t be obtained. Please, set it manually by clicking on the map.'),
+    );
+  }
+
+  changeNewLocation({ lat, long }) {
     if (!this.isActivelyEditing()) {
       return;
     }
     this.setPending();
-    this.newLat = event.coords.lat;
-    this.newLong = event.coords.lng;
+    this.newLat = lat;
+    this.newLong = long;
   }
 
   cleanup(): void {
