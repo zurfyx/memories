@@ -18,13 +18,8 @@ export class JourneyService {
 
   createJourney(journey: Journey): Observable<Journey> {
     const journeyId = this.idService.short();
-    const journeys = this.afDatabase.object(`journeys/${journeyId}`);
-    const setPromise = journeys.set(journey);
-    return Observable.fromPromise(setPromise)
-      .map(() => {
-        const newValues = Object.assign({ $key: journeyId }, journey);
-        return new Journey(newValues);
-      });
+    const newJourney = Object.assign({ $key: journeyId }, journey);
+    return this.updateJourney(newJourney);
   }
 
   /**
@@ -41,7 +36,10 @@ export class JourneyService {
     return this.imageService.createImage(cover)
       .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => {
         const newValues = Object.assign({ coverURL: snapshot.downloadURL }, journey);
-        const newJourney = new Journey(newValues);
+        const newJourney = new Journey({ // Don't modify the original subject.
+          ...journey,
+          coverURL: snapshot.downloadURL,
+        });
         return this.createJourney(newJourney);
       });
   }
@@ -59,5 +57,26 @@ export class JourneyService {
     return this.afDatabase.object(`journeys/${uid}`).map((snapshot: any) => (
       new Journey(snapshot)
     ));
+  }
+
+  updateJourney(journey: Journey): Observable<Journey> {
+    const { $key, ...unkeyedJourney } = journey; // Remove $key temporarily (forbidden by firebase).
+    const journeys = this.afDatabase.object(`journeys/${$key}`);
+    const setPromise = journeys.set(unkeyedJourney);
+    return Observable.fromPromise(setPromise).map(() => journey );
+  }
+
+  updateJourneyWithCoverFile(journey: Journey, cover?: File): Observable<Journey> {
+    if (!cover) {
+      return this.updateJourney(journey);
+    }
+    return this.imageService.createImage(cover)
+      .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => {
+        const newJourney = new Journey({ // Don't modify the original subject.
+          ...journey,
+          coverURL: snapshot.downloadURL,
+        });
+        return this.updateJourney(newJourney);
+      });
   }
 }

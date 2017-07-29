@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SafeStyle } from '@angular/platform-browser';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 
 import {
-  Journey,
+  FormUtils,
+  SafeStylePipe,
   User,
   UserService,
+  Journey,
+  JourneyService,
   Story,
   StoryService,
   CastService,
@@ -29,13 +33,21 @@ export class JourneyDetailComponent implements OnInit {
 
   isNewStoryVisible = false;
 
+  editState = 0; // 0 => Not editing; 1 => Actively editing; 2 => Saving.
+  @ViewChild('coverInput') coverInput: ElementRef;
+  newCover: File;
+  newCover64: SafeStyle;
+  newTitle: string;
+
   castServer: BehaviorSubject<LiquidGalaxyServer>;
   castingState = 0;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private safeStylePipe: SafeStylePipe,
     private userService: UserService,
+    private journeyService: JourneyService,
     private storyService: StoryService,
     private castService: CastService,
     private kmlService: KmlService,
@@ -69,12 +81,75 @@ export class JourneyDetailComponent implements OnInit {
       });
   }
 
+  /**
+   * New story.
+   */
+
   toggleNewStory(event?: Event) {
     if (event) {
       event.preventDefault();
     }
     this.isNewStoryVisible = !this.isNewStoryVisible;
   }
+
+  /**
+   * Edit journey.
+   */
+
+  toggleEdit() {
+    this.editState = 1;
+  }
+
+  saveEdit() {
+    this.editState = 2;
+
+    if (this.newTitle !== undefined) {
+      this.journey.title = this.newTitle;
+    }
+    this.journey.updatedAt = firebase.database.ServerValue.TIMESTAMP;
+    this.journeyService.updateJourneyWithCoverFile(this.journey, this.newCover)
+      .subscribe((journey: Journey) => {
+        this.journey = journey;
+        this.resetEdit();
+      });
+  }
+
+  cancelEdit() {
+    this.resetEdit();
+  }
+
+  resetEdit() {
+    this.newCover = undefined;
+    this.newCover64 = undefined;
+    this.newTitle = undefined;
+    this.editState = 0;
+  }
+
+  executeCoverInput() {
+    if (this.editState === 1) {
+      this.coverInput.nativeElement.click();
+    }
+  }
+
+  coverChange(event: EventTarget) {
+    const files: FileList = FormUtils.getFilesFromEvent(event);
+    if (files.length === 0) {
+      return;
+    }
+
+    this.newCover = files[0];
+    FormUtils.base64FromImageFile(this.newCover).subscribe(
+      b64 => this.newCover64 = this.safeStylePipe.transform(`url(${b64})`)
+    )
+  }
+
+  titleChange(event: Event) {
+    this.newTitle = (event.target as HTMLInputElement).value;
+  }
+
+  /**
+   * Misc.
+   */
 
   getRouterStoryPath(uid: string) {
     return [`/stories/${uid}`];

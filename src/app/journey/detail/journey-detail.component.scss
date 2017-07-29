@@ -57,3 +57,23 @@
 .story-new {
   margin-bottom: 25px;
 }
+
+/**
+ * Edit 
+ */
+
+.content__banner.active {
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}
+
+.title-container {
+  margin-bottom: 0.34em;
+}
+
+.title-input {
+  font-size: 2em;
+}
