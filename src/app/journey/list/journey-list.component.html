@@ -1,8 +1,8 @@
-<div class="page">
   <div>
     <input type="text" class="filter" placeholder="Search..." (keyup)="filter($event)" />
     <i class="fa fa-search input-icon" aria-hidden="true"></i>
   </div>
+<div class="page">
 
   <ul class="grid">
     <li class="journey-card-container" *ngFor="let journey of journeysFiltered || journeys">
