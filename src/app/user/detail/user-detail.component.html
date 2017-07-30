@@ -1,0 +1,31 @@
+<div class="container content__header">
+  <img class="header__avatar" [src]="user.photoURL" />
+  <div class="header__info">
+    <span class="title">{{user.displayName}}</span>
+    <dl class="description">
+      <ng-container *ngIf="userPrivate">
+        <dt>Email</dt>
+        <dd>{{userPrivate.email}} <i class="fa fa-lock" aria-hidden="true"></i></dd>
+      </ng-container>
+
+      <dt>Last seen online</dt>
+      <dd>2017-01-01</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="page">
+  <h2>{{journeys?.length}} journeys</h2>
+  <ul class="grid">
+    <li class="journey-card-container" *ngFor="let journey of journeys">
+      <md-card class="clickable" [routerLink]="['/journeys/' + journey.$key]">
+        <div md-card-image class="cover" [style.backgroundImage]="journey.coverURL && 'url(' + journey.coverURL + ')'"></div>
+        <md-card-content>
+          <md-card-title>{{journey.title}}
+          </md-card-title>
+          <p>{{user.displayName}}</p>
+        </md-card-content>
+      </md-card>
+    </li>
+  </ul>
+</div>

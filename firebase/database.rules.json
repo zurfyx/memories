@@ -28,7 +28,7 @@
     },
     "journeys": {
       ".read": true,
-      ".indexOn": ["updatedAt"],
+      ".indexOn": ["updatedAt", "owner"],
       "$uid": {
         ".write": "newData.exists() && auth !== null",
         ".validate": "newData.hasChildren(['owner', 'title', 'updatedAt'])",

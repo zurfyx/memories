@@ -5,7 +5,9 @@ import {
   MdCardModule,
 } from '@angular/material';
 
+import { UserResolver } from './user-resolver.service';
 import { UserListComponent } from './list/user-list.component';
+import { UserDetailComponent } from './detail/user-detail.component';
 import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
@@ -18,7 +20,10 @@ import { UserRoutingModule } from './user-routing.module';
   exports: [],
   declarations: [
     UserListComponent,
+    UserDetailComponent,
   ],
-  providers: [],
+  providers: [
+    UserResolver,
+  ],
 })
 export class UserModule { }

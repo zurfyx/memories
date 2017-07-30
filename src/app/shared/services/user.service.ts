@@ -38,4 +38,10 @@ export class UserService {
     const setPromise = this.afDatabase.object(`users/${$key}`).set(unkeyedUser);
     return Observable.fromPromise(setPromise).map(() => user);
   }
+
+  isAuthenticatedUser(user: User): Observable<boolean> {
+    return this.afAuth.authState.map((authUser: firebase.User) => (
+      authUser.uid === user.$key
+    ));
+  }
 }
