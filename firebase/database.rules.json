@@ -1,25 +1,30 @@
 {
   "rules": {
     "users": {
-       "$uid": { 
-         ".write": "newData.exists() && $uid === auth.uid",
-         ".validate": "newData.hasChildren(['displayName', 'email'])",
-         "displayName": {
-           ".read": true,
-           ".validate": "newData.val() === auth.token.name"
-         },
-         "email": {
-           ".read": "$uid === auth.uid",
-           ".validate": "newData.val() === auth.token.email"
-         },
-         "photoURL": {
-           ".read": true,
-           ".validate": "newData.val().matches(/^https:\\/\\/[a-z0-9]+\\.googleusercontent\\.com\\/.*\\.jpg$/)"
-         },
-         "$other": {
-           ".validate": false
+      ".read": true,
+      "$uid": {
+        ".write": "newData.exists() && $uid === auth.uid",
+        ".validate": "newData.hasChildren(['displayName'])",
+        "displayName": {
+          ".validate": "newData.val() === auth.token.name"
+        },
+        "photoURL": {
+          ".validate": "newData.val().matches(/^https:\\/\\/[a-z0-9]+\\.googleusercontent\\.com\\/.*\\.jpg$/)"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "usersPrivate": {
+      "$uid": {
+        ".write": "newData.exists() && $uid === auth.uid",
+        ".read": "$uid === auth.uid",
+        ".validate": "newData.hasChildren(['email'])",
+        "email": {
+          ".validate": "newData.val() === auth.token.email"
          }
-       }
+      }
     },
     "journeys": {
       ".read": true,
