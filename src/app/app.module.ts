@@ -14,6 +14,7 @@ import { HomeModule } from './home/home.module';
 import { JourneyModule } from './journey/journey.module';
 import { PwModule } from './physical-web/pw.module';
 import { StoryModule } from './story/story.module';
+import { UserModule } from './user/user.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './shared';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     JourneyModule,
     PwModule,
     StoryModule,
+    UserModule,
     AppRoutingModule,
   ],
   declarations: [

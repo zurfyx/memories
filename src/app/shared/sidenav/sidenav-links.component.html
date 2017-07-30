@@ -26,6 +26,15 @@
     <span class="item-value">Explore</span>
   </md-list-item>
 
+  <md-list-item
+    class="clickable withBgColor"
+    [routerLink]="['users']"
+    [routerLinkActive]="['router-link-active']"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <i class="fa fa-users" aria-hidden="true"></i>
+    <span class="item-value">Users</span>
+  </md-list-item>
+
   <h3 md-subheader>Misc</h3>
   <md-list-item
     class="clickable withBgColor"
