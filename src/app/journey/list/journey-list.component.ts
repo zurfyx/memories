@@ -43,13 +43,4 @@ export class JourneyListComponent implements OnInit {
   sortJourneysByDateDesc(journeys: Journey[]) {
     return journeys.sort((a, b) => (b.updatedAt as number) - (a.updatedAt as number));
   }
-
-  getRouterStoryPath(uid: string) {
-    return [`/journeys/${uid}`];
-  }
-
-  navigateToJourney(uid: string) {
-    const routerPath = this.getRouterStoryPath(uid);
-    this.router.navigate(routerPath);
-  }
 }

@@ -1,1 +1,17 @@
-list
+<div>
+  <input type="text" class="filter" placeholder="Search..." (keyup)="filter($event)" />
+  <i class="fa fa-search input-icon" aria-hidden="true"></i>
+</div>
+
+<div class="page">
+  <ul class="grid">
+    <li class="user-card-container" *ngFor="let user of usersFiltered || users">
+      <md-card class="clickable" [routerLink]="['/users/' + user.$key]">
+        <div md-card-image class="cover" [style.backgroundImage]="user.photoURL && 'url(' + user.photoURL + ')'"></div>
+        <md-card-content>
+          {{user.displayName}}
+        </md-card-content>
+      </md-card>
+    </li>
+  </ul>
+</div>
