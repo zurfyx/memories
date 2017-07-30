@@ -32,4 +32,10 @@ export class UserService {
       this.readUser(user.uid)
     ));
   }
+
+  updateUser(user: User): Observable<User> {
+    const { $key, ...unkeyedUser } = user;
+    const setPromise = this.afDatabase.object(`users/${$key}`).set(unkeyedUser);
+    return Observable.fromPromise(setPromise).map(() => user);
+  }
 }

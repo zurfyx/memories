@@ -22,6 +22,7 @@ import {
   PwService,
   StoryService,
   UrlShortenerService,
+  UserPrivateService,
   UserService,
 } from './services';
 
@@ -55,6 +56,7 @@ import {
     PwService,
     StoryService,
     UrlShortenerService,
+    UserPrivateService,
     UserService,
   ],
 })

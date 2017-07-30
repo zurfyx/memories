@@ -8,4 +8,5 @@ export * from './location.service';
 export * from './pw.service';
 export * from './story.service';
 export * from './url-shortener.service';
+export * from './user-private.service';
 export * from './user.service';
