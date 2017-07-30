@@ -1,7 +1,10 @@
 <div class="box" [class.shine]="hasJustSubmitted">
   <div class="comment comment-new">
     <div class="comment__avatar">
-      <img [src]="user?.photoURL" />
+      <img
+        [src]="user.photoURL"
+        [routerLink]="['/users/' + user.$key]"
+        *ngIf="user" />
     </div>
     <div class="comment__body">
       <div class="published shineText" *ngIf="hasJustSubmitted">

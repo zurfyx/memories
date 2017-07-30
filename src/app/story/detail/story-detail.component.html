@@ -10,7 +10,14 @@
   (pending)="setPending('banner')"
   (unpending)="setUnpending('banner')">
 </app-story-detail-banner>
-<div class="avatar" [style.backgroundImage]="'url(' + owner?.photoURL + ')'"></div>
+
+<div
+  class="avatar"
+  [style.backgroundImage]="'url(' + owner?.photoURL + ')'"
+  [mdTooltip]="owner?.displayName"
+  [mdTooltipPosition]="'below'"
+  [routerLink]="['/users/' + owner?.$key]">
+</div>
 
 <div class="page story-detail-page">
   <div class="container">

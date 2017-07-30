@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import {
@@ -18,7 +17,6 @@ export class JourneyListComponent implements OnInit {
   journeysFiltered: Journey[];
 
   constructor(
-    private router: Router,
     private journeyService: JourneyService,
   ) { }
 

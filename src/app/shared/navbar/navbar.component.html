@@ -12,6 +12,7 @@
         {{(user | async)?.displayName}}
       </a>
       <md-menu #userMenu="mdMenu">
+        <a md-menu-item (click)="navigateToUser()">Profile</a>
         <a md-menu-item (click)="signout()">Sign out</a>
       </md-menu>
     </ng-template>

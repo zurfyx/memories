@@ -8,6 +8,7 @@ import {
   MdCardModule,
   MdListModule,
   MdMenuModule,
+  MdTooltipModule,
 } from '@angular/material';
 import { ResponsiveModule } from 'ng2-responsive';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -35,6 +36,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     MdCardModule,
     MdListModule,
     MdMenuModule,
+    MdTooltipModule,
     ResponsiveModule,
     AngularFireAuthModule,
     CastModule,
