@@ -43,3 +43,9 @@
   text-overflow: ellipsis;
   width: 100%;
 }
+
+@mixin full-center-children() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

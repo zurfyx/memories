@@ -24,12 +24,14 @@
   (change)="coverChange($event)"
   #coverInput />
 
-<div
-  class="avatar"
-  [style.backgroundImage]="'url(' + owner?.photoURL + ')'"
-  [mdTooltip]="owner?.displayName"
-  [mdTooltipPosition]="'below'"
-  [routerLink]="['/users/' + owner?.$key]">
+<div class="avatar-container">
+  <div
+    class="avatar"
+    [style.backgroundImage]="'url(' + owner?.photoURL + ')'"
+    [mdTooltip]="owner?.displayName"
+    [mdTooltipPosition]="'below'"
+    [routerLink]="['/users/' + owner?.$key]">
+  </div>
 </div>
 
 <div class="page journey-detail-page">
