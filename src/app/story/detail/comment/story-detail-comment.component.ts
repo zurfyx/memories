@@ -39,7 +39,7 @@ export class StoryDetailCommentComponent implements OnInit {
       return;
     }
     this.users[userId] = new User({}); // Async is going to take a while until it assigns the real values.
-    this.userService.readUser(userId, ['displayName', 'photoURL']).first().subscribe((user: User) => {
+    this.userService.readUser(userId).first().subscribe((user: User) => {
       this.users[userId] = user;
     });
   }

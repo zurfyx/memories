@@ -38,7 +38,7 @@ export class StoryDetailCommentNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.readCurrentUser(['photoURL']).subscribe((user: User) => {
+    this.userService.readCurrentUser().subscribe((user: User) => {
       this.user = user;
     });
   }
