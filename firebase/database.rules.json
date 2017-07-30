@@ -4,12 +4,15 @@
       ".read": true,
       "$uid": {
         ".write": "newData.exists() && $uid === auth.uid",
-        ".validate": "newData.hasChildren(['displayName'])",
+        ".validate": "newData.hasChildren(['displayName', 'updatedAt'])",
         "displayName": {
           ".validate": "newData.val() === auth.token.name"
         },
         "photoURL": {
           ".validate": "newData.val().matches(/^https:\\/\\/[a-z0-9]+\\.googleusercontent\\.com\\/.*\\.jpg$/)"
+        },
+        "updatedAt": {
+          ".validate": "newData.val() === now"
         },
         "$other": {
           ".validate": false

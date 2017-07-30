@@ -22,10 +22,12 @@ describe('User', () => {
     const newUser = {
       displayName: AUTH_USER.token.name,
       photoURL: 'https://lh5.googleusercontent.com/-h4p4Wj9re1k/AAAAAAAAAAI/AAAAAAAAH34/xxxxxxxxx/photo.jpg',
+      updatedAt: { '.sv': 'timestamp' },
     }
     const newHacker = {
       displayName: AUTH_HACKER.token.name,
       photoURL: 'https://lh5.googleusercontent.com/-h4p4Wj9re1k/AAAAAAAAAAI/AAAAAAAAH34/xxxxxxxxx/photo.jpg',
+      updatedAt: { '.sv': 'timestamp' },
     }
     const db = targaryen.database(rules, data)
 
@@ -42,6 +44,7 @@ describe('User', () => {
     const data = {};
     const newUser = {
       displayName: null,
+      updatedAt: { '.sv': 'timestamp' },
     };
 
     const db = targaryen.database(rules, data);

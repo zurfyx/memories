@@ -34,6 +34,7 @@ export class AuthService {
       $key: user.uid,
       displayName: user.displayName,
       photoURL: user.photoURL,
+      updatedAt: firebase.database.ServerValue.TIMESTAMP,
     });
     const platformUserPrivate = new UserPrivate({
       $key: user.uid,
