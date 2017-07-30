@@ -46,7 +46,7 @@ export class StoryDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.readUser(this.story.owner, ['photoURL', 'displayName'])
+    this.userService.readUser(this.story.owner)
       .flatMap((user: User) => {
         this.owner = user;
         // Cast journey stories (if a casting serving is active).

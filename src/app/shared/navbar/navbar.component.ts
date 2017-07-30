@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
+    private router: Router,
     private dialog: MdDialog,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
@@ -56,5 +58,12 @@ export class NavbarComponent implements OnInit {
 
   signout() {
     this.authService.signout();
+  }
+
+  navigateToUser() {
+    // firebase.User.uid === authenticatedUser.$key
+    this.user.first().subscribe((user: firebase.User) => {
+      this.router.navigate([`/users/${user.uid}`]);
+    });
   }
 }

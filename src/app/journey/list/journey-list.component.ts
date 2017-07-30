@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import {
@@ -18,7 +17,6 @@ export class JourneyListComponent implements OnInit {
   journeysFiltered: Journey[];
 
   constructor(
-    private router: Router,
     private journeyService: JourneyService,
   ) { }
 
@@ -42,14 +40,5 @@ export class JourneyListComponent implements OnInit {
 
   sortJourneysByDateDesc(journeys: Journey[]) {
     return journeys.sort((a, b) => (b.updatedAt as number) - (a.updatedAt as number));
-  }
-
-  getRouterStoryPath(uid: string) {
-    return [`/journeys/${uid}`];
-  }
-
-  navigateToJourney(uid: string) {
-    const routerPath = this.getRouterStoryPath(uid);
-    this.router.navigate(routerPath);
   }
 }

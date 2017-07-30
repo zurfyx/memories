@@ -67,7 +67,7 @@ export class JourneyDetailComponent implements OnInit {
     this.storyService.readStories(this.journey.$key)
       .flatMap((stories: Story[]) => {
         this.stories = stories;
-        return this.userService.readUser(this.journey.owner, ['photoURL', 'displayName']);
+        return this.userService.readUser(this.journey.owner);
       })
       .flatMap((owner: User) => {
         this.owner = owner;

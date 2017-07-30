@@ -14,27 +14,34 @@ export class UserService {
     private afDatabase: AngularFireDatabase,
   ) { }
 
-  /**
-   * Read a User by its UID.
-   * @param uid User UID.
-   * @param properties Due to the Firebase permissions, they can't be fully read at once. Hence the
-   * desired properties have to be passed through parameters. I.e. (['displayName', 'email'])
-   */
-  readUser(uid: string, properties: string[]): Observable<User> {
-    const options = { preserveSnapshot: true };
-    const fetchers = properties.map(prop => this.afDatabase.object(`/users/${uid}/${prop}`, options).first());
-    return Observable.forkJoin(fetchers).map((snapshots: any[]) => {
-      const values = {};
-      snapshots.forEach((snapshot, i) => {
-        values[properties[i]] = snapshot.val();
-      });
-      return new User(values);
-    });
+  readUsers(): Observable<User[]> {
+    return this.afDatabase.list('users').map((snapshot: any[]) => (
+      snapshot.map(userValues => new User(userValues))
+    ));
   }
 
-  readCurrentUser(properties: string[]): Observable<User> {
+  readUser(uid: string): Observable<User> {
+    const options = { preserveSnapshot: true };
+    return this.afDatabase.object(`users/${uid}`).map((snapshot: any) => (
+      new User(snapshot)
+    ));
+  }
+
+  readCurrentUser(): Observable<User> {
     return this.afAuth.authState.flatMap((user: firebase.User) => (
-      this.readUser(user.uid, properties)
+      this.readUser(user.uid)
+    ));
+  }
+
+  updateUser(user: User): Observable<User> {
+    const { $key, ...unkeyedUser } = user;
+    const setPromise = this.afDatabase.object(`users/${$key}`).set(unkeyedUser);
+    return Observable.fromPromise(setPromise).map(() => user);
+  }
+
+  isAuthenticatedUser(user: User): Observable<boolean> {
+    return this.afAuth.authState.map((authUser: firebase.User) => (
+      authUser.uid === user.$key
     ));
   }
 }

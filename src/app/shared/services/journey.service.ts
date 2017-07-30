@@ -53,6 +53,12 @@ export class JourneyService {
     ));
   }
 
+  readJourneysByOwner(ownerUid: string): Observable<Journey[]> {
+    return this.readJourneys({
+      query: { orderByChild: 'owner', equalTo: ownerUid }
+    });
+  }
+
   readJourney(uid: string): Observable<Journey> {
     return this.afDatabase.object(`journeys/${uid}`).map((snapshot: any) => (
       new Journey(snapshot)

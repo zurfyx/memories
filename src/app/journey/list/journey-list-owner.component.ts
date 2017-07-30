@@ -19,7 +19,7 @@ export class JourneyListOwnerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.readUser(this.owner, ['displayName']).subscribe((user: User) => {
+    this.userService.readUser(this.owner).subscribe((user: User) => {
       this.ownerObj = user;
     });
   }

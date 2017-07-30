@@ -1,0 +1,54 @@
+.content__header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header__avatar + .header__info {
+  margin-left: 25px;
+}
+
+.header__avatar {
+  border-radius: 99px;
+  width: 64px;
+  height: 64px;
+}
+
+@media(min-width: 400px) {
+  .header__avatar {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.header__info {
+  dt, dd {
+    display: inline;
+    margin: 0;
+  }
+
+  dt::after {
+    content: ':';
+  }
+
+  dd::after {
+    content: "\a";
+    white-space: pre;
+  }
+}
+
+/* Grid styles below -> copy-pasted from journey-list.component.scss */
+
+.journey-card-container {
+  width: 100%;
+  height: 300px;
+}
+
+@media (min-width: 550px) {
+  .journey-card-container {
+    width: 400px;
+  }
+}
+
+.mat-card-image {
+  height: 200px;
+}

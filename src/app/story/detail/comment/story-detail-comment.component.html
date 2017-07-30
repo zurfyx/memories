@@ -3,11 +3,16 @@
 <div class="box" *ngIf="comments?.length > 0">
   <md-list-item class="comment" *ngFor="let comment of comments">
     <div class="comment__avatar">
-      <img [src]="this.users[comment.owner]?.photoURL" />
+      <img
+        [src]="this.users[comment.owner].photoURL"
+        [routerLink]="['/users/' + this.users[comment.owner].$key]"
+        *ngIf="this.users[comment.owner]" />
     </div>
     <div class="comment__body">
       <div class="comment__header">
-        <a href="#" class="comment__owner neat">{{this.users[comment.owner]?.displayName}}</a>
+        <a href="#" class="comment__owner neat" [routerLink]="['/users/' + this.users[comment.owner].$key]">
+          {{this.users[comment.owner]?.displayName}}
+        </a>
         <span class="comment__date">{{comment.updatedAt | date}}</span>
       </div>
       <div class="comment__description">
