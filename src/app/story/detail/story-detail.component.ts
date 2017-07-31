@@ -140,20 +140,23 @@ export class StoryDetailComponent implements OnInit {
 
   delete() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: 'Want to delete?',
+      data: {
+        title: 'Delete story',
+        description: `You are about to delete "${this.story.title}".\n\nThis action cannot be undone!`,
+      },
     });
     dialogRef.afterClosed().subscribe((isConfirmed: boolean) => {
       if (isConfirmed) {
-        console.info('proceed to delete');
-      } else {
-        console.info('no');
+        this.deleteConfirmed();
       }
+    });
+  }
 
-    })
-    // this.storyService.deleteStory(this.story.$key).subscribe(
-    //   () => this.router.navigate([`/journeys/${this.story.journey}`]),
-    //   error => window.alert('An error ocurred. Story was not deleted.'),
-    // );
+  deleteConfirmed() {
+    this.storyService.deleteStory(this.story.$key).subscribe(
+      () => this.router.navigate([`/journeys/${this.story.journey}`]),
+      error => window.alert('An error ocurred. Story was not deleted.'),
+    );
   }
 
   cast() {
