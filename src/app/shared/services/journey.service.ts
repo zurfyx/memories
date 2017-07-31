@@ -85,4 +85,10 @@ export class JourneyService {
         return this.updateJourney(newJourney);
       });
   }
+
+  deleteJourney(uid: string): Observable<void> {
+    const dbObject = this.afDatabase.object(`journeys/${uid}`);
+    const removePromise = dbObject.remove();
+    return Observable.fromPromise(removePromise);
+  }
 }

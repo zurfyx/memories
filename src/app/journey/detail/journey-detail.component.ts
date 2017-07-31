@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SafeStyle } from '@angular/platform-browser';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { MdDialog } from '@angular/material';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
@@ -18,6 +18,7 @@ import {
   StoryService,
   CastService,
   KmlService,
+  ConfirmComponent,
 } from '../../shared';
 
 @Component({
@@ -46,6 +47,7 @@ export class JourneyDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private safeStylePipe: SafeStylePipe,
+    private dialog: MdDialog,
     private userService: UserService,
     private journeyService: JourneyService,
     private storyService: StoryService,
@@ -145,6 +147,30 @@ export class JourneyDetailComponent implements OnInit {
 
   titleChange(event: Event) {
     this.newTitle = (event.target as HTMLInputElement).value;
+  }
+
+  /**
+   * Delete journey.
+   */
+  delete() {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Delete journey',
+        description: `You are about to delete "${this.journey.title}".\n\nThis action cannot be undone!`,
+      },
+    });
+    dialogRef.afterClosed().subscribe((isConfirmed: boolean) => {
+      if (isConfirmed) {
+        this.deleteConfirmed();
+      }
+    });
+  }
+
+  deleteConfirmed() {
+    this.journeyService.deleteJourney(this.journey.$key).subscribe(
+      () => this.router.navigate(['/journeys']),
+      error => window.alert('An error ocurred. Journey was not deleted.'),
+    );
   }
 
   /**

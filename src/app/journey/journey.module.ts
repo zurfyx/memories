@@ -9,6 +9,7 @@ import {
   MdListModule,
   MdMenuModule,
   MdTooltipModule,
+  MdDialogModule,
 } from '@angular/material';
 import { ResponsiveModule } from 'ng2-responsive';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -16,6 +17,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import {
   CastModule,
   PwModule,
+  ConfirmModule,
+  ConfirmComponent,
 } from '../shared';
 import { StoryNewModule } from './story-new/story-new.module';
 import { JourneyListComponent } from './list/journey-list.component';
@@ -50,6 +53,9 @@ import { JourneyRoutingModule } from './journey-routing.module';
     JourneyListOwnerComponent,
     JourneyNewComponent,
     JourneyDetailComponent,
+  ],
+  entryComponents: [
+    ConfirmComponent,
   ],
   providers: [
     JourneyResolver,
