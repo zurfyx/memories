@@ -1,4 +1,5 @@
 export * from './cast';
+export * from './confirm';
 export * from './models';
 export * from './navbar';
 export * from './physical-web';
