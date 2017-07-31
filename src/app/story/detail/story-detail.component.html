@@ -34,7 +34,12 @@
         <a (click)="edit()" *ngIf="!isEditing()" md-button>Edit</a>
         <a (click)="cancel()" *ngIf="isEditing()" [disabled]="!isActivelyEditing()" md-button>Cancel</a>
         <a (click)="save()" *ngIf="isEditing()" [disabled]="!isActivelyEditing()" md-button>Save</a>
-        <a (click)="delete()" *ngIf="!isEditing()" md-button>Delete</a>
+        <a class="menu-button" md-button [mdMenuTriggerFor]="detailMenu">
+          <i class="fa fa-ellipsis-v"></i>
+        </a>
+        <md-menu #detailMenu="mdMenu">
+          <a md-menu-item (click)="delete()" *ngIf="!isEditing()">Delete</a>
+        </md-menu>
       </div>
     </div>
 

@@ -8,6 +8,7 @@ import {
   MdNativeDateModule,
   MdDatepickerModule,
   MdSnackBarModule,
+  MdMenuModule,
   MdTooltipModule,
 } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
@@ -37,6 +38,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     MdNativeDateModule,
     MdDatepickerModule,
     MdSnackBarModule,
+    MdMenuModule,
     MdTooltipModule,
     AgmCoreModule,
     CastModule,
