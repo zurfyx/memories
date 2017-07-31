@@ -3,8 +3,9 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
-import { Journey } from '../models';
+import { Journey, Story } from '../models';
 import { FileService } from './file.service';
+import { StoryService } from './story.service';
 import { IdService } from './id.service';
 
 @Injectable()
@@ -13,6 +14,7 @@ export class JourneyService {
   constructor(
     private afDatabase: AngularFireDatabase,
     private imageService: FileService,
+    private storyService: StoryService,
     private idService: IdService,
   ) { }
 
@@ -86,9 +88,25 @@ export class JourneyService {
       });
   }
 
+  /**
+   * Deletes journey and its stories.
+   * @param uid journey uid.
+   */
   deleteJourney(uid: string): Observable<void> {
     const dbObject = this.afDatabase.object(`journeys/${uid}`);
     const removePromise = dbObject.remove();
-    return Observable.fromPromise(removePromise);
+    // 1. Delete journey first (so that no more new stories can be created).
+    return Observable.fromPromise(removePromise)
+      .flatMap(() => ( // 2. Read journey stories.
+        this.storyService.readStories(uid)
+      ))
+      .flatMap((stories: Story[]) => { // 3. Remove journey stories.
+        const removePromises = stories.map(story => {
+          const dbStory = this.afDatabase.object(`stories/${story.$key}`);
+          return dbStory.remove();
+        });
+        return Observable.forkJoin(...removePromises);
+      })
+      .map(() => {}); // 3. Clear response (otherwise an array of void would be returned).
   }
 }
