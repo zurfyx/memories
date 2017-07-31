@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
+import {
+  MdSnackBar,
+  MdDialog,
+} from '@angular/material';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
@@ -12,6 +15,7 @@ import {
   StoryService,
   CastService,
   KmlService,
+  ConfirmComponent,
 } from '../../shared';
 import { EditState } from './edit-state';
 
@@ -36,6 +40,7 @@ export class StoryDetailComponent implements OnInit {
     private userService: UserService,
     private storyService: StoryService,
     private snackBar: MdSnackBar,
+    private dialog: MdDialog,
     private castService: CastService,
     private kmlService: KmlService,
   ) {
@@ -134,10 +139,21 @@ export class StoryDetailComponent implements OnInit {
   }
 
   delete() {
-    this.storyService.deleteStory(this.story.$key).subscribe(
-      () => this.router.navigate([`/journeys/${this.story.journey}`]),
-      error => window.alert('An error ocurred. Story was not deleted.'),
-    );
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: 'Want to delete?',
+    });
+    dialogRef.afterClosed().subscribe((isConfirmed: boolean) => {
+      if (isConfirmed) {
+        console.info('proceed to delete');
+      } else {
+        console.info('no');
+      }
+
+    })
+    // this.storyService.deleteStory(this.story.$key).subscribe(
+    //   () => this.router.navigate([`/journeys/${this.story.journey}`]),
+    //   error => window.alert('An error ocurred. Story was not deleted.'),
+    // );
   }
 
   cast() {

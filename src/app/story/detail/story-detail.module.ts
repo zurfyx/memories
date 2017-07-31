@@ -10,6 +10,7 @@ import {
   MdSnackBarModule,
   MdMenuModule,
   MdTooltipModule,
+  MdDialogModule,
 } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
 
@@ -17,6 +18,8 @@ import {
   SafeStylePipe,
   SafeUrlPipe,
   CastModule,
+  ConfirmModule,
+  ConfirmComponent,
 } from '../../shared';
 import { StoryDetailComponent } from './story-detail.component';
 import { StoryDetailBannerComponent } from './banner/story-detail-banner.component';
@@ -40,8 +43,10 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     MdSnackBarModule,
     MdMenuModule,
     MdTooltipModule,
+    MdDialogModule,
     AgmCoreModule,
     CastModule,
+    ConfirmModule,
   ],
   exports: [],
   declarations: [
@@ -54,6 +59,9 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     StoryDetailMapComponent,
     StoryDetailPhotoComponent,
     StoryDetailTitleComponent,
+  ],
+  entryComponents: [
+    ConfirmComponent,
   ],
   providers: [
     SafeStylePipe,
