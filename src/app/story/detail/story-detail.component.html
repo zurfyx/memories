@@ -34,6 +34,7 @@
         <a (click)="edit()" *ngIf="!isEditing()" md-button>Edit</a>
         <a (click)="cancel()" *ngIf="isEditing()" [disabled]="!isActivelyEditing()" md-button>Cancel</a>
         <a (click)="save()" *ngIf="isEditing()" [disabled]="!isActivelyEditing()" md-button>Save</a>
+        <a (click)="delete()" *ngIf="!isEditing()" md-button>Delete</a>
       </div>
     </div>
 

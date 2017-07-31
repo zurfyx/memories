@@ -47,4 +47,10 @@ export class StoryService {
     const setPromise = dbObject.set(unkeyedStory);
     return Observable.fromPromise(setPromise);
   }
+
+  deleteStory(uid: string): Observable<void> {
+    const dbObject = this.afDatabase.object(`stories/${uid}`);
+    const removePromise = dbObject.remove();
+    return Observable.fromPromise(removePromise);
+  }
 }

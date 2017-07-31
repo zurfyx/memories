@@ -133,6 +133,13 @@ export class StoryDetailComponent implements OnInit {
     });
   }
 
+  delete() {
+    this.storyService.deleteStory(this.story.$key).subscribe(
+      () => this.router.navigate([`/journeys/${this.story.journey}`]),
+      error => window.alert('An error ocurred. Story was not deleted.'),
+    );
+  }
+
   cast() {
     const server: LiquidGalaxyServer = this.castService.active.value;
 
