@@ -8,7 +8,7 @@ import { MD_DIALOG_DATA } from '@angular/material';
 })
 export class ConfirmComponent {
   constructor(
-    @Inject(MD_DIALOG_DATA) private data: any
+    @Inject(MD_DIALOG_DATA) public data: any
   ) { }
 
 }
