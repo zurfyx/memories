@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SafeStyle } from '@angular/platform-browser';
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdSnackBar } from '@angular/material';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
@@ -48,6 +48,7 @@ export class JourneyDetailComponent implements OnInit {
     private router: Router,
     private safeStylePipe: SafeStylePipe,
     private dialog: MdDialog,
+    private snackBar: MdSnackBar,
     private userService: UserService,
     private journeyService: JourneyService,
     private storyService: StoryService,
@@ -168,7 +169,10 @@ export class JourneyDetailComponent implements OnInit {
 
   deleteConfirmed() {
     this.journeyService.deleteJourney(this.journey).subscribe(
-      () => this.router.navigate(['/journeys']),
+      () => {
+        this.router.navigate(['/journeys']);
+        this.snackBar.open('Deleted!', null, { duration: 3000 });
+      },
       error => window.alert('An error ocurred. Journey was not deleted.'),
     );
   }
