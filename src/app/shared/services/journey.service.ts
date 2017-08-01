@@ -100,8 +100,10 @@ export class JourneyService {
       : Observable.of(null);
     const storiesObs: Observable<Story[]> = this.storyService.readStories(journey.$key).first();
     const removeStories: Observable<void[]> = storiesObs.flatMap((stories: Story[]) => {
-      const remove = stories.map((story: Story) => this.storyService.deleteStory(story));
-      return Observable.forkJoin(remove);
+      const remove: Observable<void>[] = stories.length > 0
+        ? stories.map((story: Story) => this.storyService.deleteStory(story))
+        : [Observable.of(null)];
+      return Observable.forkJoin(...remove);
     });
 
     return Observable.forkJoin(removeJourney, removeCover, removeStories).map(() => {});
