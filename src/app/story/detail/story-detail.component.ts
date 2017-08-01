@@ -153,7 +153,7 @@ export class StoryDetailComponent implements OnInit {
   }
 
   deleteConfirmed() {
-    this.storyService.deleteStory(this.story.$key).subscribe(
+    this.storyService.deleteStory(this.story).subscribe(
       () => this.router.navigate([`/journeys/${this.story.journey}`]),
       error => window.alert('An error ocurred. Story was not deleted.'),
     );

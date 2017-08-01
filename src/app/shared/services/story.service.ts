@@ -4,6 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 import { Story } from '../models';
+import { FileService } from './file.service';
 import { IdService } from './id.service';
 
 @Injectable()
@@ -11,6 +12,7 @@ export class StoryService {
 
   constructor(
     private afDatabase: AngularFireDatabase,
+    private fileService: FileService,
     private idService: IdService,
   ) { }
 
@@ -48,9 +50,13 @@ export class StoryService {
     return Observable.fromPromise(setPromise);
   }
 
-  deleteStory(uid: string): Observable<void> {
-    const dbObject = this.afDatabase.object(`stories/${uid}`);
-    const removePromise = dbObject.remove();
-    return Observable.fromPromise(removePromise);
+  deleteStory(story: Story): Observable<void> {
+    const dbObject = this.afDatabase.object(`stories/${story.$key}`);
+    const removeStory: firebase.Promise<void> = dbObject.remove();
+    const removeCover: Observable<void> = this.fileService.deleteFileByDownloadURL(story.coverURL);
+    const removePhotos: Observable<void>[] = Object.keys(story.photos || []).map((photoId) => (
+       this.fileService.deleteFileByDownloadURL(story.photos[photoId].url)
+    ));
+    return Observable.forkJoin(removeStory, removeCover, ...removePhotos).map(() => {});
   }
 }
