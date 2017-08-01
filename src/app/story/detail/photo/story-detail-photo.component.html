@@ -6,7 +6,7 @@
     multiple="multiple"
     (change)="addPhoto($event)"
     #addPhotoInput />
-  <button md-button (click)="executeAddPhoto()">Add photo</button>
+  <button md-button (click)="executeAddPhoto()" [disabled]="!isActivelyEditing()">Add photo</button>
 </div>
 
 <div class="photos">
