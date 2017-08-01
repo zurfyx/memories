@@ -167,7 +167,7 @@ export class JourneyDetailComponent implements OnInit {
   }
 
   deleteConfirmed() {
-    this.journeyService.deleteJourney(this.journey.$key).subscribe(
+    this.journeyService.deleteJourney(this.journey).subscribe(
       () => this.router.navigate(['/journeys']),
       error => window.alert('An error ocurred. Journey was not deleted.'),
     );

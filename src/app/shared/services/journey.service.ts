@@ -13,7 +13,7 @@ export class JourneyService {
 
   constructor(
     private afDatabase: AngularFireDatabase,
-    private imageService: FileService,
+    private fileService: FileService,
     private storyService: StoryService,
     private idService: IdService,
   ) { }
@@ -35,7 +35,7 @@ export class JourneyService {
       return this.createJourney(journey);
     }
 
-    return this.imageService.createImage(cover)
+    return this.fileService.createImage(cover)
       .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => {
         const newValues = Object.assign({ coverURL: snapshot.downloadURL }, journey);
         const newJourney = new Journey({ // Don't modify the original subject.
@@ -78,7 +78,7 @@ export class JourneyService {
     if (!cover) {
       return this.updateJourney(journey);
     }
-    return this.imageService.createImage(cover)
+    return this.fileService.createImage(cover)
       .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => {
         const newJourney = new Journey({ // Don't modify the original subject.
           ...journey,
@@ -92,21 +92,16 @@ export class JourneyService {
    * Deletes journey and its stories.
    * @param uid journey uid.
    */
-  deleteJourney(uid: string): Observable<void> {
-    const dbObject = this.afDatabase.object(`journeys/${uid}`);
-    const removePromise = dbObject.remove();
-    // 1. Delete journey first (so that no more new stories can be created).
-    return Observable.fromPromise(removePromise)
-      .flatMap(() => ( // 2. Read journey stories.
-        this.storyService.readStories(uid)
-      ))
-      .flatMap((stories: Story[]) => { // 3. Remove journey stories.
-        const removePromises = stories.map(story => {
-          const dbStory = this.afDatabase.object(`stories/${story.$key}`);
-          return dbStory.remove();
-        });
-        return Observable.forkJoin(...removePromises);
-      })
-      .map(() => {}); // 3. Clear response (otherwise an array of void would be returned).
+  deleteJourney(journey: Journey): Observable<void> {
+    const dbObject = this.afDatabase.object(`journeys/${journey.$key}`);
+    const removeJourney: firebase.Promise<void> = dbObject.remove();
+    const removeCover: Observable<void> = this.fileService.deleteFileByDownloadURL(journey.coverURL);
+    const storiesObs: Observable<Story[]> = this.storyService.readStories(journey.$key).first();
+    const removeStories: Observable<void[]> = storiesObs.flatMap((stories: Story[]) => {
+      const remove = stories.map((story: Story) => this.storyService.deleteStory(story));
+      return Observable.forkJoin(remove);
+    });
+
+    return Observable.forkJoin(removeJourney, removeCover, removeStories).map(() => {});
   }
 }
