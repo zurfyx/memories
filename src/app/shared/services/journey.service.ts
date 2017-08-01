@@ -95,7 +95,9 @@ export class JourneyService {
   deleteJourney(journey: Journey): Observable<void> {
     const dbObject = this.afDatabase.object(`journeys/${journey.$key}`);
     const removeJourney: firebase.Promise<void> = dbObject.remove();
-    const removeCover: Observable<void> = this.fileService.deleteFileByDownloadURL(journey.coverURL);
+    const removeCover: Observable<void> = journey.coverURL
+      ? this.fileService.deleteFileByDownloadURL(journey.coverURL)
+      : Observable.of(null);
     const storiesObs: Observable<Story[]> = this.storyService.readStories(journey.$key).first();
     const removeStories: Observable<void[]> = storiesObs.flatMap((stories: Story[]) => {
       const remove = stories.map((story: Story) => this.storyService.deleteStory(story));
