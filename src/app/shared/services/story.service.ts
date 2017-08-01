@@ -53,7 +53,9 @@ export class StoryService {
   deleteStory(story: Story): Observable<void> {
     const dbObject = this.afDatabase.object(`stories/${story.$key}`);
     const removeStory: firebase.Promise<void> = dbObject.remove();
-    const removeCover: Observable<void> = this.fileService.deleteFileByDownloadURL(story.coverURL);
+    const removeCover: Observable<void> = story.coverURL
+      ? this.fileService.deleteFileByDownloadURL(story.coverURL)
+      : Observable.of(null);
     const removePhotos: Observable<void>[] = Object.keys(story.photos || []).map((photoId) => (
        this.fileService.deleteFileByDownloadURL(story.photos[photoId].url)
     ));
