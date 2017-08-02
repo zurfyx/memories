@@ -19,8 +19,10 @@ export class JourneyListOwnerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.readUser(this.owner).subscribe((user: User) => {
-      this.ownerObj = user;
-    });
+    this.userService.readUser(this.owner)
+      .first()
+      .subscribe((user: User) => {
+        this.ownerObj = user;
+      });
   }
 }

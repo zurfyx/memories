@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, ReplaySubject } from 'rxjs/Rx';
 
 import {
   Journey,
@@ -12,7 +12,9 @@ import {
   templateUrl: 'journey-list.component.html',
   styleUrls: ['journey-list.component.scss'],
 })
-export class JourneyListComponent implements OnInit {
+export class JourneyListComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   journeys: Journey[];
   journeysFiltered: Journey[];
 
@@ -21,9 +23,15 @@ export class JourneyListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.journeyService.readJourneys().subscribe((journeys: Journey[]) => {
-      this.journeys = this.sortJourneysByDateDesc(journeys);
-    });
+    this.journeyService.readJourneys()
+      .takeUntil(this.destroy)
+      .subscribe((journeys: Journey[]) => {
+        this.journeys = this.sortJourneysByDateDesc(journeys);
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
   }
 
   filter(event: Event) {

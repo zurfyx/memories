@@ -26,6 +26,7 @@ import { JourneyListComponent } from './list/journey-list.component';
 import { JourneyListOwnerComponent } from './list/journey-list-owner.component';
 import { JourneyNewComponent } from './new/journey-new.component';
 import { JourneyDetailComponent } from './detail/journey-detail.component';
+import { JourneyDetailCastComponent } from './detail/journey-detail-cast.component';
 import { JourneyResolver } from './journey-resolver.service';
 import { JourneyRoutingModule } from './journey-routing.module';
 
@@ -56,6 +57,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     JourneyListOwnerComponent,
     JourneyNewComponent,
     JourneyDetailComponent,
+    JourneyDetailCastComponent,
   ],
   entryComponents: [
     ConfirmComponent,

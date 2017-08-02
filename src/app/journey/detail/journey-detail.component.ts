@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SafeStyle } from '@angular/platform-browser';
 import { MdDialog, MdSnackBar } from '@angular/material';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, Subject, BehaviorSubject, ReplaySubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 
@@ -16,9 +16,8 @@ import {
   JourneyService,
   Story,
   StoryService,
-  CastService,
-  KmlService,
   ConfirmComponent,
+  CastService,
 } from '../../shared';
 
 @Component({
@@ -27,7 +26,9 @@ import {
   templateUrl: 'journey-detail.component.html',
   styleUrls: ['journey-detail.component.scss'],
 })
-export class JourneyDetailComponent implements OnInit {
+export class JourneyDetailComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   journey: Journey;
   owner: User; // Journey's owner.
   stories: Story[];
@@ -41,7 +42,6 @@ export class JourneyDetailComponent implements OnInit {
   newTitle: string;
 
   castServer: BehaviorSubject<LiquidGalaxyServer>;
-  castingState = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +53,6 @@ export class JourneyDetailComponent implements OnInit {
     private journeyService: JourneyService,
     private storyService: StoryService,
     private castService: CastService,
-    private kmlService: KmlService,
   ) {
     this.route.data.subscribe((params: { journey: Journey }) => {
       this.journey = params.journey;
@@ -61,27 +60,24 @@ export class JourneyDetailComponent implements OnInit {
     this.castServer = this.castService.active;
   }
 
-  /**
-   * 1. Read journey owner information.
-   * 2. Read journey stories.
-   * 3. Cast stories into the casting device (if available).
-   */
   ngOnInit() {
+    // Read journey stories (until the page is destroyed).
     this.storyService.readStories(this.journey.$key)
-      .flatMap((stories: Story[]) => {
+      .takeUntil(this.destroy)
+      .subscribe((stories: Story[]) => {
         this.stories = stories;
-        return this.userService.readUser(this.journey.owner);
-      })
-      .flatMap((owner: User) => {
-        this.owner = owner;
-        // Cast new stories (if a casting serving is active).
-        return this.castService.active;
-      })
-      .subscribe((server: LiquidGalaxyServer) => {
-        if (server) {
-          this.cast();
-        }
       });
+
+    // Read current user data.
+    this.userService.readUser(this.journey.owner)
+      .first()
+      .subscribe((owner: User) => {
+        this.owner = owner;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
   }
 
   /**
@@ -188,27 +184,5 @@ export class JourneyDetailComponent implements OnInit {
   navigateToStory(uid: string) {
     const routerPath = this.getRouterStoryPath(uid);
     this.router.navigate(routerPath);
-  }
-
-  cast() {
-    const server: LiquidGalaxyServer = this.castServer.value;
-    const kml = this.kmlService.tour(this.stories, this.owner);
-    Observable.fromPromise(server.writeKML(kml))
-      .subscribe(() => {
-        // Liquid Galaxy tick time to read new sent KML files is ~1s.
-        setTimeout(() => this.castPlayTour(), 1000);
-      });
-  }
-
-  async castPlayTour() {
-    const server: LiquidGalaxyServer = this.castServer.value;
-    await server.writeQuery('playtour=main');
-    this.castingState = 1;
-  }
-
-  async castStopTour() {
-    const server: LiquidGalaxyServer = this.castServer.value;
-    await server.writeQuery('exittour=main');
-    this.castingState = 2;
   }
 }
