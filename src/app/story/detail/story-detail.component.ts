@@ -91,17 +91,13 @@ export class StoryDetailComponent implements OnInit {
   }
 
   setPending(componentName: string) {
-    this.pending.first().subscribe((pending: Set<string>) => {
-      pending.add(componentName);
-      this.pending.next(pending);
-    });
+    this.pending.value.add(componentName);
+    this.pending.next(this.pending.value); // Mutated data structure. Send the same reference as a new update.
   }
 
   setUnpending(componentName: string) {
-    this.pending.first().subscribe((pending: Set<string>) => {
-      pending.delete(componentName);
-      this.pending.next(pending);
-    });
+    this.pending.value.delete(componentName);
+    this.pending.next(this.pending.value); // Mutated data structure. Send the same reference as a new update.
   }
 
   edit() {
