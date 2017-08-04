@@ -38,6 +38,7 @@ export class FileService {
       <head>
         <title>${values.title}</title>
         <meta name="description" content="${values.description}" />
+        <link rel="icon" type="image/png" sizes="256x256" href="${window.location.origin}/assets/favicon-256.png">
         <script>window.location.href = '${values.redirectUri}';</script>
       </head>
       </html>`;
