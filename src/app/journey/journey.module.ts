@@ -48,6 +48,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     AngularFireAuthModule,
     CastModule,
     PwModule,
+    ConfirmModule,
     StoryNewModule,
     JourneyRoutingModule,
   ],

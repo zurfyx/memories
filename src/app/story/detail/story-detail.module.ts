@@ -18,6 +18,7 @@ import {
   SafeStylePipe,
   SafeUrlPipe,
   CastModule,
+  PwModule,
   ConfirmModule,
   ConfirmComponent,
 } from '../../shared';
@@ -47,6 +48,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     MdDialogModule,
     AgmCoreModule,
     CastModule,
+    PwModule,
     ConfirmModule,
   ],
   exports: [],
