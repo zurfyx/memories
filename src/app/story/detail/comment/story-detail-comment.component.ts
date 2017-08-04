@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { ReplaySubject } from 'rxjs/Rx';
 
 import {
   User,
@@ -13,7 +14,9 @@ import {
   templateUrl: 'story-detail-comment.component.html',
   styleUrls: ['story-detail-comment.component.scss'],
 })
-export class StoryDetailCommentComponent implements OnInit {
+export class StoryDetailCommentComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   @Input() story: Story;
 
   comments: Comment[];
@@ -26,12 +29,18 @@ export class StoryDetailCommentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.commentService.readComments(this.story.$key).subscribe((comments: Comment[]) => {
-      this.comments = comments.sort((a, b) => (b.updatedAt as number) - (a.updatedAt as number));
+    this.commentService.readComments(this.story.$key)
+      .takeUntil(this.destroy)
+      .subscribe((comments: Comment[]) => {
+        this.comments = comments.sort((a, b) => (b.updatedAt as number) - (a.updatedAt as number));
 
-      // Gather user data associated with these comments.
-      comments.forEach(comment => this.refreshUser(comment.owner));
-    });
+        // Gather user data associated with these comments.
+        comments.forEach(comment => this.refreshUser(comment.owner));
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
   }
 
   refreshUser(userId: string) {

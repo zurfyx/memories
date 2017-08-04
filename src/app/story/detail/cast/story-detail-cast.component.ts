@@ -5,22 +5,24 @@ import { LiquidGalaxyServer } from 'liquid-galaxy';
 import {
   User,
   Story,
+  StoryService,
   CastService,
   KmlService,
-} from '../../shared';
+} from '../../../shared';
 
 @Component({
-  selector: 'app-journey-detail-cast',
-  templateUrl: 'journey-detail-cast.component.html',
+  selector: 'app-story-detail-cast',
+  templateUrl: 'story-detail-cast.component.html',
 })
-export class JourneyDetailCastComponent implements OnInit, OnChanges {
-  @Input() stories: Story[];
+export class StoryDetailCastComponent implements OnInit, OnChanges {
+  @Input() story: Story;
   @Input() owner: User;
 
   castServer: BehaviorSubject<LiquidGalaxyServer>;
   castingState = 0;
 
   constructor(
+    private storyService: StoryService,
     private castService: CastService,
     private kmlService: KmlService,
   ) {
@@ -37,9 +39,16 @@ export class JourneyDetailCastComponent implements OnInit, OnChanges {
   }
 
   cast() {
-    const server: LiquidGalaxyServer = this.castServer.value;
-    const kml = this.kmlService.tour(this.stories, this.owner);
-    Observable.fromPromise(server.writeKML(kml))
+    const server: LiquidGalaxyServer = this.castService.active.value;
+
+    // We'll focus on the current story, but we'll show other story placemarks in the same journey
+    // as well.
+    this.storyService.readStories(this.story.journey)
+      .first()
+      .flatMap((stories: Story[]) => {
+        const kml = this.kmlService.soloTour(stories, this.story, this.owner);
+        return Observable.fromPromise(server.writeKML(kml));
+      })
       .subscribe(() => {
         // Liquid Galaxy tick time to read new sent KML files is ~1s.
         setTimeout(() => this.castPlayTour(), 1000);

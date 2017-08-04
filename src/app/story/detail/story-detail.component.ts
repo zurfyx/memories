@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   MdSnackBar,
   MdDialog,
 } from '@angular/material';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, Subject, BehaviorSubject, ReplaySubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 
@@ -24,15 +24,16 @@ import { EditState } from './edit-state';
   templateUrl: 'story-detail.component.html',
   styleUrls: ['story-detail.component.scss'],
 })
-export class StoryDetailComponent implements OnInit {
+export class StoryDetailComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   story: Story;
-  owner: User; // Story owner.
+  owner: User;
 
   editState = EditState.View;
   pending = new BehaviorSubject<Set<string>>(new Set());
 
   castServer: BehaviorSubject<LiquidGalaxyServer>;
-  castingState = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +43,6 @@ export class StoryDetailComponent implements OnInit {
     private snackBar: MdSnackBar,
     private dialog: MdDialog,
     private castService: CastService,
-    private kmlService: KmlService,
   ) {
     this.route.data.subscribe((params: { story: Story }) => {
       this.story = params.story;
@@ -51,17 +51,16 @@ export class StoryDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Read current user data.
     this.userService.readUser(this.story.owner)
-      .flatMap((user: User) => {
-        this.owner = user;
-        // Cast journey stories (if a casting serving is active).
-        return this.castService.active;
-      })
-      .subscribe((server: LiquidGalaxyServer) => {
-        if (server) {
-          this.cast();
-        }
+      .first()
+      .subscribe((owner: User) => {
+        this.owner = owner;
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
   }
 
   isActivelyEditing(): boolean {
@@ -106,24 +105,30 @@ export class StoryDetailComponent implements OnInit {
 
   cancel() {
     this.editState = EditState.Cancel;
-    const self = this;
-    this.pending.subscribe(function (pending: Set<string>) {
-      if (pending.size === 0) {
-        this.unsubscribe();
-        self.editState = EditState.View;
-      }
-    });
+
+    const cancelDone = new Subject<any>();
+    const stop = Observable.merge(cancelDone, this.destroy);
+    this.pending
+      .takeUntil(stop)
+      .filter((pending: Set<string>) => pending.size === 0)
+      .subscribe(() => {
+        cancelDone.next(true);
+        this.editState = EditState.View;
+      });
   }
 
   save() {
     this.editState = EditState.Save;
-    const self = this;
-    this.pending.subscribe(function (pending: Set<string>) {
-      if (pending.size === 0) {
-        this.unsubscribe();
-        self.updateStory();
-      }
-    });
+
+    const saveDone = new Subject<any>();
+    const stop = Observable.merge(saveDone, this.destroy);
+    this.pending
+      .takeUntil(stop)
+      .filter((pending: Set<string>) => pending.size === 0)
+      .subscribe(() => {
+        saveDone.next(true);
+        this.updateStory();
+      });
   }
 
   updateStory() {
@@ -156,33 +161,5 @@ export class StoryDetailComponent implements OnInit {
       },
       error => window.alert('An error ocurred. Story was not deleted.'),
     );
-  }
-
-  cast() {
-    const server: LiquidGalaxyServer = this.castService.active.value;
-
-    // We'll focus on the current story, but we'll show other story placemarks in the same journey
-    // as well.
-    this.storyService.readStories(this.story.journey)
-      .flatMap((stories: Story[]) => {
-        const kml = this.kmlService.soloTour(stories, this.story, this.owner);
-        return Observable.fromPromise(server.writeKML(kml));
-      })
-      .subscribe(() => {
-        // Liquid Galaxy tick time to read new sent KML files is ~1s.
-        setTimeout(() => this.castPlayTour(), 1000);
-      });
-  }
-
-  async castPlayTour() {
-    const server: LiquidGalaxyServer = this.castServer.value;
-    await server.writeQuery('playtour=main');
-    this.castingState = 1;
-  }
-
-  async castStopTour() {
-    const server: LiquidGalaxyServer = this.castServer.value;
-    await server.writeQuery('exittour=main');
-    this.castingState = 2;
   }
 }
