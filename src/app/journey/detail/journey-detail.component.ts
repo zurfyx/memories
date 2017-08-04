@@ -61,6 +61,15 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Real time journey updates (only when the user's not editing it).
+    this.journeyService.readJourney(this.journey.$key)
+      .takeUntil(this.destroy)
+      .subscribe((journey: Journey) => {
+        if (this.editState === 0) {
+          this.journey = journey;
+        }
+      });
+
     // Read journey stories (until the page is destroyed).
     this.storyService.readStories(this.journey.$key)
       .takeUntil(this.destroy)

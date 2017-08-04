@@ -51,6 +51,14 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.storyService.readStory(this.story.$key)
+      .takeUntil(this.destroy)
+      .subscribe((story: Story) => {
+        if (this.editState === EditState.View) {
+          this.story = story;
+        }
+      });
+
     // Read current user data.
     this.userService.readUser(this.story.owner)
       .first()
@@ -136,6 +144,7 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
     this.storyService.updateStory(this.story).subscribe(() => {
       this.editState = EditState.View;
       this.snackBar.open('Saved!', null, { duration: 3000 });
+      this.story = new Story(this.story); // Simulate a real time update.
     });
   }
 
