@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataSource } from '@angular/cdk';
 import { MdSort } from '@angular/material';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs/Rx';
 
 import {
   Pw,
@@ -13,20 +13,27 @@ import {
   templateUrl: 'pw.component.html',
   styleUrls: ['pw.component.scss'],
 })
-export class PwComponent implements OnInit {
+export class PwComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   dataSource: PwDataSource;
   displayedColumns = ['title', 'shortUrl', 'createdAt', 'beacon'];
 
-  pws: Observable<Pw[]>; // That's not the table data. It's only used to count entries to get to
-                         // know when to display the info message.
+  hasEntries: boolean;
 
   constructor(
     private pwService: PwService,
   ) { }
 
   ngOnInit() {
-    this.pws = this.pwService.readPws();
-    this.dataSource = new PwDataSource(this.pws);
+    this.dataSource = new PwDataSource(this.pwService.readPws());
+    this.dataSource.connect()
+      .takeUntil(this.destroy)
+      .subscribe((pws: Pw[]) => this.hasEntries = pws.length !== 0);
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
   }
 }
 
