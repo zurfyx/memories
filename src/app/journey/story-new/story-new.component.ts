@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
@@ -14,7 +14,7 @@ import {
   selector: 'app-story-new',
   templateUrl: 'story-new.component.html',
 })
-export class StoryNewComponent implements OnInit {
+export class StoryNewComponent {
   @Input() journey: Journey;
   @Output() success: EventEmitter<void> = new EventEmitter<void>();
   @Output() fail: EventEmitter<void> = new EventEmitter<void>();
@@ -32,8 +32,6 @@ export class StoryNewComponent implements OnInit {
       title: ['', Validators.required],
     });
   }
-
-  ngOnInit() { }
 
   submitStoryForm() {
     this.isSubmitting = true;

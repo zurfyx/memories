@@ -27,7 +27,7 @@ export abstract class StoryDetailEditComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const editState = changes['editState'] && changes['editState'].currentValue;
     if (editState === EditState.Save) {
-      this.updateStory().subscribe(() => this.cleanup());
+      this.updateStory().first().subscribe(() => this.cleanup());
     } else if (editState === EditState.Cancel) {
       this.cleanup();
     }

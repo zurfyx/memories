@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ReplaySubject } from 'rxjs/Rx';
 
 import {
   User,
@@ -10,7 +11,9 @@ import {
   templateUrl: 'user-list.component.html',
   styleUrls: ['user-list.component.scss'],
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   users: User[];
   usersFiltered: User[];
 
@@ -19,9 +22,15 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.readUsers().subscribe((users: User[]) => {
-      this.users = users;
-    });
+    this.userService.readUsers()
+      .takeUntil(this.destroy)
+      .subscribe((users: User[]) => {
+        this.users = users;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
   }
 
   filter(event: Event) {

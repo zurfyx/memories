@@ -1,8 +1,8 @@
-<app-casting
-  [state]="castingState"
-  (playTour)="castPlayTour()"
-  (stopTour)="castStopTour()">
-</app-casting>
+<app-story-detail-cast
+  [story]="story"
+  [owner]="owner"
+  *ngIf="(castServer | async) && story && owner">
+</app-story-detail-cast>
 
 <app-story-detail-banner
   [story]="story"

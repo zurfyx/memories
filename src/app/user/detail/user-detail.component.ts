@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ReplaySubject } from 'rxjs/Rx';
 
 import {
   User,
@@ -15,7 +16,9 @@ import {
   templateUrl: 'user-detail.component.html',
   styleUrls: ['user-detail.component.scss'],
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   user: User;
   userPrivate: UserPrivate;
 
@@ -45,6 +48,13 @@ export class UserDetailComponent implements OnInit {
       });
 
     this.journeyService.readJourneysByOwner(this.user.$key)
-      .subscribe((journeys: Journey[]) => this.journeys = journeys);
+      .takeUntil(this.destroy)
+      .subscribe((journeys: Journey[]) => {
+        this.journeys = journeys;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
   }
 }
