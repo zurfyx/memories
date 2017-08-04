@@ -5,11 +5,11 @@ export default {
     ${imageUrl ? `<img class="banner" src="${imageUrl}" />` : ''}
     <div class="separator"></div>
     <div class="row tcenter">
-      <span class="col2 date">${dateText}</span>
-      <span class="col2 author">${ownerDisplayName}</span>
+      <span class="col2 date">${dateText || ''}</span>
+      <span class="col2 author">${ownerDisplayName || ''}</span>
     </div>
     <div class="separator"></div>
-    <pre class="description">${ellipsis(description, 450)}</pre>
+    <pre class="description">${description ? ellipsis(description, 450) : ''}</pre>
     <div class="logo tcenter">
       <i class="fa fa-globe" aria-hidden="true"></i>
     </div>
