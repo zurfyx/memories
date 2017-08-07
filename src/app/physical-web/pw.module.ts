@@ -4,6 +4,8 @@ import { CdkTableModule } from '@angular/cdk';
 import { MdTableModule } from '@angular/material';
 
 import { PwComponent } from './pw.component';
+import { PwIntroComponent } from './pw-intro.component';
+import { PwListComponent } from './pw-list.component';
 import { PwRoutingModule } from './pw-routing.module';
 
 @NgModule({
@@ -14,7 +16,11 @@ import { PwRoutingModule } from './pw-routing.module';
     PwRoutingModule,
   ],
   exports: [],
-  declarations: [PwComponent],
+  declarations: [
+    PwComponent,
+    PwIntroComponent,
+    PwListComponent,
+  ],
   providers: [],
 })
 export class PwModule { }

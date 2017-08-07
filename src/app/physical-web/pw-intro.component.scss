@@ -1,0 +1,16 @@
+.eddystone {
+  margin-top: 10px;
+  margin-left: 15px;
+  width: 40px;
+  float: right;
+}
+
+@media (min-width: 400px) {
+  .eddystone {
+    width: 65px;
+  }
+}
+
+h2 {
+  margin-top: 2rem;
+}
