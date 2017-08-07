@@ -3,20 +3,30 @@
     <h1>Physical Web</h1>
 
     <div class="box">
+      <span class="box-notification" *ngIf="isSignedIn === false">
+        <p>Sign in to start.</p>
+        <span class="hint">Signing in enables you to record with custom metadata, and keep track of your recorded URLs.</span>
+      </span>
+
       <img class="eddystone" src="/assets/physical-web.png" />
 
       <p>
         Memories supports Physical Web. By using 
         <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API" target="_blank">Web Bluetooth</a>
         and
-        <a href="https://github.com/zurfyx/eddystone-web-bluetooth" target="_blank">Eddystone Web Bluetooth</a>
-        , it is able to record online content to a beacon as a URL.
+        <a href="https://github.com/zurfyx/eddystone-web-bluetooth" target="_blank">Eddystone Web Bluetooth</a>,
+        it is able to record online content to a beacon as a URL.
       </p>
 
       <a href="https://google.github.io/physical-web/" target="_blank">What is Physical Web?</a>
 
       <h2>Get beacons</h2>
-      <p>On supported Android devices, you can use Beacon Toy to transform your phone into an Eddystone beacon. Otherwise, choose from a variety of beacon manufacturers.</p>
+      <p>
+        On supported Android devices, you can use 
+        <a href="https://play.google.com/store/apps/details?id=com.uriio" target="_blank">Beacon Toy</a>
+        to transform your phone into an Eddystone beacon. Otherwise, choose from a variety of
+        <a href="https://developers.google.com/beacons/eddystone#full_support_for_eddystone" target="_blank">beacon manufacturers</a>.
+      </p>
 
       <h2>Record a journey or story</h2>
       <p>Enter any journey or story, and click on the "Physical Web" menu option. Memories will help you record your favorite experiences onto your beacon.</p>

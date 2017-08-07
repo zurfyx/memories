@@ -1,3 +1,12 @@
+@import "../shared/index";
+
+.box-notification {
+  display: block;
+  border-bottom: 1px solid $separator;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
 .eddystone {
   margin-top: 10px;
   margin-left: 15px;

@@ -1,10 +1,16 @@
 <div class="page">
   <div class="container box info" *ngIf="hasEntries === false">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
-    <span>
-      It looks like you have no Physical Web entries. You can make an Eddystone beacon broadcast a
-      <strong>journey</strong> or <strong>story</strong> by visiting a user's journey or story.
-    </span>
+    <div>
+      <p>
+        It looks like you have no Physical Web entries. You can make an Eddystone beacon broadcast a
+        <strong>journey</strong> or <strong>story</strong> by visiting a user's journey or story.
+      </p>
+      <p>
+        If you are new to Physical Web, you might also want to check
+        <a [routerLink]="['/physical-web/intro']">Introduction to Physical Web</a> first.
+      </p>
+    </div>
   </div>
 
   <div class="container box">
