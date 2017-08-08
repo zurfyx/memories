@@ -1,5 +1,16 @@
 @import "../index";
 
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.links {
+  flex: 1;
+}
+
 .mat-list {
   padding-top: 0;
 }
@@ -39,4 +50,18 @@ md-list-item.highlight {
 
 md-list-item.router-link-active {
   color: $primary;
+}
+
+.about {
+  margin-top: 1rem;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  > * + * {
+    &::before {
+      content: "·";
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+  }
 }
