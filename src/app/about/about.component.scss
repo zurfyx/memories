@@ -6,9 +6,22 @@ img {
   max-width: 100%;
 }
 
+.image-block {
+  display: block;
+  text-align: center;
+  
+  > img {
+    max-height: 300px;
+  }
+}
+
 img.physical-web {
   float: right;
-  width: 250px;
+  width: 400px;
+}
+
+.physical-web-logos > img {
+  height: 44px;
 }
 
 .gsoc-container {
