@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
 import { JourneyModule } from './journey/journey.module';
+import { LgModule } from './liquid-galaxy/lg.module';
 import { PwModule } from './physical-web/pw.module';
 import { StoryModule } from './story/story.module';
 import { UserModule } from './user/user.module';
@@ -36,6 +37,7 @@ import { AppRoutingModule } from './app-routing.module';
     AboutModule,
     HomeModule,
     JourneyModule,
+    LgModule,
     PwModule,
     StoryModule,
     UserModule,

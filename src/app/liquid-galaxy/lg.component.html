@@ -1,0 +1,56 @@
+<div class="page">
+  <div class="container">
+    <h1>Liquid Galaxy</h1>
+
+    <div class="box">
+      <p>Memories supports <a href="https://www.google.com/earth/explore/showcase/liquidgalaxy.html" target="_blank">Liquid Galaxy</a>*. You can cast your journeys or stories on a Liquid Galaxy setup just like if it was a Chromecast device, by clicking on the <i class="fa fa-rocket"></i> icon.</p>
+
+      <p>Have a Liquid Galaxy ready? Jump to <a href="#cast">cast</a>.</p>
+
+      <span class="hint">* Liquid Galaxy API required.</span>
+
+      <h2 id="install">Install Liquid Galaxy</h2>
+
+      <div class="image-block">
+        <img src="/assets/liquid-galaxy-screens.jpg" />
+      </div>
+
+      <p>If you do not have a Liquid Galaxy setup yet, getting one ready just takes a few minutes (<a href="https://github.com/LiquidGalaxyLAB/liquid-galaxy" target="_blank">and all its code is open-source</a>).</p>
+
+      <p>Grab a few average machines, connect each of them to a distinct screen, and follow these instructions.</p>
+
+      <ol>
+        <li>Install Ubuntu to each of each (see <a href="https://github.com/LiquidGalaxyLAB/liquid-galaxy/blob/master/README.md" target="_blank">README</a> for the current supported versions).  
+        <li>Execute <code>bash <(curl -s https://raw.githubusercontent.com/LiquidGalaxyLAB/liquid-galaxy/master/install.sh)</code></li>
+      </ol>
+
+      <p>See detailed instructions <a href="https://github.com/LiquidGalaxyLAB/liquid-galaxy" target="_blank">here</a>.</p>
+
+      <h2 id="install-api">Install Liquid Galaxy API on the master machine</h2>
+
+      <p>
+        Memories does its cast <i>magic</i> by making use of a public API placed on the Liquid Galaxy master machine.
+        Installing it is as simple as running the following script:
+      </p>
+
+      <code>bash <(curl -s https://raw.githubusercontent.com/LiquidGalaxyLAB/liquid-galaxy-api/master/scripts/install.sh)</code>
+
+      <p>See detailed instructions <a href="https://github.com/LiquidGalaxyLAB/liquid-galaxy-api/blob/master/README.md" target="_blank">here</a>.</p>
+
+      <h2 id="cast">Cast</h2>
+
+      <p>When your Liquid Galaxy is displaying Google Earth across its screens, and the API is up and ready (you can verify so by entering  <code>&lt;ip-address&gt;:82</code> on your browser), you are ready to cast.</p>
+
+      <p>Press the <i class="fa fa-rocket"></i> icon at the top, select your Liquid Galaxy setup<sup>1</sup>, and journeys and stories will start showing<sup>2</sup> on the screens as you enter them on your device.</p>
+
+      <div class="image-block">
+        <img src="/assets/cast-to.png" />
+      </div>
+
+      <p>Liquid Galaxy users will only have to go through this step.</p>
+
+      <span class="hint"><sup>1</sup> By default, Liquid Galaxy setups can only be discovered by those who are in the same network (so you might have to connect through Wi-Fi on your mobile devices).</span>
+      <span class="hint"><sup>2</sup> Only geolocalized stories will be shown.</span>
+    </div>
+  </div>
+</div>
