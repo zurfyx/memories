@@ -16,10 +16,11 @@ import { ResponsiveModule } from 'ng2-responsive';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {
+  AuthGuard,
   CastModule,
-  PwModule,
   ConfirmModule,
   ConfirmComponent,
+  PwModule,
 } from '../shared';
 import { StoryNewModule } from './story-new/story-new.module';
 import { JourneyListComponent } from './list/journey-list.component';
@@ -64,6 +65,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     ConfirmComponent,
   ],
   providers: [
+    AuthGuard,
     JourneyResolver,
   ],
 })

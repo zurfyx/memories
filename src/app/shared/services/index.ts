@@ -1,4 +1,5 @@
 export * from './kml';
+export * from './auth-guard.service';
 export * from './auth.service';
 export * from './comment.service';
 export * from './id.service';

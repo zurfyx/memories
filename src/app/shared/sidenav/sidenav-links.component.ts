@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   moduleId: module.id,
@@ -8,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class SidenavLinksComponent implements OnInit {
-  constructor() { }
+  isSignedIn: boolean;
 
-  ngOnInit() { }
+  constructor(private angularFireAuthService: AngularFireAuth) { }
+
+  ngOnInit() {
+    this.angularFireAuthService.authState.subscribe((auth: firebase.User) => {
+      this.isSignedIn = !!auth;
+    });
+  }
 }
