@@ -26,8 +26,6 @@ import { SidenavService } from './sidenav.service';
     SidenavComponent,
     SidenavLinksComponent,
   ],
-  providers: [
-    SidenavService,
-  ],
+  providers: [SidenavService],
 })
 export class SidenavModule { }

@@ -16,12 +16,11 @@ import {
   JourneyService,
   Story,
   StoryService,
-  ConfirmComponent,
-  CastService,
 } from '../../shared';
+import { CastService } from '../../parts/cast';
+import { ConfirmComponent } from '../../parts/confirm';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-journey-detail',
   templateUrl: 'journey-detail.component.html',
   styleUrls: ['journey-detail.component.scss'],

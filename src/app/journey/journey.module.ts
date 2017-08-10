@@ -17,11 +17,15 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {
   AuthGuard,
-  CastModule,
-  ConfirmModule,
-  ConfirmComponent,
-  PwModule,
+  JourneyService,
+  FileService,
+  StoryService,
+  IdService,
+  SafeStylePipe,
 } from '../shared';
+import { CastModule } from '../parts/cast';
+import { ConfirmModule, ConfirmComponent } from '../parts/confirm';
+import { PwModule } from '../parts/physical-web';
 import { StoryNewModule } from './story-new/story-new.module';
 import { JourneyListComponent } from './list/journey-list.component';
 import { JourneyListOwnerComponent } from './list/journey-list-owner.component';
@@ -67,6 +71,11 @@ import { JourneyRoutingModule } from './journey-routing.module';
   providers: [
     AuthGuard,
     JourneyResolver,
+    JourneyService,
+    FileService,
+    StoryService,
+    IdService,
+    SafeStylePipe,
   ],
 })
 export class JourneyModule { }

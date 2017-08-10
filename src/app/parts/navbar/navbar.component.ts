@@ -8,16 +8,15 @@ import * as firebase from 'firebase/app';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 import { BehaviorSubject } from 'rxjs/Rx';
 
-import { AuthService } from '../services';
+import { AuthService } from '../../shared';
 import { CastService } from '../cast';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { SigninComponent } from './signin.component';
 
 @Component({
-  moduleId: module.id,
-  selector: 'app-sd-navbar',
+  selector: 'app-navbar',
   templateUrl: 'navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
+  styleUrls: ['navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   isMobileNavbarOpen: BehaviorSubject<boolean>;

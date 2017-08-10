@@ -6,13 +6,13 @@ import {
   MdToolbarModule,
   MdMenuModule,
 } from '@angular/material';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { ResponsiveModule } from 'ng2-responsive';
 
+import { SharedModule } from '../../shared';
 import { CastModule } from '../cast';
+import { SidenavService } from '../sidenav/sidenav.service';
 import { NavbarComponent } from './navbar.component';
 import { SigninComponent } from './signin.component';
-import { SidenavService } from '../sidenav/sidenav.service';
 
 @NgModule({
   imports: [
@@ -22,6 +22,7 @@ import { SidenavService } from '../sidenav/sidenav.service';
     MdToolbarModule,
     MdMenuModule,
     ResponsiveModule,
+    SharedModule,
     CastModule,
   ],
   exports: [NavbarComponent],
@@ -33,8 +34,7 @@ import { SidenavService } from '../sidenav/sidenav.service';
     SigninComponent,
   ],
   providers: [
-    AngularFireAuth,
-    SidenavService, // This is an exceptional case because they mutually include each other.
+    SidenavService, // (exception) module's not imported to prevent a circular import.
   ],
 })
 export class NavbarModule { }

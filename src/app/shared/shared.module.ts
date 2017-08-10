@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { CastModule } from './cast';
-import { NavbarModule, NavbarComponent } from './navbar';
-import { SidenavModule, SidenavComponent } from './sidenav';
 import {
   ShowOnSignedInDirective,
 } from './directives';
@@ -14,31 +13,17 @@ import {
   SafeStylePipe,
   SafeUrlPipe,
 } from './pipes';
-import {
-  AuthService,
-  CommentService,
-  FileService,
-  IdService,
-  JourneyService,
-  KmlService,
-  LocationService,
-  PwService,
-  StoryService,
-  UrlShortenerService,
-  UserPrivateService,
-  UserService,
-} from './services';
 
 @NgModule({
   imports: [
     CommonModule,
-    CastModule,
-    NavbarModule,
-    SidenavModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
   ],
   exports: [
-    NavbarComponent,
-    SidenavComponent,
     ShowOnSignedInDirective,
     SafeHtmlPipe,
     SafeStylePipe,
@@ -49,23 +34,6 @@ import {
     SafeHtmlPipe,
     SafeStylePipe,
     SafeUrlPipe,
-  ],
-  providers: [
-    AngularFireAuth,
-    AngularFireDatabase,
-    DatePipe,
-    AuthService,
-    CommentService,
-    FileService,
-    IdService,
-    JourneyService,
-    KmlService,
-    LocationService,
-    PwService,
-    StoryService,
-    UrlShortenerService,
-    UserPrivateService,
-    UserService,
   ],
 })
 export class SharedModule { }

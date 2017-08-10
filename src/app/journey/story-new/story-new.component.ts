@@ -10,7 +10,6 @@ import {
 } from '../../shared';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-story-new',
   templateUrl: 'story-new.component.html',
 })

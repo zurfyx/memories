@@ -4,7 +4,10 @@ import { RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk';
 import { MdTableModule } from '@angular/material';
 
-import { SharedModule } from '../shared';
+import {
+  SharedModule,
+  PwService,
+} from '../shared';
 import { PwComponent } from './pw.component';
 import { PwIntroComponent } from './pw-intro.component';
 import { PwListComponent } from './pw-list.component';
@@ -25,6 +28,8 @@ import { PwRoutingModule } from './pw-routing.module';
     PwIntroComponent,
     PwListComponent,
   ],
-  providers: [],
+  providers: [
+    PwService,
+  ],
 })
 export class PwModule { }

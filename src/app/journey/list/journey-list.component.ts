@@ -7,7 +7,6 @@ import {
 } from '../../shared';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-journey-list',
   templateUrl: 'journey-list.component.html',
   styleUrls: ['journey-list.component.scss'],

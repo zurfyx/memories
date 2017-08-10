@@ -13,10 +13,10 @@ import {
   UserService,
   Story,
   StoryService,
-  CastService,
   KmlService,
-  ConfirmComponent,
 } from '../../shared';
+import { CastService } from '../../parts/cast';
+import { ConfirmComponent } from '../../parts/confirm';
 import { EditState } from './edit-state';
 
 @Component({

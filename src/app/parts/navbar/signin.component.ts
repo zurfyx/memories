@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 import * as firebase from 'firebase/app';
 
-import { AuthService } from '../services';
+import { AuthService } from '../../shared';
 
 @Component({
   moduleId: module.id,
@@ -10,13 +10,11 @@ import { AuthService } from '../services';
   templateUrl: 'signin.component.html',
   styleUrls: ['signin.component.scss'],
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent {
   constructor(
     private dialogRef: MdDialogRef<SigninComponent>,
     private authService: AuthService,
   ) { }
-
-  ngOnInit() { }
 
   googleSignin() {
     this.authService.googleSignin();

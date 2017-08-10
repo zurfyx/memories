@@ -15,13 +15,14 @@ import {
 import { AgmCoreModule } from '@agm/core';
 
 import {
+  SharedModule,
   SafeStylePipe,
   SafeUrlPipe,
-  CastModule,
-  PwModule,
-  ConfirmModule,
-  ConfirmComponent,
+  CommentService,
 } from '../../shared';
+import { CastModule } from '../../parts/cast';
+import { PwModule } from '../../parts/physical-web';
+import { ConfirmModule, ConfirmComponent } from '../../parts/confirm';
 import { StoryDetailComponent } from './story-detail.component';
 import { StoryDetailBannerComponent } from './banner/story-detail-banner.component';
 import { StoryDetailCastComponent } from './cast/story-detail-cast.component';
@@ -68,6 +69,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     ConfirmComponent,
   ],
   providers: [
+    CommentService,
     SafeStylePipe,
     SafeUrlPipe,
   ],
