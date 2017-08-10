@@ -7,6 +7,9 @@ import { CastModule } from './cast';
 import { NavbarModule, NavbarComponent } from './navbar';
 import { SidenavModule, SidenavComponent } from './sidenav';
 import {
+  ShowOnSignedInDirective,
+} from './directives';
+import {
   SafeHtmlPipe,
   SafeStylePipe,
   SafeUrlPipe,
@@ -36,8 +39,13 @@ import {
   exports: [
     NavbarComponent,
     SidenavComponent,
+    ShowOnSignedInDirective,
+    SafeHtmlPipe,
+    SafeStylePipe,
+    SafeUrlPipe,
   ],
   declarations: [
+    ShowOnSignedInDirective,
     SafeHtmlPipe,
     SafeStylePipe,
     SafeUrlPipe,

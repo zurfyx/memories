@@ -1,2 +1,2 @@
-<app-pw-intro *ngIf="isSignedIn === false"></app-pw-intro>
-<app-pw-list *ngIf="isSignedIn"></app-pw-list>
+<app-pw-intro *appShowOnSignedIn="false"></app-pw-intro>
+<app-pw-list *appShowOnSignedIn></app-pw-list>

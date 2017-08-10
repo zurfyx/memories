@@ -8,3 +8,4 @@ export * from './pipes';
 export * from './services';
 export * from './sidenav';
 export * from './utils';
+export * from './shared.module';
