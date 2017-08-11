@@ -28,7 +28,7 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
   destroy: ReplaySubject<any> = new ReplaySubject();
 
   journey: Journey;
-  owner: User; // Journey's owner.
+  owner: User; // Journey owner.
   stories: Story[];
 
   user: User; // Signed in user.
@@ -165,6 +165,7 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
   /**
    * Delete journey.
    */
+
   delete() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
@@ -192,6 +193,7 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
   /**
    * Misc.
    */
+
   isSignedUserTheOwner(): boolean {
     if (!(this.user && this.owner)) {
       return false;

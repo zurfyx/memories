@@ -27,7 +27,9 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
   destroy: ReplaySubject<any> = new ReplaySubject();
 
   story: Story;
-  owner: User;
+  owner: User; // Story owner.
+
+  user: User; // Signed in user.
 
   editState = EditState.View;
   pending = new BehaviorSubject<Set<string>>(new Set());
@@ -58,17 +60,28 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
         }
       });
 
-    // Read current user data.
+    // Read story owner user data.
     this.userService.readUser(this.story.owner)
       .first()
       .subscribe((owner: User) => {
         this.owner = owner;
+      });
+
+    // Read current signed in user data.
+    this.userService.readCurrentUser()
+      .takeUntil(this.destroy)
+      .subscribe((user: User) => {
+        this.user = user;
       });
   }
 
   ngOnDestroy() {
     this.destroy.next(true);
   }
+
+  /**
+   * Edit story.
+   */
 
   isActivelyEditing(): boolean {
     return this.editState === EditState.Edit;
@@ -147,6 +160,10 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Delete story.
+   */
+
   delete() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
@@ -170,5 +187,16 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
       },
       error => window.alert('An error has ocurred. Story was not deleted.'),
     );
+  }
+
+  /**
+   * Misc.
+   */
+
+  isSignedUserTheOwner(): boolean {
+    if (!(this.user && this.owner)) {
+      return false;
+    }
+    return this.user.$key === this.owner.$key;
   }
 }
