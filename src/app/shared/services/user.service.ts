@@ -28,7 +28,7 @@ export class UserService {
 
   readCurrentUser(): Observable<User> {
     return this.afAuth.authState.flatMap((user: firebase.User) => (
-      this.readUser(user.uid)
+      user ? this.readUser(user.uid) : Observable.of(null)
     ));
   }
 
