@@ -13,6 +13,12 @@
   }
 }
 
+.mat-card.disabled {
+  border: 1px solid #dadada;
+  box-shadow: none !important;
+  background-color: transparent;
+}
+
 .mat-card-image {
   max-height: 300px;
 }

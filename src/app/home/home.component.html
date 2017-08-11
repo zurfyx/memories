@@ -7,7 +7,16 @@
 
 <div class="page">
   <div class="grid">
-    <md-card class="clickable" [routerLink]="['/journeys/new']">
+    <md-card class="disabled" *appShowOnSignedIn="false">
+      <div md-card-image>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </div>
+      <md-card-content>
+        Sign in to start
+      </md-card-content>
+    </md-card>
+
+    <md-card class="clickable" [routerLink]="['/journeys/new']" *appShowOnSignedIn>
       <div md-card-image>
         <i class="fa fa-plus" aria-hidden="true"></i>
       </div>

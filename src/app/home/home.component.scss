@@ -32,11 +32,11 @@ md-card {
   text-align: center;
   padding: 3rem;
   transition: 0.2s all ease-in;
+}
 
-  &:hover {
-    background-color: $primary;
-    color: #fff;
-  }
+md-card:not(.disabled) .mat-card-image:hover {
+  background-color: $primary;
+  color: #fff;
 }
 
 .mat-card-content {
