@@ -49,3 +49,7 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin rounded-full() {
+  border-radius: 999px;
+}

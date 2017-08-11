@@ -1,3 +1,9 @@
+/** 
+  * DO NOT IMPORT THIS FILE DIRECTLY FROM MODULES!
+  * IT WILL CAUSE UNWANTED REDUNDANCY. Component styles are already imported by the app.component.ts
+  * Use conf/index.scss instead (contains variables and mixins).
+  **/
+
 @import "conf/index";
 @import "a";
 @import "borders";
