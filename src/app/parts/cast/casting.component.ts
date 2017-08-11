@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  Input,
-  Output,
-  EventEmitter,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 

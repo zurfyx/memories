@@ -44,7 +44,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
         const safeUrl: SafeStyle = this.safeUrlPipe.transform(b64);
         this.newPhotos.push({
           file: files[i],
-          safeStyle: b64,
+          safeStyle: safeUrl,
         });
       });
     });

@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import {
   MdButtonModule,
   MdToolbarModule,
   MdMenuModule,
 } from '@angular/material';
-import { ResponsiveModule } from 'ng2-responsive';
 
 import { SharedModule } from '../../shared';
 import { CastModule } from '../cast';

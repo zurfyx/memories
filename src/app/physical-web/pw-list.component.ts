@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataSource } from '@angular/cdk';
-import { MdSort } from '@angular/material';
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs/Rx';
+import { Observable, ReplaySubject } from 'rxjs/Rx';
 
 import {
   Pw,

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDatepicker } from '@angular/material';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { StoryDetailEditComponent } from '../story-detail-edit.component';

@@ -1,20 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
-import * as firebase from 'firebase/app';
+import { Component } from '@angular/core';
 
 import { AuthService } from '../../shared';
 
 @Component({
-  moduleId: module.id,
-  selector: 'app-sd-signin',
+  selector: 'app-signin',
   templateUrl: 'signin.component.html',
   styleUrls: ['signin.component.scss'],
 })
 export class SigninComponent {
-  constructor(
-    private dialogRef: MdDialogRef<SigninComponent>,
-    private authService: AuthService,
-  ) { }
+  constructor(private authService: AuthService) { }
 
   googleSignin() {
     this.authService.googleSignin();

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   MdSnackBar,
@@ -13,7 +13,6 @@ import {
   UserService,
   Story,
   StoryService,
-  KmlService,
 } from '../../shared';
 import { CastService } from '../../parts/cast';
 import { ConfirmComponent } from '../../parts/confirm';

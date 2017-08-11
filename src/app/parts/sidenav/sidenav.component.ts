@@ -11,7 +11,7 @@ import { SidenavService } from './sidenav.service';
 export class SidenavComponent {
   isMobileNavbarOpen: BehaviorSubject<boolean>;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(sidenavService: SidenavService) {
     this.isMobileNavbarOpen = sidenavService.isMobileNavbarOpen;
   }
 }

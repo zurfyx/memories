@@ -37,7 +37,6 @@ export class JourneyService {
 
     return this.fileService.createImage(cover)
       .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => {
-        const newValues = Object.assign({ coverURL: snapshot.downloadURL }, journey);
         const newJourney = new Journey({ // Don't modify the original subject.
           ...journey,
           coverURL: snapshot.downloadURL,

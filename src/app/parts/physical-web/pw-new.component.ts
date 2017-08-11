@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Beacon } from 'eddystone-web-bluetooth';
-import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-pw-new',

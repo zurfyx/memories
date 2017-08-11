@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { PwComponent } from './pw.component';
 import { PwIntroComponent } from './pw-intro.component';

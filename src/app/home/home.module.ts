@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import {
-  MdCardModule,
-} from '@angular/material';
+import { MdCardModule } from '@angular/material';
 
 import { SharedModule } from '../shared';
 import { HomeComponent } from './home.component';

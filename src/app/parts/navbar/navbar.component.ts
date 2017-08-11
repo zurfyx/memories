@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
-import { Observable } from 'rxjs/Rx';
+import { ReplaySubject } from 'rxjs/Rx';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
@@ -18,27 +17,37 @@ import { SigninComponent } from './signin.component';
   templateUrl: 'navbar.component.html',
   styleUrls: ['navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
+  destroy: ReplaySubject<any> = new ReplaySubject();
+
   isMobileNavbarOpen: BehaviorSubject<boolean>;
 
-  user: Observable<firebase.User>;
-  activeCast: Observable<LiquidGalaxyServer>;
+  user: firebase.User;
+  castServer: BehaviorSubject<LiquidGalaxyServer>;
 
   constructor(
-    private sanitizer: DomSanitizer,
     private router: Router,
     private dialog: MdDialog,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
-    private castService: CastService,
-    private sidenavService: SidenavService,
+    castService: CastService,
+    sidenavService: SidenavService,
   ) {
     this.isMobileNavbarOpen = sidenavService.isMobileNavbarOpen;
-    this.user = afAuth.authState;
-    this.activeCast = this.castService.active;
+    this.castServer = castService.active;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.afAuth.authState
+      .takeUntil(this.destroy)
+      .subscribe((user: firebase.User) => {
+        this.user = user;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
+  }
 
   openSidenav() {
     this.isMobileNavbarOpen.next(false);
@@ -61,8 +70,6 @@ export class NavbarComponent implements OnInit {
 
   navigateToUser() {
     // firebase.User.uid === authenticatedUser.$key
-    this.user.first().subscribe((user: firebase.User) => {
-      this.router.navigate([`/users/${user.uid}`]);
-    });
+    this.router.navigate([`/users/${this.user.uid}`]);
   }
 }

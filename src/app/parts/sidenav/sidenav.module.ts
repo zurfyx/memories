@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import {
   MdSidenavModule,
   MdListModule,
 } from '@angular/material';
-import { ResponsiveModule } from 'ng2-responsive';
 
 import { SharedModule } from '../../shared';
 import { NavbarModule } from '../navbar';

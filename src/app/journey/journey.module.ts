@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import {
   MdInputModule,
   MdButtonModule,
@@ -12,8 +9,6 @@ import {
   MdDialogModule,
   MdSnackBarModule,
 } from '@angular/material';
-import { ResponsiveModule } from 'ng2-responsive';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {
   SharedModule,

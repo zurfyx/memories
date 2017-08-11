@@ -10,7 +10,7 @@
     "test-cli-watch": "ng test",
     "test-firebase": "jest",
     "test-firebase-watch": "jest --watch",
-    "lint": "ng lint",
+    "lint": "ng lint --type-check",
     "e2e": "ng e2e",
     "coverage": "ng test --watch false --code-coverage"
   },

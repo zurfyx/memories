@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Observable } from 'rxjs/Rx';
 
 import { Story, User } from '../../models';
-import { UserService } from '../user.service';
 import html from './html-templates';
 import xml from './xml-templates';
 
 @Injectable()
 export class KmlService {
 
-  constructor(
-    private datePipe: DatePipe,
-    private userService: UserService,
-  ) { }
+  constructor(private datePipe: DatePipe) { }
 
   empty(): string {
     return xml.document();

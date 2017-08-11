@@ -14,9 +14,7 @@ export class PwNewScanComponent {
   eddystone: Eddystone;
   user: Observable<firebase.User>;
 
-  constructor(
-    private afAuth: AngularFireAuth,
-  ) {
+  constructor(afAuth: AngularFireAuth) {
     this.eddystone = new Eddystone();
     this.user = afAuth.authState;
   }

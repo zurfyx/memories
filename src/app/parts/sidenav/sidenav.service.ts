@@ -6,9 +6,7 @@ import { BehaviorSubject } from 'rxjs/Rx';
 export class SidenavService {
   isMobileNavbarOpen: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(
-    private router: Router,
-  ) {
+  constructor(router: Router) {
     // Close sidenav after navigating.
     router.events.subscribe(() => this.isMobileNavbarOpen.next(false));
   }

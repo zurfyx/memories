@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase';
 
 import { UserPrivate } from '../models';
 
 @Injectable()
 export class UserPrivateService {
-  constructor(
-    private afDatabase: AngularFireDatabase,
-  ) { }
+  constructor(private afDatabase: AngularFireDatabase) { }
 
   readUserPrivate(uid: string): Observable<UserPrivate> {
     return this.afDatabase.object(`usersPrivate/${uid}`).map((snapshot: any) => (
