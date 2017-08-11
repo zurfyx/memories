@@ -5,13 +5,14 @@ import {
   MdButtonModule,
 } from '@angular/material';
 
+import { SharedModule } from '../../shared';
 import { ConfirmComponent } from './confirm.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     MdDialogModule,
     MdButtonModule,
+    SharedModule,
   ],
   exports: [ConfirmComponent],
   declarations: [ConfirmComponent],

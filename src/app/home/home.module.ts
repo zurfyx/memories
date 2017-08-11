@@ -5,14 +5,14 @@ import {
   MdCardModule,
 } from '@angular/material';
 
+import { SharedModule } from '../shared';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
     MdCardModule,
+    SharedModule,
     HomeRoutingModule,
   ],
   exports: [],

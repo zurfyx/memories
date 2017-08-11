@@ -16,12 +16,9 @@ import { SigninComponent } from './signin.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
     MdButtonModule,
     MdToolbarModule,
     MdMenuModule,
-    ResponsiveModule,
     SharedModule,
     CastModule,
   ],

@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
-import { ResponsiveModule } from 'ng2-responsive';
 
 import { environment } from '../environments/environment';
 import {
@@ -38,7 +37,6 @@ import { AppRoutingModule } from './app-routing.module';
       apiKey: environment.maps.apiKey,
     }),
     AngularFireModule.initializeApp(environment.firebase),
-    ResponsiveModule,
     SharedModule,
     NavbarModule,
     SidenavModule,

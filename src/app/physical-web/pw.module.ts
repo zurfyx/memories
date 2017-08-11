@@ -15,8 +15,6 @@ import { PwRoutingModule } from './pw-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
     CdkTableModule,
     MdTableModule,
     SharedModule,

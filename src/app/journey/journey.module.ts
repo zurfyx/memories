@@ -16,12 +16,13 @@ import { ResponsiveModule } from 'ng2-responsive';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {
+  SharedModule,
+  SafeStylePipe,
   AuthGuard,
   JourneyService,
   FileService,
   StoryService,
   IdService,
-  SafeStylePipe,
 } from '../shared';
 import { CastModule } from '../parts/cast';
 import { ConfirmModule, ConfirmComponent } from '../parts/confirm';
@@ -37,10 +38,6 @@ import { JourneyRoutingModule } from './journey-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
     MdInputModule,
     MdButtonModule,
     MdCardModule,
@@ -49,8 +46,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     MdTooltipModule,
     MdDialogModule,
     MdSnackBarModule,
-    ResponsiveModule,
-    AngularFireAuthModule,
+    SharedModule,
     CastModule,
     PwModule,
     ConfirmModule,

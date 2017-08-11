@@ -7,16 +7,14 @@ import {
 } from '@angular/material';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { SharedModule } from '../../shared';
 import { StoryNewComponent } from './story-new.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     MdInputModule,
+    SharedModule,
     MdButtonModule,
-    AngularFireAuthModule,
   ],
   exports: [StoryNewComponent],
   declarations: [StoryNewComponent],

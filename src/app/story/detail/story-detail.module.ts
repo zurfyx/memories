@@ -36,9 +36,6 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
     MdButtonModule,
     MdInputModule,
     MdNativeDateModule,
@@ -48,6 +45,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     MdTooltipModule,
     MdDialogModule,
     AgmCoreModule,
+    SharedModule,
     CastModule,
     PwModule,
     ConfirmModule,
