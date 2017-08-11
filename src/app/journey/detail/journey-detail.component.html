@@ -51,7 +51,7 @@
       </md-input-container>
 
       <div class="buttons">
-        <ng-container *ngIf="editState === 0">
+        <ng-container *ngIf="editState === 0 && isSignedUserTheOwner()">
           <a md-button (click)="toggleEdit()" *hideItBootstrap="['xs']">Edit journey</a>
           <a md-button (click)="toggleNewStory($event)" *hideItBootstrap="['xs']">Add story</a>
         </ng-container>
@@ -67,7 +67,7 @@
             <a md-menu-item (click)="toggleEdit()" *showItBootstrap="['xs']">Edit journey</a>
             <a md-menu-item (click)="toggleNewStory($event)" *showItBootstrap="['xs']">Add story</a>
           </ng-container>
-          <a md-menu-item (click)="delete()">Delete journey</a>
+          <a md-menu-item (click)="delete()" *ngIf="isSignedUserTheOwner()">Delete journey</a>
           <a md-menu-item appPwNew>Physical Web</a>
         </md-menu>
       </div>

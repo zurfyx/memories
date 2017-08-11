@@ -31,6 +31,8 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
   owner: User; // Journey's owner.
   stories: Story[];
 
+  user: User; // Signed in user.
+
   isNewStoryVisible = false;
 
   editState = 0; // 0 => Not editing; 1 => Actively editing; 2 => Saving.
@@ -75,11 +77,18 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
         this.stories = stories;
       });
 
-    // Read current user data.
+    // Read journey owner user data.
     this.userService.readUser(this.journey.owner)
       .first()
       .subscribe((owner: User) => {
         this.owner = owner;
+      });
+
+    // Read current signed in user data.
+    this.userService.readCurrentUser()
+      .takeUntil(this.destroy)
+      .subscribe((user: User) => {
+        this.user = user;
       });
   }
 
@@ -183,6 +192,12 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
   /**
    * Misc.
    */
+  isSignedUserTheOwner(): boolean {
+    if (!(this.user && this.owner)) {
+      return false;
+    }
+    return this.user.$key === this.owner.$key;
+  }
 
   getRouterStoryPath(uid: string) {
     return [`/stories/${uid}`];
