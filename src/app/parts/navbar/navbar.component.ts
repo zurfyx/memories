@@ -2,12 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 import { ReplaySubject } from 'rxjs/Rx';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 import { BehaviorSubject } from 'rxjs/Rx';
 
-import { AuthService } from '../../shared';
+import { AuthService, User, UserService } from '../../shared';
 import { CastService } from '../cast';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { SigninComponent } from './signin.component';
@@ -22,14 +20,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isMobileNavbarOpen: BehaviorSubject<boolean>;
 
-  user: firebase.User;
+  user: User;
   castServer: BehaviorSubject<LiquidGalaxyServer>;
 
   constructor(
     private router: Router,
     private dialog: MdDialog,
-    private afAuth: AngularFireAuth,
     private authService: AuthService,
+    private userService: UserService,
     castService: CastService,
     sidenavService: SidenavService,
   ) {
@@ -38,9 +36,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.afAuth.authState
+    this.userService.readCurrentUser()
       .takeUntil(this.destroy)
-      .subscribe((user: firebase.User) => {
+      .subscribe((user: User) => {
         this.user = user;
       });
   }
@@ -69,7 +67,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   navigateToUser() {
-    // firebase.User.uid === authenticatedUser.$key
-    this.router.navigate([`/users/${this.user.uid}`]);
+    this.router.navigate([`/users/${this.user.$key}`]);
   }
 }
