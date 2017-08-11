@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs/Rx';
+import { ReplaySubject } from 'rxjs/Rx';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({

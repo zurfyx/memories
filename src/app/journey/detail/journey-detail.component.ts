@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SafeStyle } from '@angular/platform-browser';
 import { MdDialog, MdSnackBar } from '@angular/material';
-import { Observable, Subject, BehaviorSubject, ReplaySubject } from 'rxjs/Rx';
+import { BehaviorSubject, ReplaySubject } from 'rxjs/Rx';
 import * as firebase from 'firebase';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 
@@ -16,12 +15,11 @@ import {
   JourneyService,
   Story,
   StoryService,
-  ConfirmComponent,
-  CastService,
 } from '../../shared';
+import { CastService } from '../../parts/cast';
+import { ConfirmComponent } from '../../parts/confirm';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-journey-detail',
   templateUrl: 'journey-detail.component.html',
   styleUrls: ['journey-detail.component.scss'],

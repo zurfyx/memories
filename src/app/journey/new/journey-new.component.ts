@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -16,7 +16,7 @@ import {
   templateUrl: 'journey-new.component.html',
   styleUrls: ['journey-new.component.scss'],
 })
-export class JourneyNewComponent implements OnInit {
+export class JourneyNewComponent {
   @ViewChild('coverInput') coverInput: ElementRef;
 
   journeyForm: FormGroup;
@@ -35,8 +35,6 @@ export class JourneyNewComponent implements OnInit {
       title: [''],
     });
   }
-
-  ngOnInit() { }
 
   executeCover() {
     this.coverInput.nativeElement.click();

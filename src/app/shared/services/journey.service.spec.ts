@@ -1,3 +1,5 @@
+/* tslint:disable:no-unused-variable */
+
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase } from 'angularfire2/database';

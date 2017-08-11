@@ -1,0 +1,45 @@
+@import "conf/index";
+
+.box {
+  background-color: $important-bg;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 400px) {
+  .box {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 550px) {
+  .box {
+    padding: 42px;
+  }
+}
+
+.box.info {
+  display: flex;
+  flex-direction: row;
+  box-shadow: none;
+  background-color: #e6f8ff;
+  color: #004563;
+
+  .fa {
+    margin-right: 20px;
+    align-self: center;
+  }
+}
+
+.box + .box {
+  margin-top: 2rem;
+}
+
+.box.unspaced {
+  padding: 0;
+}
+
+.box.highlight {
+  background-color: $secondary;
+}

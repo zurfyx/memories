@@ -1,0 +1,37 @@
+@import "conf/index";
+
+.mat-card {
+  overflow: hidden;
+}
+
+.mat-card.clickable {
+  cursor: pointer;
+
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.1); 
+    outline: none;
+  }
+}
+
+.mat-card-image {
+  max-height: 300px;
+}
+
+.mat-card-image.cover {
+  @include bg-image();
+  height: 200px;
+}
+
+md-card-content {
+   word-wrap: break-word;
+}
+
+.mat-card-title {
+  @include three-dots();
+  line-height: 1.2em;
+}
+
+md-card-header.solo-title .mat-card-header-text {
+  width: 100%;
+  margin: 0;
+}

@@ -4,12 +4,18 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { ResponsiveModule } from 'ng2-responsive';
 import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
 
 import { environment } from '../environments/environment';
-import { SharedModule } from './shared/shared.module';
+import {
+  SharedModule,
+  AuthService,
+  UserService,
+  UserPrivateService,
+} from './shared';
+import { NavbarModule } from './parts/navbar';
+import { SidenavModule } from './parts/sidenav';
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
 import { JourneyModule } from './journey/journey.module';
@@ -18,7 +24,6 @@ import { PwModule } from './physical-web/pw.module';
 import { StoryModule } from './story/story.module';
 import { UserModule } from './user/user.module';
 import { AppComponent } from './app.component';
-import { AuthService } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -28,12 +33,13 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     HttpModule,
     MaterialModule,
-    ResponsiveModule,
     AgmCoreModule.forRoot({
       apiKey: environment.maps.apiKey,
     }),
     AngularFireModule.initializeApp(environment.firebase),
     SharedModule,
+    NavbarModule,
+    SidenavModule,
     AboutModule,
     HomeModule,
     JourneyModule,
@@ -48,6 +54,8 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   providers: [
     AuthService,
+    UserService,
+    UserPrivateService,
   ],
   bootstrap: [AppComponent]
 })

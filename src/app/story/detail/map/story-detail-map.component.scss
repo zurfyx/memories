@@ -1,9 +1,9 @@
-@import "../../../shared/index";
+@import "../../../shared/scss/conf/index";
 
 .no-location {
-  @extend .one-line;
   text-align: center;
 }
+
 agm-map {
   height: 400px;
 }

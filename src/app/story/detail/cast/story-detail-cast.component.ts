@@ -6,9 +6,9 @@ import {
   User,
   Story,
   StoryService,
-  CastService,
   KmlService,
 } from '../../../shared';
+import { CastService } from '../../../parts/cast';
 
 @Component({
   selector: 'app-story-detail-cast',

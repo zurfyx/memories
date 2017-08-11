@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 
@@ -10,7 +10,6 @@ import {
 } from '../../shared';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-story-new',
   templateUrl: 'story-new.component.html',
 })

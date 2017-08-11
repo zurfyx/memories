@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs/Rx';
+import { ReplaySubject } from 'rxjs/Rx';
 
 import {
   Journey,
@@ -7,7 +7,6 @@ import {
 } from '../../shared';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-journey-list',
   templateUrl: 'journey-list.component.html',
   styleUrls: ['journey-list.component.scss'],

@@ -21,7 +21,6 @@ export class UserService {
   }
 
   readUser(uid: string): Observable<User> {
-    const options = { preserveSnapshot: true };
     return this.afDatabase.object(`users/${uid}`).map((snapshot: any) => (
       new User(snapshot)
     ));

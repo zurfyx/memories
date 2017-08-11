@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   MdSnackBar,
@@ -13,10 +13,9 @@ import {
   UserService,
   Story,
   StoryService,
-  CastService,
-  KmlService,
-  ConfirmComponent,
 } from '../../shared';
+import { CastService } from '../../parts/cast';
+import { ConfirmComponent } from '../../parts/confirm';
 import { EditState } from './edit-state';
 
 @Component({
@@ -163,12 +162,13 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteConfirmed() {
+    const journeyUid = this.story.journey; // Gather journey UID before the story is destroyed.
     this.storyService.deleteStory(this.story).subscribe(
       () => {
-        this.router.navigate([`/journeys/${this.story.journey}`]);
+        this.router.navigate([`/journeys/${journeyUid}`]);
         this.snackBar.open('Deleted!', null, { duration: 3000 });
       },
-      error => window.alert('An error ocurred. Story was not deleted.'),
+      error => window.alert('An error has ocurred. Story was not deleted.'),
     );
   }
 }

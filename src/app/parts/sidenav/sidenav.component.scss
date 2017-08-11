@@ -1,0 +1,50 @@
+@import "../../shared/scss/conf/index";
+
+md-sidenav {
+  width: 256px;
+  position: fixed;
+  left: -256px;
+  transition: .4s all !important;
+  z-index: 44;
+
+  &.mat-sidenav-opening, &.mat-sidenav-opened {
+    left: 0;
+  }
+}
+
+.mat-sidenav-container, 
+/deep/ .mat-sidenav-content {
+  transform: none !important;
+}
+
+/deep/ .mat-sidenav-content {
+  min-height: 100vh;
+}
+
+/deep/ .mat-sidenav-backdrop {
+  z-index: 44 !important;
+
+  &.mat-sidenav-shown {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.sidenav-mobile {
+  z-index: 43;
+}
+
+.sidenav-desktop > md-sidenav {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+              0 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+#sidenav-logo {
+  display: block;
+  color: $unimportant;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px 16px;
+  border-bottom: 1px solid $separator;
+  outline: none;
+}

@@ -1,0 +1,68 @@
+@import "conf/index";
+
+.content__header {
+  background-color: #fff;
+  border-bottom: 1px solid $separator;
+  width: 100%;
+  padding: 30px;
+
+  .title {
+    display: block;
+    color: #444;
+    font-size: 1.4em;
+    font-weight: 500;
+  }
+
+  .description {
+    color: $unimportant;
+    display: block;
+    max-width: 475px;
+  }
+
+  .title + .description {
+    margin-top: 15px;
+  }
+}
+
+.content__banner {
+  @include bg-image();
+  height: 250px;
+  width: 100%;
+
+}
+
+.banner__action-buttons {
+  position: relative;
+  width: 100%;
+  
+  .fa {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+  }
+}
+
+.banner__action-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  background: linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+  opacity: 0.7;
+  width: 20%;
+  max-width: 200px;
+  height: 100%;
+  outline: none;
+  transition: all 1s ease-out;
+
+  &:hover {
+    opacity: 1;
+    color: #ddd;
+    cursor: pointer;
+  }
+
+  .arrow {
+    transform: rotate(-90deg);
+    font-size: 4em;
+  }
+}

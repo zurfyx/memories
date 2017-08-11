@@ -5,9 +5,9 @@ import { LiquidGalaxyServer } from 'liquid-galaxy';
 import {
   User,
   Story,
-  CastService,
   KmlService,
 } from '../../shared';
+import { CastService } from '../../parts/cast';
 
 @Component({
   selector: 'app-journey-detail-cast',

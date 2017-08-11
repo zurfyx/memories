@@ -1,0 +1,24 @@
+@import "conf/index";
+
+a {
+  color: $primary;
+  text-decoration: none;
+}
+
+a.neat, .fake-link.neat {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fake-link {
+  cursor: pointer;
+}
+
+a.invisible {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: currentColor;
+  }
+}

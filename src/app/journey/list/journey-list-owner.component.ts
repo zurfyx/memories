@@ -6,7 +6,6 @@ import {
 } from '../../shared';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-journey-list-owner',
   templateUrl: 'journey-list-owner.component.html',
 })

@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 import {
   MdButtonModule,
   MdInputModule,
@@ -15,13 +12,14 @@ import {
 import { AgmCoreModule } from '@agm/core';
 
 import {
+  SharedModule,
   SafeStylePipe,
   SafeUrlPipe,
-  CastModule,
-  PwModule,
-  ConfirmModule,
-  ConfirmComponent,
+  CommentService,
 } from '../../shared';
+import { CastModule } from '../../parts/cast';
+import { PwModule } from '../../parts/physical-web';
+import { ConfirmModule, ConfirmComponent } from '../../parts/confirm';
 import { StoryDetailComponent } from './story-detail.component';
 import { StoryDetailBannerComponent } from './banner/story-detail-banner.component';
 import { StoryDetailCastComponent } from './cast/story-detail-cast.component';
@@ -35,9 +33,6 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
     MdButtonModule,
     MdInputModule,
     MdNativeDateModule,
@@ -47,6 +42,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     MdTooltipModule,
     MdDialogModule,
     AgmCoreModule,
+    SharedModule,
     CastModule,
     PwModule,
     ConfirmModule,
@@ -68,6 +64,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     ConfirmComponent,
   ],
   providers: [
+    CommentService,
     SafeStylePipe,
     SafeUrlPipe,
   ],
