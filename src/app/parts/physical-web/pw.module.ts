@@ -5,7 +5,11 @@ import {
   MdDialogModule,
 } from '@angular/material';
 
-import { SharedModule } from '../../shared';
+import {
+  SharedModule,
+  LocationService,
+  UrlShortenerService,
+} from '../../shared';
 import { PwNewComponent } from './pw-new.component';
 import { PwNewScanComponent } from './pw-new-scan.component';
 import { PwNewSaveComponent } from './pw-new-save.component';
@@ -33,6 +37,9 @@ import { PwNewDirective } from './pw-new.directive';
   entryComponents: [
     PwNewComponent,
   ],
-  providers: [],
+  providers: [
+    LocationService,
+    UrlShortenerService,
+  ],
 })
 export class PwModule { }
