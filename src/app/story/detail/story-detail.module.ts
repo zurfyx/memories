@@ -29,6 +29,7 @@ import { StoryDetailDateComponent } from './date/story-detail-date.component';
 import { StoryDetailDescriptionComponent } from './description/story-detail-description.component';
 import { StoryDetailMapComponent } from './map/story-detail-map.component';
 import { StoryDetailPhotoComponent } from './photo/story-detail-photo.component';
+import { StoryDetailGalleryComponent } from './photo/story-detail-gallery.component';
 import { StoryDetailTitleComponent } from './title/story-detail-title.component';
 
 @NgModule({
@@ -58,10 +59,12 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     StoryDetailDescriptionComponent,
     StoryDetailMapComponent,
     StoryDetailPhotoComponent,
+    StoryDetailGalleryComponent,
     StoryDetailTitleComponent,
   ],
   entryComponents: [
     ConfirmComponent,
+    StoryDetailGalleryComponent,
   ],
   providers: [
     CommentService,

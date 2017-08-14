@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { SafeStyle } from '@angular/platform-browser';
+import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 
 import {
@@ -8,6 +9,8 @@ import {
   SafeUrlPipe,
 } from '../../../shared';
 import { StoryDetailEditComponent } from '../story-detail-edit.component';
+import { StoryDetailGalleryComponent } from './story-detail-gallery.component';
+import { MediaType } from './media-type';
 
 @Component({
   selector: 'app-story-detail-photo',
@@ -24,6 +27,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   pendingDelete: { url: string, title?: string }[] = [];
 
   constructor(
+    private dialog: MdDialog,
     private imageService: FileService,
     private safeUrlPipe: SafeUrlPipe,
   ) {
@@ -121,5 +125,21 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
    */
   deleteNewStoryPhoto(photo) {
     this.newPhotos = this.newPhotos.filter(newPhoto => newPhoto !== photo);
+  }
+
+  openGallery() {
+    if (this.isEditing()) {
+      return;
+    }
+    const media = Object.keys(this.story.photos).map(key => ({
+      url: this.story.photos[key].url,
+      type: MediaType.Photo,
+    }));
+    this.dialog.open(StoryDetailGalleryComponent, {
+      data: {
+        media,
+        selectedIndex: 0,
+      },
+    });
   }
 }

@@ -1,0 +1,36 @@
+@import "../../../shared/scss/conf/index";
+
+.media {
+  position: relative;
+}
+
+.arrow {
+  @include rounded-full();
+  position: absolute;
+  top: 50%;
+  color: #666;
+  font-size: 4em;
+  transform: translateX(-50%) rotate(90deg);
+  white-space: nowrap;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+}
+
+.arrow-left {
+  left: -0.25%;
+  transform: rotate(-90deg);
+}
+
+.arrow-right {
+  right: -0.25%;
+  transform: rotate(90deg);
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
