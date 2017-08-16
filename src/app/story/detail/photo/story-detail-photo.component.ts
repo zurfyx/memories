@@ -5,6 +5,8 @@ import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import uuid from 'uuid/v4';
 
+import { Validators } from './validators';
+
 import {
   FormUtils,
   FileService,
@@ -47,7 +49,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     super();
 
     this.videoForm = this.formBuilder.group({
-      url: [''],
+      url: ['', Validators.isVideo],
     });
   }
 
@@ -89,11 +91,20 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   submitVideoForm() {
     this.setPending();
     const url: string = this.videoForm.value['url'];
+    const id = this.extractVideoId(url);
 
     if (this.newVideos === undefined) {
       this.initializeNewVideos();
     }
-    this.newVideos[uuid()] = { id: url, type: 'youtube' };
+    this.newVideos[uuid()] = { id, type: 'youtube' };
+
+    this.videoForm.setValue({ url: '' });
+  }
+
+  extractVideoId(url: string) {
+    // https://stackoverflow.com/a/27728417
+    const REGEX = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+    return url.match(REGEX)[1];
   }
 
   cleanup(): void {
