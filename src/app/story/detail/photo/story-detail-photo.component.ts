@@ -78,7 +78,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     if (this.newVideos !== undefined) {
       throw new Error('newVideos has already been initialized');
     }
-    this.newVideos = {};
+    this.newVideos = this.story.videos || {};
   }
 
   submitVideoForm() {
@@ -178,7 +178,14 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   }
 
   deleteVideo(video: { id: string, type: string }) {
-
+    if (this.newVideos === undefined) {
+      this.initializeNewVideos();
+    }
+    Object.keys(this.newVideos).forEach((newVideoUid) => {
+      if (this.newVideos[newVideoUid] === video) {
+        delete this.newVideos[newVideoUid];
+      }
+    });
   }
 
   openGallery() {
