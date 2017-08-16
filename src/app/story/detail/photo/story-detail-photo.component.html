@@ -7,9 +7,13 @@
     (change)="addPhoto($event)"
     #addPhotoInput />
   <button md-button (click)="executeAddPhoto()" [disabled]="!isActivelyEditing()">Add photo</button>
-  <button md-button [disabled]="!isActivelyEditing()">Add video</button>
+  <button md-button (click)="toggleVideoForm()" [disabled]="!isActivelyEditing()">Add video</button>
 
-  <form class="add-video-form" [formGroup]="videoForm" (ngSubmit)="submitVideoForm()">
+  <form
+    class="add-video-form"
+    [formGroup]="videoForm"
+    (ngSubmit)="submitVideoForm()"
+    *ngIf="isVideoFormVisible">
     <fieldset>
       <md-input-container>
         <input type="text" formControlName="url" placeholder="YouTube URL" mdInput />

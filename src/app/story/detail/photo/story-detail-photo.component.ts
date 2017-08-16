@@ -29,6 +29,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   pendingDelete: { url: string, title?: string }[] = [];
 
   videoForm: FormGroup;
+  isVideoFormVisible = false;
 
   // New videos.
   // If the variable remains as undefined, no modifications will be done. Otherwise, the final Story
@@ -81,6 +82,10 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     this.newVideos = this.story.videos || {};
   }
 
+  toggleVideoForm() {
+    this.isVideoFormVisible = !this.isVideoFormVisible;
+  }
+
   submitVideoForm() {
     this.setPending();
     const url: string = this.videoForm.value['url'];
@@ -94,7 +99,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   cleanup(): void {
     this.newPhotos = [];
     this.pendingDelete = [];
-    this.videoForm.patchValue({ url: '' });
+    this.videoForm.setValue({ url: '' });
     this.newVideos = {};
     this.unsetPending();
   }
