@@ -11,6 +11,7 @@ import {
 } from './directives';
 import {
   SafeHtmlPipe,
+  SafeResourceUrlPipe,
   SafeStylePipe,
   SafeUrlPipe,
 } from './pipes';
@@ -35,12 +36,14 @@ import {
     ResponsiveModule,
     ShowOnSignedInDirective,
     SafeHtmlPipe,
+    SafeResourceUrlPipe,
     SafeStylePipe,
     SafeUrlPipe,
   ],
   declarations: [
     ShowOnSignedInDirective,
     SafeHtmlPipe,
+    SafeResourceUrlPipe,
     SafeStylePipe,
     SafeUrlPipe,
   ],

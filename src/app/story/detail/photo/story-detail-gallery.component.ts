@@ -19,6 +19,18 @@ export class StoryDetailGalleryComponent {
     this.selectedIndex = data.selectedIndex;
   }
 
+  get currentMediaItem(): GalleryMediaItem {
+    return this.media[this.selectedIndex];
+  }
+
+  isPhoto(media: GalleryMediaItem): boolean {
+    return media.type === MediaType.Photo;
+  }
+
+  isVideo(media: GalleryMediaItem): boolean {
+    return media.type === MediaType.Video;
+  }
+
   next() {
     this.selectedIndex = this.mod(this.selectedIndex + 1, this.media.length);
 
@@ -41,7 +53,9 @@ interface GalleryData {
   selectedIndex: number,
 };
 
-type GalleryMedia = [{
+type GalleryMedia = GalleryMediaItem[];
+
+interface GalleryMediaItem {
   url: string,
   type: MediaType,
-}];
+};
