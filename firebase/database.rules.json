@@ -101,8 +101,8 @@
         },
         "videos": {
           "$videoUid": {
-            ".validate": "newData.hasChildren(['url', 'type'])",
-            "url": {
+            ".validate": "newData.hasChildren(['id', 'type'])",
+            "id": {
               ".validate": "newData.val().matches(/^[a-zA-Z0-9_-]{11}$/)"
             },
             "type": {

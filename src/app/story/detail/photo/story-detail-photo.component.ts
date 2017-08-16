@@ -1,7 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { SafeStyle } from '@angular/platform-browser';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
+import uuid from 'uuid/v4';
 
 import {
   FormUtils,
@@ -26,12 +28,26 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
   // Photos marked to be deleted (which won't be deleted until the editing is over).
   pendingDelete: { url: string, title?: string }[] = [];
 
+  videoForm: FormGroup;
+
+  // New videos.
+  // If the variable remains as undefined, no modifications will be done. Otherwise, the final Story
+  // object will have its videos replaced by this one when the update is over.
+  newVideos: {
+    [uid: string]: { id: string, type: string };
+  };
+
   constructor(
+    private formBuilder: FormBuilder,
     private dialog: MdDialog,
     private imageService: FileService,
     private safeUrlPipe: SafeUrlPipe,
   ) {
     super();
+
+    this.videoForm = this.formBuilder.group({
+      url: [''],
+    });
   }
 
   addPhoto(event: EventTarget) {
@@ -58,13 +74,37 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     this.addPhotoInput.nativeElement.click();
   }
 
+  initializeNewVideos() {
+    if (this.newVideos !== undefined) {
+      throw new Error('newVideos has already been initialized');
+    }
+    this.newVideos = {};
+  }
+
+  submitVideoForm() {
+    this.setPending();
+    const url: string = this.videoForm.value['url'];
+
+    if (this.newVideos === undefined) {
+      this.initializeNewVideos();
+    }
+    this.newVideos[uuid()] = { id: url, type: 'youtube' };
+  }
+
   cleanup(): void {
     this.newPhotos = [];
     this.pendingDelete = [];
+    this.videoForm.patchValue({ url: '' });
+    this.newVideos = {};
     this.unsetPending();
   }
 
   updateStory(): Observable<void> {
+    // Add videos to the story object. Contrary to photos, we only save their id.
+    if (this.newVideos !== undefined) {
+      this.story.videos = this.newVideos;
+    }
+
     if (!this.story.photos) {
       this.story.photos = {};
     }
@@ -111,6 +151,16 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
       .filter(photo => !this.pendingDelete.includes(photo));
   }
 
+  storyVideos(): { id: string, type: string }[] {
+    if (this.newVideos !== undefined) {
+      return Object.keys(this.newVideos).map(key => this.newVideos[key]);
+    }
+    if (this.story.videos) {
+      return Object.keys(this.story.videos).map(key => this.story.videos[key]);
+    }
+    return [];
+  }
+
   /**
    * Delete a photo that has been previously stored.
    * TODO.
@@ -125,6 +175,10 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
    */
   deleteNewStoryPhoto(photo) {
     this.newPhotos = this.newPhotos.filter(newPhoto => newPhoto !== photo);
+  }
+
+  deleteVideo(video: { id: string, type: string }) {
+
   }
 
   openGallery() {

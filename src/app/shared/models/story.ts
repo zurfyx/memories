@@ -18,6 +18,12 @@ export class Story extends Base {
       title?: string;
     },
   };
+  videos: {
+    [uid: string]: {
+      id: string,
+      type: string,
+    }
+  };
 
   isGeolocalized(): boolean {
     return !!this.map

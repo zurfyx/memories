@@ -7,9 +7,30 @@
     (change)="addPhoto($event)"
     #addPhotoInput />
   <button md-button (click)="executeAddPhoto()" [disabled]="!isActivelyEditing()">Add photo</button>
+  <button md-button [disabled]="!isActivelyEditing()">Add video</button>
+
+  <form class="add-video-form" [formGroup]="videoForm" (ngSubmit)="submitVideoForm()">
+    <fieldset>
+      <md-input-container>
+        <input type="text" formControlName="url" placeholder="YouTube URL" mdInput />
+      </md-input-container>
+      <button type="submit" color="primary" [disabled]="!videoForm.valid" md-raised-button>
+        Add
+      </button>
+    </fieldset>
+  </form>
 </div>
 
 <div class="photos">
+  <div class="video" *ngFor="let video of storyVideos()">
+    <a
+      href="javascript:void(0)"
+      class="video__delete"
+      *ngIf="isEditing()">
+      <i class="fa fa-times"></i>
+    </a>
+    <img [src]="'https://img.youtube.com/vi/' + video.id + '/hqdefault.jpg'" />
+  </div>
   <div class="photo" *ngFor="let photo of newPhotos">
     <a
       href="javascript:void(0)"
