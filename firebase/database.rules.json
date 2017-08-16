@@ -98,6 +98,17 @@
               ".validate": "newData.isString()"
             }
           }
+        },
+        "videos": {
+          "$videoUid": {
+            ".validate": "newData.hasChildren(['url', 'type'])",
+            "url": {
+              ".validate": "newData.val().matches(/^[a-zA-Z0-9_-]{11}$/)"
+            },
+            "type": {
+              ".validate": "newData.val() === 'youtube'"
+            }
+          }
         }
       }
     },
