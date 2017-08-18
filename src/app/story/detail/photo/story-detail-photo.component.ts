@@ -204,23 +204,23 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     });
   }
 
-  openGallery() {
+  openGallery(selectedIndex = 0) {
     if (this.isEditing()) {
       return;
     }
-    const videos = this.story.videos && Object.keys(this.story.videos).map(key => ({
-      url: this.story.videos[key].id,
+    const videos = this.storyVideos().map(video => ({
+      url: video.id,
       type: MediaType.Video,
     }));
-    const photos = this.story.photos && Object.keys(this.story.photos).map(key => ({
-      url: this.story.photos[key].url,
+    const photos = this.storyPhotos().map(photo => ({
+      url: photo.url,
       type: MediaType.Photo,
     }));
-    const media = [].concat(videos || [], photos || []);
+    const media = [].concat(videos, photos);
     this.dialog.open(StoryDetailGalleryComponent, {
       data: {
         media,
-        selectedIndex: 0,
+        selectedIndex,
       },
     });
   }
