@@ -38,7 +38,7 @@
 
 @mixin three-dots() {
   display: block;
-  overflow-x: hidden;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%;
