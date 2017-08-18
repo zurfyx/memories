@@ -17,6 +17,7 @@ import {
 import { NavbarModule } from './parts/navbar';
 import { SidenavModule } from './parts/sidenav';
 import { AboutModule } from './about/about.module';
+import { ErrorModule } from './error/error.module';
 import { HomeModule } from './home/home.module';
 import { JourneyModule } from './journey/journey.module';
 import { LgModule } from './liquid-galaxy/lg.module';
@@ -41,6 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     NavbarModule,
     SidenavModule,
     AboutModule,
+    ErrorModule,
     HomeModule,
     JourneyModule,
     LgModule,
