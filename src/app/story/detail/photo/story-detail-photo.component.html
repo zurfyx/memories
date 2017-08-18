@@ -26,7 +26,7 @@
 </div>
 
 <div class="photos">
-  <div class="video" *ngFor="let video of storyVideos()">
+  <div class="video" (click)="openGallery()" *ngFor="let video of storyVideos()">
     <a
       href="javascript:void(0)"
       class="video__delete"
