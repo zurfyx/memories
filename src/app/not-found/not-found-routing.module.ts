@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { Error404Component } from './error-404.component';
+import { NotFoundComponent } from './not-found.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '**', component: Error404Component },
+      { path: '', component: NotFoundComponent },
     ])
   ]
 })
-export class ErrorRoutingModule { }
+export class NotFoundRoutingModule { }

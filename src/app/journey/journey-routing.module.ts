@@ -10,14 +10,14 @@ import { JourneyDetailComponent } from './detail/journey-detail.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'journeys', component: JourneyListComponent },
+      { path: '', component: JourneyListComponent },
       {
-        path: 'journeys/new',
+        path: 'new',
         component: JourneyNewComponent,
         canActivate: [AuthGuard] ,
       },
       {
-        path: 'journeys/:uid',
+        path: ':uid',
         component: JourneyDetailComponent,
         resolve: {
           journey: JourneyResolver,

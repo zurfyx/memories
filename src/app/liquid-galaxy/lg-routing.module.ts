@@ -6,7 +6,7 @@ import { LgComponent } from './lg.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'liquid-galaxy', component: LgComponent },
+      { path: '', component: LgComponent },
     ])
   ]
 })

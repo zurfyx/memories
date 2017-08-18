@@ -8,9 +8,9 @@ import { UserDetailComponent } from './detail/user-detail.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'users', component: UserListComponent },
+      { path: '', component: UserListComponent },
       {
-        path: 'users/:uid',
+        path: ':uid',
         component: UserDetailComponent,
         resolve: {
           user: UserResolver,

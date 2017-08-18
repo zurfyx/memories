@@ -7,8 +7,8 @@ import { PwIntroComponent } from './pw-intro.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'physical-web', component: PwComponent },
-      { path: 'physical-web/intro', component: PwIntroComponent },
+      { path: '', component: PwComponent },
+      { path: 'intro', component: PwIntroComponent },
     ])
   ]
 })

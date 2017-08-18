@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ng serve --host 0.0.0.0",
-    "build": "ng build --prod",
+    "build": "ng build -prod -aot --no-sourcemap",
     "test": "npm run lint && npm run test-firebase && npm run test-cli",
     "test-cli": "ng test --watch false",
     "test-cli-watch": "ng test",

@@ -15,6 +15,9 @@ import {
   SharedModule,
   SafeStylePipe,
   SafeUrlPipe,
+  FileService,
+  IdService,
+  StoryService,
   CommentService,
 } from '../../shared';
 import { CastModule } from '../../parts/cast';
@@ -70,6 +73,9 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     CommentService,
     SafeStylePipe,
     SafeUrlPipe,
+    FileService,
+    IdService,
+    StoryService,
   ],
 })
 export class StoryDetailModule { }
