@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import {
   MdButtonModule,
   MdInputModule,
@@ -19,6 +20,7 @@ import {
   IdService,
   StoryService,
   CommentService,
+  PwService,
 } from '../../shared';
 import { CastModule } from '../../parts/cast';
 import { PwModule } from '../../parts/physical-web';
@@ -37,6 +39,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
 
 @NgModule({
   imports: [
+    HttpModule,
     MdButtonModule,
     MdInputModule,
     MdNativeDateModule,
@@ -76,6 +79,7 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     FileService,
     IdService,
     StoryService,
+    PwService,
   ],
 })
 export class StoryDetailModule { }

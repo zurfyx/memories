@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import {
   MdInputModule,
   MdButtonModule,
@@ -18,6 +19,7 @@ import {
   FileService,
   StoryService,
   IdService,
+  PwService,
 } from '../shared';
 import { CastModule } from '../parts/cast';
 import { ConfirmModule, ConfirmComponent } from '../parts/confirm';
@@ -33,6 +35,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
 
 @NgModule({
   imports: [
+    HttpModule,
     MdInputModule,
     MdButtonModule,
     MdCardModule,
@@ -67,6 +70,7 @@ import { JourneyRoutingModule } from './journey-routing.module';
     StoryService,
     IdService,
     SafeStylePipe,
+    PwService,
   ],
 })
 export class JourneyModule { }
