@@ -12,6 +12,7 @@ import {
   UserService,
   UserPrivateService,
 } from './shared';
+import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarModule } from './parts/navbar';
 import { SidenavModule } from './parts/sidenav';
@@ -27,6 +28,7 @@ import { AppComponent } from './app.component';
     }),
     AngularFireModule.initializeApp(environment.firebase),
     SharedModule,
+    CoreModule,
     NavbarModule,
     SidenavModule,
     AppRoutingModule,

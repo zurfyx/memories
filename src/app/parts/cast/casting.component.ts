@@ -2,7 +2,7 @@ import { Component, OnChanges, Input, Output, EventEmitter, SimpleChanges } from
 import { BehaviorSubject } from 'rxjs/Rx';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 
-import { CastService } from './cast.service';
+import { CastService } from '../../core';
 
 @Component({
   selector: 'app-casting',

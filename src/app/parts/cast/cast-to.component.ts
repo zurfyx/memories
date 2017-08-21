@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { LiquidGalaxy, LiquidGalaxyServer } from 'liquid-galaxy';
 
-import { CastService } from './cast.service';
+import { CastService } from '../../core';
 
 @Component({
   selector: 'app-cast-to',

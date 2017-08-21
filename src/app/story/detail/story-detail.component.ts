@@ -14,7 +14,7 @@ import {
   Story,
   StoryService,
 } from '../../shared';
-import { CastService } from '../../parts/cast';
+import { CastService } from '../../core';
 import { ConfirmComponent } from '../../parts/confirm';
 import { EditState } from './edit-state';
 

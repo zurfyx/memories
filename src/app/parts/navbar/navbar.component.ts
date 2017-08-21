@@ -6,7 +6,7 @@ import { LiquidGalaxyServer } from 'liquid-galaxy';
 import { BehaviorSubject } from 'rxjs/Rx';
 
 import { AuthService, User, UserService } from '../../shared';
-import { CastService } from '../cast';
+import { CastService } from '../../core';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { SigninComponent } from './signin.component';
 

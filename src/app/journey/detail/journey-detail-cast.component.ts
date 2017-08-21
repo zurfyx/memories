@@ -7,7 +7,7 @@ import {
   Story,
   KmlService,
 } from '../../shared';
-import { CastService } from '../../parts/cast';
+import { CastService } from '../../core';
 
 @Component({
   selector: 'app-journey-detail-cast',
