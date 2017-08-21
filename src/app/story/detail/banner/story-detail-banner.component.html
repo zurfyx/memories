@@ -6,8 +6,9 @@
   <div class="banner__action-left" [routerLink]="['/journeys/' + story.journey]">
     <span class="arrow">&#x2303;</span>
   </div>
-  <div class="banner__action-buttons" *ngIf="isEditing()">
-    <i class="fa fa-camera"></i>
+  <div class="banner__action-buttons">
+    <a class="fa fa-external-link neat" [href]="story.coverURL" *ngIf="story.coverURL && !isEditing()" target="_blank"></a>
+    <i class="fa fa-camera" *ngIf="isEditing()"></i>
   </div>
 </div>
 
