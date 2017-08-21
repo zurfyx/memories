@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MdDialog } from '@angular/material';
 
 import { CastToComponent } from './cast-to.component';
@@ -7,12 +7,8 @@ import { CastToComponent } from './cast-to.component';
   selector: 'app-cast',
   templateUrl: 'cast.component.html',
 })
-export class CastComponent implements OnInit {
-  constructor(
-    private dialog: MdDialog,
-  ) { }
-
-  ngOnInit() { }
+export class CastComponent {
+  constructor(private dialog: MdDialog) { }
 
   openCastToDialog() {
     this.dialog.open(CastToComponent);

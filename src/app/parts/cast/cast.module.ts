@@ -6,7 +6,7 @@ import {
 
 import { SharedModule } from '../../shared';
 import { CastComponent } from './cast.component';
-import { CastToComponent } from './cast-to.component';
+// import { CastToComponent } from './cast-to.component';
 import { CastingComponent } from './casting.component';
 
 @NgModule({
@@ -21,9 +21,9 @@ import { CastingComponent } from './casting.component';
   ],
   declarations: [
     CastComponent,
-    CastToComponent,
+    // CastToComponent,
     CastingComponent,
   ],
-  entryComponents: [CastToComponent],
+  // entryComponents: [CastToComponent],
 })
 export class CastModule { }

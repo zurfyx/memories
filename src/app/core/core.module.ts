@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
+import { NavbarModule } from './navbar';
+import { SidenavModule } from './sidenav';
 import {
   KmlService,
   AuthGuard,
@@ -19,8 +21,14 @@ import {
 } from './services';
 
 @NgModule({
-  imports: [],
-  exports: [],
+  imports: [
+    NavbarModule,
+    SidenavModule,
+  ],
+  exports: [
+    NavbarModule,
+    SidenavModule,
+  ],
   declarations: [],
   providers: [
     DatePipe,

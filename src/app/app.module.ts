@@ -9,8 +9,6 @@ import { environment } from '../environments/environment';
 import { SharedModule } from './shared';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { NavbarModule } from './parts/navbar';
-import { SidenavModule } from './parts/sidenav';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -24,8 +22,6 @@ import { AppComponent } from './app.component';
     AngularFireModule.initializeApp(environment.firebase),
     SharedModule,
     CoreModule,
-    NavbarModule,
-    SidenavModule,
     AppRoutingModule,
   ],
   declarations: [

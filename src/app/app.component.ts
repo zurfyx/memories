@@ -1,8 +1,4 @@
-import {
-  Component,
-  ViewEncapsulation,
-  OnInit,
-} from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { AuthService } from './core';
 

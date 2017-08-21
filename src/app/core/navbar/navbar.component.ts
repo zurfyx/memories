@@ -10,7 +10,7 @@ import {
   AuthService,
   UserService,
   CastService,
-} from '../../core';
+} from '../services';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { SigninComponent } from './signin.component';
 
