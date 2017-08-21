@@ -8,8 +8,8 @@ import * as firebase from 'firebase';
 import {
   FormUtils,
   Journey,
-  JourneyService,
 } from '../../shared';
+import { JourneyService } from '../../core';
 
 @Component({
   selector: 'app-journey-new',

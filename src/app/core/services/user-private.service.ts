@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { UserPrivate } from '../models';
+import { UserPrivate } from '../../shared';
 
 @Injectable()
 export class UserPrivateService {

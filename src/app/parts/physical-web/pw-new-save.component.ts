@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Rx';
 import { Beacon, BeaconService } from 'eddystone-web-bluetooth';
 import * as firebase from 'firebase';
 
+import { Pw } from '../../shared';
 import {
   LocationService,
   FileService,
   UrlShortenerService,
-  Pw,
   PwService,
-} from '../../shared';
+} from '../../core';
 
 @Component({
   selector: 'app-pw-new-save',

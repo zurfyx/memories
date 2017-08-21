@@ -8,9 +8,9 @@ import { Observable } from 'rxjs/Rx';
 
 import {
   FormUtils,
-  FileService,
   SafeStylePipe,
 } from '../../../shared';
+import { FileService } from '../../../core';
 import { StoryDetailEditComponent } from '../story-detail-edit.component';
 
 @Component({

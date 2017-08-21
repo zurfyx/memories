@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { Comment } from '../models';
+import { Comment } from '../../shared';
 
 @Injectable()
 export class CommentService {

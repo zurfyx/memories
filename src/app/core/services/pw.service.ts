@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
-import { Pw } from '../models';
+import { Pw } from '../../shared';
 
 @Injectable()
 export class PwService {

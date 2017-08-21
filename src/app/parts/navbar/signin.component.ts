@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from '../../shared';
+import { AuthService } from '../../core';
 
 @Component({
   selector: 'app-signin',

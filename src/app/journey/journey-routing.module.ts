@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AuthGuard } from '../shared';
+import { AuthGuard } from '../core';
 import { JourneyResolver } from './journey-resolver.service';
 import { JourneyListComponent } from './list/journey-list.component';
 import { JourneyNewComponent } from './new/journey-new.component';

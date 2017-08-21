@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import {
-  Journey,
-  JourneyService,
-} from '../shared';
+import { Journey } from '../shared';
+import { JourneyService } from '../core';
 
 @Injectable()
 export class JourneyResolver implements Resolve<Journey> {

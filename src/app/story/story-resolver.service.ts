@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import {
-  Story,
-  StoryService,
-} from '../shared';
+import { Story } from '../shared';
+import { StoryService } from '../core';
 
 @Injectable()
 export class StoryResolver implements Resolve<any> {

@@ -3,11 +3,13 @@ import { ReplaySubject } from 'rxjs/Rx';
 
 import {
   User,
-  UserService,
   Story,
   Comment,
-  CommentService,
 } from '../../../shared';
+import {
+  UserService,
+  CommentService,
+} from '../../../core';
 
 @Component({
   selector: 'app-story-detail-comment',
