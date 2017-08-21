@@ -9,9 +9,9 @@ import { Validators } from './validators';
 
 import {
   FormUtils,
-  FileService,
   SafeUrlPipe,
 } from '../../../shared';
+import { FileService } from '../../../core';
 import { StoryDetailEditComponent } from '../story-detail-edit.component';
 import { StoryDetailGalleryComponent } from './story-detail-gallery.component';
 import { MediaType } from './media-type';

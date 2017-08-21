@@ -1,6 +1,7 @@
 export * from './kml';
 export * from './auth-guard.service';
 export * from './auth.service';
+export * from './cast.service';
 export * from './comment.service';
 export * from './id.service';
 export * from './file.service';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { Story, User } from '../../models';
+import { Story, User } from '../../../shared';
 import html from './html-templates';
 import xml from './xml-templates';
 

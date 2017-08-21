@@ -9,7 +9,7 @@ import { JourneyService } from './journey.service';
 import { StoryService } from './story.service';
 import { FileService } from './file.service';
 import { IdService } from './id.service';
-import { Journey } from '../models';
+import { Journey } from '../../shared';
 
 class MockAngularFireDatabase {
   read = false;

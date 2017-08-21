@@ -5,10 +5,12 @@ import { LiquidGalaxyServer } from 'liquid-galaxy';
 import {
   User,
   Story,
+} from '../../../shared';
+import {
   StoryService,
   KmlService,
-} from '../../../shared';
-import { CastService } from '../../../parts/cast';
+} from '../../../core';
+import { CastService } from '../../../core';
 
 @Component({
   selector: 'app-story-detail-cast',

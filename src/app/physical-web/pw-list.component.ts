@@ -2,10 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataSource } from '@angular/cdk';
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 
-import {
-  Pw,
-  PwService,
-} from '../shared';
+import { Pw } from '../shared';
+import { PwService } from '../core';
 
 @Component({
   selector: 'app-pw-list',

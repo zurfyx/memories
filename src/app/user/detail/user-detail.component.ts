@@ -4,12 +4,14 @@ import { ReplaySubject } from 'rxjs/Rx';
 
 import {
   User,
-  UserService,
   UserPrivate,
-  UserPrivateService,
   Journey,
-  JourneyService,
 } from '../../shared';
+import {
+  UserService,
+  UserPrivateService,
+  JourneyService,
+} from '../../core';
 
 @Component({
   selector: 'app-user-detail',

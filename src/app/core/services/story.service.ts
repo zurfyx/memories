@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
-import { Story } from '../models';
+import { Story } from '../../shared';
 import { FileService } from './file.service';
 import { IdService } from './id.service';
 

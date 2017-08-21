@@ -6,8 +6,8 @@ import * as firebase from 'firebase';
 import {
   Journey,
   Story,
-  StoryService,
 } from '../../shared';
+import { StoryService } from '../../core';
 
 @Component({
   selector: 'app-story-new',

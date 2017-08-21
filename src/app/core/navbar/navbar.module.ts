@@ -6,7 +6,7 @@ import {
 } from '@angular/material';
 
 import { SharedModule } from '../../shared';
-import { CastModule } from '../cast';
+import { CastModule } from '../../parts/cast';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { NavbarComponent } from './navbar.component';
 import { SigninComponent } from './signin.component';

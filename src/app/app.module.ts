@@ -6,15 +6,9 @@ import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
 
 import { environment } from '../environments/environment';
-import {
-  SharedModule,
-  AuthService,
-  UserService,
-  UserPrivateService,
-} from './shared';
+import { SharedModule } from './shared';
+import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { NavbarModule } from './parts/navbar';
-import { SidenavModule } from './parts/sidenav';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -27,17 +21,11 @@ import { AppComponent } from './app.component';
     }),
     AngularFireModule.initializeApp(environment.firebase),
     SharedModule,
-    NavbarModule,
-    SidenavModule,
+    CoreModule,
     AppRoutingModule,
   ],
   declarations: [
     AppComponent,
-  ],
-  providers: [
-    AuthService,
-    UserService,
-    UserPrivateService,
   ],
   bootstrap: [AppComponent]
 })

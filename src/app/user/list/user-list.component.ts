@@ -3,8 +3,10 @@ import { ReplaySubject } from 'rxjs/Rx';
 
 import {
   User,
-  UserService,
 } from '../../shared';
+import {
+  UserService,
+} from '../../core';
 
 @Component({
   selector: 'app-user-list',

@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import {
-  User,
-  UserService,
-} from '../shared';
+import { User } from '../shared';
+import { UserService } from '../core';
 
 @Injectable()
 export class UserResolver implements Resolve<User> {

@@ -10,11 +10,13 @@ import { LiquidGalaxyServer } from 'liquid-galaxy';
 
 import {
   User,
-  UserService,
   Story,
-  StoryService,
 } from '../../shared';
-import { CastService } from '../../parts/cast';
+import {
+  UserService,
+  StoryService,
+  CastService,
+} from '../../core';
 import { ConfirmComponent } from '../../parts/confirm';
 import { EditState } from './edit-state';
 

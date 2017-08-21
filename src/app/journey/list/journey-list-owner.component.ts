@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import {
-  User,
-  UserService,
-} from '../../shared';
+import { User } from '../../shared';
+import { UserService } from '../../core';
 
 @Component({
   selector: 'app-journey-list-owner',

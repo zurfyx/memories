@@ -16,11 +16,6 @@ import {
   SharedModule,
   SafeStylePipe,
   SafeUrlPipe,
-  FileService,
-  IdService,
-  StoryService,
-  CommentService,
-  PwService,
 } from '../../shared';
 import { CastModule } from '../../parts/cast';
 import { PwModule } from '../../parts/physical-web';
@@ -73,13 +68,8 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
     StoryDetailGalleryComponent,
   ],
   providers: [
-    CommentService,
     SafeStylePipe,
     SafeUrlPipe,
-    FileService,
-    IdService,
-    StoryService,
-    PwService,
   ],
 })
 export class StoryDetailModule { }

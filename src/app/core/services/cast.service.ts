@@ -7,8 +7,6 @@ export class CastService {
   // The solo (or no) server that has a connection established.
   active: BehaviorSubject<LiquidGalaxyServer> = new BehaviorSubject(undefined);
 
-  constructor() { }
-
   setActive(server: LiquidGalaxyServer) {
     this.unsetActive();
     this.active.next(server);

@@ -5,8 +5,12 @@ import { ReplaySubject } from 'rxjs/Rx';
 import { LiquidGalaxyServer } from 'liquid-galaxy';
 import { BehaviorSubject } from 'rxjs/Rx';
 
-import { AuthService, User, UserService } from '../../shared';
-import { CastService } from '../cast';
+import { User } from '../../shared';
+import {
+  AuthService,
+  UserService,
+  CastService,
+} from '../services';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { SigninComponent } from './signin.component';
 

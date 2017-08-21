@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReplaySubject } from 'rxjs/Rx';
 
-import {
-  Journey,
-  JourneyService,
-} from '../../shared';
+import { Journey } from '../../shared';
+import { JourneyService } from '../../core';
 
 @Component({
   selector: 'app-journey-list',

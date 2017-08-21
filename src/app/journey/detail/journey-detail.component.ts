@@ -10,13 +10,15 @@ import {
   FormUtils,
   SafeStylePipe,
   User,
-  UserService,
   Journey,
-  JourneyService,
   Story,
-  StoryService,
 } from '../../shared';
-import { CastService } from '../../parts/cast';
+import {
+  UserService,
+  JourneyService,
+  StoryService,
+  CastService,
+} from '../../core';
 import { ConfirmComponent } from '../../parts/confirm';
 
 @Component({

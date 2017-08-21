@@ -1,10 +1,6 @@
-import {
-  Component,
-  ViewEncapsulation,
-  OnInit,
-} from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
-import { AuthService } from './shared';
+import { AuthService } from './core';
 
 @Component({
   selector: 'app-root',

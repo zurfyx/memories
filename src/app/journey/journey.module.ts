@@ -14,12 +14,6 @@ import {
 import {
   SharedModule,
   SafeStylePipe,
-  AuthGuard,
-  JourneyService,
-  FileService,
-  StoryService,
-  IdService,
-  PwService,
 } from '../shared';
 import { CastModule } from '../parts/cast';
 import { ConfirmModule, ConfirmComponent } from '../parts/confirm';
@@ -63,14 +57,8 @@ import { JourneyRoutingModule } from './journey-routing.module';
     ConfirmComponent,
   ],
   providers: [
-    AuthGuard,
     JourneyResolver,
-    JourneyService,
-    FileService,
-    StoryService,
-    IdService,
     SafeStylePipe,
-    PwService,
   ],
 })
 export class JourneyModule { }
