@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import {
   MdListModule,
   MdProgressSpinnerModule,
+  MdDialogModule,
 } from '@angular/material';
 
 import { SharedModule } from '../../shared';
@@ -13,6 +14,7 @@ import { CastingComponent } from './casting.component';
   imports: [
     MdListModule,
     MdProgressSpinnerModule,
+    MdDialogModule,
     SharedModule,
   ],
   exports: [
