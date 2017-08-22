@@ -40,12 +40,17 @@ export class JourneyDetailCastComponent implements OnInit, OnChanges {
 
   cast() {
     const server: LiquidGalaxyServer = this.castServer.value;
-    const kml = this.kmlService.tour(this.stories, this.owner);
+    const sortedStories = this.sortStoriesByDateAsc(this.stories);
+    const kml = this.kmlService.tour(sortedStories, this.owner);
     Observable.fromPromise(server.writeKML(kml))
       .subscribe(() => {
         // Liquid Galaxy tick time to read new sent KML files is ~1s.
         setTimeout(() => this.castPlayTour(), 1000);
       });
+  }
+
+  sortStoriesByDateAsc(stories: Story[]): Story[] {
+    return stories.sort((a, b) => (a.dateStart - b.dateStart));
   }
 
   async castPlayTour() {

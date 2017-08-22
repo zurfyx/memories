@@ -76,7 +76,7 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
     this.storyService.readStories(this.journey.$key)
       .takeUntil(this.destroy)
       .subscribe((stories: Story[]) => {
-        this.stories = stories;
+        this.stories = this.sortStoriesByDateDesc(stories);
       });
 
     // Read journey owner user data.
@@ -210,5 +210,9 @@ export class JourneyDetailComponent implements OnInit, OnDestroy {
   navigateToStory(uid: string) {
     const routerPath = this.getRouterStoryPath(uid);
     this.router.navigate(routerPath);
+  }
+
+  sortStoriesByDateDesc(stories: Story[]): Story[] {
+    return stories.sort((a, b) => (b.dateStart - a.dateStart));
   }
 }

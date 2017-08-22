@@ -43,7 +43,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     ));
   }
 
-  sortJourneysByDateDesc(journeys: Journey[]) {
+  sortJourneysByDateDesc(journeys: Journey[]): Journey[] {
     return journeys.sort((a, b) => (b.updatedAt as number) - (a.updatedAt as number));
   }
 }
