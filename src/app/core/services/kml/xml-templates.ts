@@ -2,7 +2,14 @@ export default {
   document: (content?) => `<?xml version="1.0" encoding="UTF-8"?>
     <kml xmlns="http://www.opengis.net/kml/2.2"
           xmlns:gx="http://www.google.com/kml/ext/2.2">
-      <Document>${content}</Document>
+      <Document>
+            <Style id="ballon">
+ <BalloonStyle>
+        <text>$[description]</text>
+    </BalloonStyle>
+  </Style>
+      ${content}
+      </Document>
     </kml>`,
   placemark: (placemark: Placemark) => `
     <Placemark id="${placemark.id}">
@@ -32,6 +39,7 @@ export default {
           <Change>
             <Placemark targetId="${placemarkId}">
               <gx:balloonVisibility>${visible ? '1' : '0' }</gx:balloonVisibility>
+             <styleUrl>#ballon</styleUrl>
             </Placemark>
           </Change>
         </Update>

@@ -9,7 +9,7 @@ export default {
       <span class="col2 author">${ownerDisplayName || ''}</span>
     </div>
     <div class="separator"></div>
-    <pre class="description">${description ? ellipsis(description, 450) : ''}</pre>
+    <pre class="description">${description ? ellipsis(description, 600) : ''}</pre>
     <div class="logo tcenter">
       <i class="fa fa-globe" aria-hidden="true"></i>
     </div>
