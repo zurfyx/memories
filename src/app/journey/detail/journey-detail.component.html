@@ -9,8 +9,13 @@
   [style.backgroundImage]="newCover64 || 'url(' + journey.coverURL + ')'"
   [class.active]="editState > 0"
   (click)="executeCoverInput()">
-  <div class="banner__action-left" [routerLink]="['/journeys']">
+  <!--<div class="banner__action-left" [routerLink]="['/journeys']">
     <span class="arrow">&#x2303;</span>
+  </div>-->
+  <div class="page">
+    <div class="container">
+      <a href="" class="fa fa-arrow-left banner__back" md-mini-fab></a>
+    </div>
   </div>
   <div class="banner__action-buttons">
     <a class="fa fa-external-link neat" [href]="journey.coverURL" *ngIf="journey.coverURL && editState === 0" target="_blank"></a>

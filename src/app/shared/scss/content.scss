@@ -26,9 +26,9 @@
 
 .content__banner {
   @include bg-image();
+  position: relative;
   height: 250px;
   width: 100%;
-
 }
 
 .banner__action-buttons {
@@ -65,4 +65,10 @@
     transform: rotate(-90deg);
     font-size: 4em;
   }
+}
+
+.banner__back {
+  position: absolute;
+  bottom: 0;
+  background-color: red;
 }
