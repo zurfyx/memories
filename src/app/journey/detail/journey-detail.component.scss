@@ -8,6 +8,7 @@
   @include rounded-full();
   @include full-center-children();
   background: linear-gradient(to bottom, rgba(113, 175, 249, 0.75) 0%, rgba(0, 150, 136, 0.75) 100%);
+  position: relative;
   margin-top: -32px;
   margin-left: auto;
   margin-right: auto;

@@ -26,20 +26,15 @@
 
 .content__banner {
   @include bg-image();
+  position: relative;
   height: 250px;
   width: 100%;
-
 }
 
-.banner__action-buttons {
-  position: relative;
-  width: 100%;
-  
-  .fa {
-    position: absolute;
-    right: 2rem;
-    bottom: 2rem;
-  }
+.banner__action-buttons .fa {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
 }
 
 .banner__action-left {
@@ -65,4 +60,16 @@
     transform: rotate(-90deg);
     font-size: 4em;
   }
+}
+
+.banner__back {
+  @include rounded-full();
+  position: absolute;
+  left: 2rem;
+  bottom: 0;
+  margin-bottom: -14px;
+  background-color: #eaeaea;
+  color: #444;
+  padding: 8px;
+  font-size: 0.9em;
 }

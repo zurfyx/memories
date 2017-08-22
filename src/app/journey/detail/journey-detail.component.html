@@ -9,13 +9,16 @@
   [style.backgroundImage]="newCover64 || 'url(' + journey.coverURL + ')'"
   [class.active]="editState > 0"
   (click)="executeCoverInput()">
-  <div class="banner__action-left" [routerLink]="['/journeys']">
-    <span class="arrow">&#x2303;</span>
-  </div>
   <div class="banner__action-buttons">
     <a class="fa fa-external-link neat" [href]="journey.coverURL" *ngIf="journey.coverURL && editState === 0" target="_blank"></a>
     <i class="fa fa-camera" *ngIf="editState > 0"></i>
   </div>
+  <a
+    href="javascript:void(0)"
+    class="fa fa-arrow-left banner__back"
+    [routerLink]="['/journeys']"
+    [mdTooltip]="'Go back to journeys'">
+  </a>
 </div>
 
 <input
