@@ -111,7 +111,7 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     this.newPhotos = [];
     this.pendingDelete = [];
     this.videoForm.setValue({ url: '' });
-    this.newVideos = {};
+    this.newVideos = undefined;
     this.unsetPending();
   }
 
