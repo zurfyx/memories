@@ -9,7 +9,7 @@
     <div *ngIf="!isLoading && servers?.length === 0">
       <p class="first">No Liquid Galaxy setups detected.</p>
       <a (click)="close.click()" [routerLink]="['/liquid-galaxy']">Need help?</a>
-      <button class="invisible" md-dialog-close #close></button>
+      <button class="hidden" md-dialog-close #close></button>
     </div>
     <md-list *ngIf="!isLoading">
       <md-list-item
