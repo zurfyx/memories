@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import {
   MdButtonModule,
   MdInputModule,
@@ -34,7 +33,6 @@ import { StoryDetailTitleComponent } from './title/story-detail-title.component'
 
 @NgModule({
   imports: [
-    HttpModule,
     MdButtonModule,
     MdInputModule,
     MdNativeDateModule,

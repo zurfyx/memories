@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import {
   MdInputModule,
   MdButtonModule,
@@ -29,7 +28,6 @@ import { JourneyRoutingModule } from './journey-routing.module';
 
 @NgModule({
   imports: [
-    HttpModule,
     MdInputModule,
     MdButtonModule,
     MdCardModule,
