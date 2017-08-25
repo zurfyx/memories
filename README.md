@@ -47,6 +47,8 @@ export const environment = {
 };
 ```
 
+Install project dependencies first with `npm install`.
+
 Build the project with `npm run build`.
 
 Serve the built project yourself or upload the `dist/` project onto the Firebase hosting.
@@ -66,6 +68,23 @@ firebase deploy
 ```
 
 Your own Geographical Memories version should now be live!
+
+## Development
+
+Want to help with the development of Geographical Memories?
+
+Requirements:
+
+- [Node 8+](https://nodejs.org/)
+- Firebase project to test your modifications on a non-production environment (create one [here](https://console.firebase.google.com))
+
+Edit `src/environments/environment.ts` to suit your needs.
+
+Install dependencies with `npm install` and run the project as development with `npm start`. Make sure to run a full set of tests with `npm test` before commiting!
+
+We are following [https://github.com/gothinkster/angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) when it comes to the application coding structure and style.
+
+It is to note that we are also using a [CoreModule](https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot) to store our servies, to prevent what should be singletons from reinitializating themselves when splitting the `bundle.js` [into chunks](https://github.com/zurfyx/memories/blob/master/src/app/app-routing.module.ts).
 
 ## License
 
