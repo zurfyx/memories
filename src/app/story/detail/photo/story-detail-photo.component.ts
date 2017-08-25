@@ -126,18 +126,19 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
     }
 
     // Delete "pendingDelete" photos.
-    // TODO delete photo from storage.
+    const removeImages: Observable<void>[] = [];
     this.pendingDelete.forEach((pendingDeletePhoto) => {
       const photoId = Object.keys(this.story.photos).filter(id => this.story.photos[id] === pendingDeletePhoto)[0];
+      removeImages.push(this.imageService.deleteFileByDownloadURL(this.story.photos[photoId].url));
       delete this.story.photos[photoId];
     });
 
     // Create new photos.
     const createImages = this.newPhotos.map(photo => this.imageService.createImage(photo.file));
     const emptyObs = Observable.of(null); // To prevent waiting indefinetely just because there are
-                                          // no new images to create.
-    return Observable.forkJoin(...createImages, emptyObs).map((images: firebase.storage.UploadTaskSnapshot[]) => {
-      images.splice(images.length - 1, 1); // Remove the emptyObs.
+                                          // no new images to create nor remove.
+    return Observable.forkJoin(...createImages, ...removeImages, emptyObs).map((images: firebase.storage.UploadTaskSnapshot[]) => {
+      images.splice(createImages.length, images.length - createImages.length); // Remove non-new photos.
       images.forEach((image) => {
         const url = image.downloadURL;
         this.story.photos[this.findEmptyPhotoIndex()] = { url };
