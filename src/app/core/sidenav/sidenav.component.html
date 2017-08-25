@@ -5,7 +5,7 @@
   </md-sidenav>
   <app-navbar></app-navbar>
   <div class="below-navbar">
-    <router-outlet></router-outlet>
+    <router-outlet (deactivate)="onDeactivate()"></router-outlet>
   </div>
 </md-sidenav-container>
 
@@ -14,6 +14,6 @@
     <app-sidenav-links></app-sidenav-links>
   </md-sidenav>
   <div class="below-navbar">
-    <router-outlet></router-outlet>
+    <router-outlet (deactivate)="onDeactivate()"></router-outlet>
   </div>
 </md-sidenav-container>

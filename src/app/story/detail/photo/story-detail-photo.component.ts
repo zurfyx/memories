@@ -180,7 +180,6 @@ export class StoryDetailPhotoComponent extends StoryDetailEditComponent {
 
   /**
    * Delete a photo that has been previously stored.
-   * TODO.
    */
   deleteStoryPhoto(photo: { url: string, title?: string }) {
     this.setPending();

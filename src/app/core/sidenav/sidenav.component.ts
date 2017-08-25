@@ -14,4 +14,8 @@ export class SidenavComponent {
   constructor(sidenavService: SidenavService) {
     this.isMobileNavbarOpen = sidenavService.isMobileNavbarOpen;
   }
+
+  onDeactivate() {
+    window.scrollTo(0, 0);
+  }
 }
