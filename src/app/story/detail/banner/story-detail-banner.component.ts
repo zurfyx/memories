@@ -25,7 +25,7 @@ export class StoryDetailBannerComponent extends StoryDetailEditComponent {
   newCover64: SafeStyle;
 
   constructor(
-    private imageService: FileService,
+    private fileService: FileService,
     private safeStylePipe: SafeStylePipe,
   ) {
     super();
@@ -63,8 +63,11 @@ export class StoryDetailBannerComponent extends StoryDetailEditComponent {
       return Observable.of(null);
     }
 
-    // TODO: Delete current cover.
-    return this.imageService.createImage(this.newCover).map((image) => {
+    const removeCover: Observable<void> = this.story.coverURL
+      ? this.fileService.deleteFileByDownloadURL(this.story.coverURL)
+      : Observable.of(null);
+    const createCover: Observable<firebase.storage.UploadTaskSnapshot> = this.fileService.createImage(this.newCover);
+    return Observable.forkJoin(removeCover, createCover).map(([_, image]: [void, firebase.storage.UploadTaskSnapshot]) => {
       this.story.coverURL = image.downloadURL;
       this.unsetPending();
     });
