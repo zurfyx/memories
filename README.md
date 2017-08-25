@@ -53,7 +53,7 @@ Build the project with `npm run build`.
 
 Serve the built project yourself or upload the `dist/` project onto the Firebase hosting.
 
-Either if you are serving the project yourself or uploading it onto the Firebase hosting, you do need to modify the `.firebaserc` file to match the name of your own Firebase project. That is because the database rules do still have to be uploaded to Firebase (unless you are doing this process manually by copy-pasting the contents in `firebase/database.rules.json`).
+Either if you are serving the project yourself or uploading it onto the Firebase hosting, you do need to modify the `.firebaserc` file to match the name of your own Firebase project. That is because the database and storage rules do still have to be uploaded to Firebase (unless you are doing this process manually by copy-pasting the contents in `firebase/database.rules.json`).
 
 To have everything uploaded inside Firebase, install Firebase Tools first.
 
@@ -68,6 +68,16 @@ firebase deploy
 ```
 
 Your own Geographical Memories version should now be live!
+
+## Built with
+
+Core technologies/dependencies:
+
+- [TypeScript](https://www.typescriptlang.org)
+- [Angular 4](https://angular.io)
+- [Angular Material](https://material.angular.io)
+- [Firebase](https://firebase.google.com) - Real time database and Storage
+- [Angularfire2](https://github.com/angular/angularfire2)
 
 ## Development
 
@@ -85,6 +95,10 @@ Install dependencies with `npm install` and run the project as development with 
 We are following [https://github.com/gothinkster/angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) when it comes to the application coding structure and style.
 
 It is to note that we are also using a [CoreModule](https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot) to store our servies, to prevent what should be singletons from reinitializating themselves when splitting the `bundle.js` [into chunks](https://github.com/zurfyx/memories/blob/master/src/app/app-routing.module.ts).
+
+## Contributions
+
+Contributions are welcome. See [Development](#development).
 
 ## License
 
