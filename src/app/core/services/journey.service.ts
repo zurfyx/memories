@@ -77,8 +77,12 @@ export class JourneyService {
     if (!cover) {
       return this.updateJourney(journey);
     }
-    return this.fileService.createImage(cover)
-      .flatMap((snapshot: firebase.storage.UploadTaskSnapshot) => {
+    const removeCover: Observable<void> = journey.coverURL
+      ? this.fileService.deleteFileByDownloadURL(journey.coverURL)
+      : Observable.of(null);
+    const createImage: Observable<firebase.storage.UploadTaskSnapshot> = this.fileService.createImage(cover);
+    return Observable.forkJoin(removeCover, createImage)
+      .flatMap(([_, snapshot]: [void, firebase.storage.UploadTaskSnapshot]) => {
         const newJourney = new Journey({ // Don't modify the original subject.
           ...journey,
           coverURL: snapshot.downloadURL,
